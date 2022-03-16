@@ -15,6 +15,9 @@
     <style name="tabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/ar_font</item>
     </style>
-
+    <style name="dialog_congratulation_animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_congratulation_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_congratulation_exit</item>
+    </style>
 
 </resources>

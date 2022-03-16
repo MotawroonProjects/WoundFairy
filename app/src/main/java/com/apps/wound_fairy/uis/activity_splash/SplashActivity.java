@@ -11,6 +11,7 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.databinding.ActivitySplashBinding;
+import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -65,7 +66,7 @@ public class SplashActivity extends BaseActivity {
 
 
     private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
