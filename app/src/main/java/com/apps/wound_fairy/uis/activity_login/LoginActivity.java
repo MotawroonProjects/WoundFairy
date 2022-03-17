@@ -51,6 +51,9 @@ public class LoginActivity extends BaseActivity {
 
 
     private void initView() {
+
+        setUpToolbar(binding.toolbar, getString(R.string.login), R.color.white, R.color.black);
+
         activityLoginMvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
         model = new LoginModel();
         binding.setModel(model);

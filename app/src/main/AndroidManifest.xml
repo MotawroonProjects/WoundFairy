@@ -14,7 +14,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name="com.apps.wound_fairy.share.App"
+        android:name=".share.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -25,33 +25,36 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="q">
-
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_language.LanguageActivity"
+            android:name=".uis.activity_settings.SettingsActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_sign_up.SignUpActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.apps.wound_fairy.uis.activity_verification_code.VerificationCodeActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.apps.wound_fairy.uis.activity_login.LoginActivity"
+            android:name=".uis.activity_language.LanguageActivity"
             android:exported="false" />
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_contact_us.ContactUsActivity"
+            android:name=".uis.activity_sign_up.SignUpActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_verification_code.VerificationCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_login.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_contact_us.ContactUsActivity"
             android:exported="true" />
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_notification.NotificationActivity"
+            android:name=".uis.activity_notification.NotificationActivity"
             android:exported="true" />
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_home.HomeActivity"
+            android:name=".uis.activity_home.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.apps.wound_fairy.uis.activity_splash.SplashActivity"
+            android:name=".uis.activity_splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

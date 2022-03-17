@@ -22,5 +22,15 @@
     <color name="gray2">#364545</color>
     <color name="gray3">#747474</color>
     <color name="gray4">#F8F8F9</color>
+    <color name="gray5">#777777</color>
+    <color name="gray6">#F5F5F5</color>
+    <color name="gray7">#747474</color>
+    <color name="gray8">#DADADA</color>
+    <color name="gray9">#F8F8F8</color>
+    <color name="gray10">#E5E5E5</color>
+    <color name="gray11">#C4C4C4</color>
+    <color name="green1">#68BE9E</color>
+    <color name="red">#BE3033</color>
+
 
 </resources>

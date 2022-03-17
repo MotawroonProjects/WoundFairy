@@ -21,7 +21,7 @@
     <string name="login">تسجيل دخول</string>
     <string name="terms_and_conditions">الشروط والاحكام</string>
     <string name="about_us">عن التطبيق</string>
-    <string name="privacy_policy">السياسة والخصوصية</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="contact_us">إتصل بنا</string>
     <string name="wait">إنتطر قليلا...</string>
     <string name="current">الحالية</string>
@@ -38,7 +38,7 @@
     <string name="field_required">الحقل مطلوب</string>
     <string name="inv_email">البريد الالكتروني غير صحيح</string>
     <string name="search">عن ماذا تبحث..</string>
-    <string name="rate_app">قييم التطبيق</string>
+    <string name="rate_app">قيم التطبيق</string>
     <string name="settings">الإعدادات</string>
     <string name="change_language">تغيير اللغة</string>
     <string name="no_blogs_to_show">لا توجد اخبار لعرضها</string>
@@ -69,8 +69,14 @@
     <string name="change">تغيير</string>
     <string name="cnt_book">عفوا لايمكن الحجز الان</string>
     <string name="choose_language">تغيير اللغة</string>
-    <string name="welcome_back">Welcome Back !</string>
-    <string name="country_code">Country Code</string>
+    <string name="welcome_back">مرحبا بعودتك !</string>
+    <string name="country_code">رمز الدولة </string>
+    <string name="we_sent_an_code_to_verify_your_phone">لقد أرسلنا رمزًا للتحقق من هاتفك</string>
+    <string name="user_name">اسم االمستخدم</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">الاسم الاخير</string>
+    <string name="language">اللغة</string>
+    <string name="share_app">شارك التطبيق</string>
     <string name="blogs">Blogs</string>
     <string name="market">Market</string>
     <string name="online_consultation">Online Consultation</string>

@@ -24,18 +24,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.databinding.FragmentMarketBinding;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
-import com.apps.wound_fairy.databinding.FragmentProfileBinding;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 
 import java.util.List;
 
 
-public class FragmentProfile extends BaseFragment {
-    private static final String TAG = FragmentProfile.class.getName();
+public class FragmentMarket extends BaseFragment {
+    private static final String TAG = FragmentMarket.class.getName();
     private HomeActivity activity;
-    private FragmentProfileBinding binding;
+    private FragmentMarketBinding binding;
     private boolean login;
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
@@ -44,14 +44,7 @@ public class FragmentProfile extends BaseFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
-        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
-                binding.setModel(getUserModel());
-            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK&&result.getData()!=null) {
-                String lang = result.getData().getStringExtra("lang");
-                activity.refreshActivity(lang);
-            }
-        });
+
     }
 
     @Override
@@ -70,10 +63,7 @@ public class FragmentProfile extends BaseFragment {
     }
 
     private void initView() {
-        if (getUserModel() != null) {
-            binding.setModel(getUserModel());
-        }
-        binding.setLang(getLang());
+
 
 
 
@@ -132,19 +122,5 @@ public class FragmentProfile extends BaseFragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        NavBackStackEntry currentBackStackEntry = Navigation.findNavController(binding.getRoot()).getCurrentBackStackEntry();
-        if (currentBackStackEntry != null) {
-            SavedStateHandle savedStateHandle = currentBackStackEntry.getSavedStateHandle();
-            if (savedStateHandle.contains("data")) {
-                login = savedStateHandle.get("data");
-                if (login) {
-                    binding.setModel(getUserModel());
-                    activity.updateFirebase();
-                }
-            }
-        }
-    }
+
 }

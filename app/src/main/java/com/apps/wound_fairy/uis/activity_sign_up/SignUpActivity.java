@@ -112,7 +112,7 @@ public class SignUpActivity extends BaseActivity {
 
         binding.btnCancel.setOnClickListener(view -> closeSheet());
 
-        binding.btnSignup.setOnClickListener(view -> {
+        binding.btnConfirm.setOnClickListener(view -> {
             if (model.isDataValid(this)) {
                 if (model.isDataValid(this)) {
 

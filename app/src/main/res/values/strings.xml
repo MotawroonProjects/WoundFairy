@@ -20,7 +20,7 @@
     <string name="login">Login</string>
     <string name="terms_and_conditions">Terms and conditions</string>
     <string name="about_us">About us</string>
-    <string name="privacy_policy">Privacy policy</string>
+    <string name="privacy_policy">Privacy</string>
     <string name="contact_us">Contact us</string>
     <string name="wait">Wait</string>
     <string name="current">Current</string>
@@ -70,6 +70,12 @@
     <string name="choose_language">Change language</string>
     <string name="welcome_back">Welcome Back !</string>
     <string name="country_code">Country Code</string>
+    <string name="we_sent_an_code_to_verify_your_phone">We sent an code to verify your phone</string>
+    <string name="user_name">User Name</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="language">Language</string>
+    <string name="share_app">Share App</string>
     <string name="blogs">Blogs</string>
     <string name="market">Market</string>
     <string name="online_consultation">Online \n Consultation</string>

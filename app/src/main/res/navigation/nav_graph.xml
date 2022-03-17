@@ -12,6 +12,20 @@
         android:label=""
         tools:layout="@layout/fragment_home" />
 
-
+    <fragment
+        android:id="@+id/about"
+        android:name="com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion.FragmentAboutUs"
+        android:label=""
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/blogs"
+        android:name="com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion.FragmentBlogs"
+        android:label=""
+        tools:layout="@layout/fragment_blogs" />
+    <fragment
+        android:id="@+id/market"
+        android:name="com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion.FragmentMarket"
+        android:label=""
+        tools:layout="@layout/fragment_market" />
     
 </navigation>
