@@ -105,25 +105,20 @@
                                 app:layout_constraintTop_toTopOf="@id/flImage"
                                 app:layout_constraintVertical_bias="1">
 
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardBackgroundColor="@color/gray3"
-                                    app:cardCornerRadius="50dp"
-                                    app:cardElevation="3dp">
+
 
                                     <de.hdodenhof.circleimageview.CircleImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-
+                                        android:background="@drawable/circle_shape"
                                         />
 
                                     <ImageView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:padding="10dp"
-                                        android:src="@drawable/ic_edit" />
-                                </androidx.cardview.widget.CardView>
+                                        android:src="@drawable/ic_edit"
+                                        app:tint="@color/gray5" />
 
                             </FrameLayout>
 

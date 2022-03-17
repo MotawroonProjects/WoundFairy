@@ -61,6 +61,8 @@ public class SignUpActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
         preferences = Preferences.getInstance();
         activitySignupMvvm = ViewModelProviders.of(this).get(ActivitySignupMvvm.class);
         model = new SignUpModel();

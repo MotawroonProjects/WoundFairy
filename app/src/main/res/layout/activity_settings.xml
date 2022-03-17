@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/gray7"
+            android:background="@color/gray12"
             >
             <include
                 android:id="@+id/toolbar"

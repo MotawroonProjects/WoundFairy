@@ -28,21 +28,31 @@
         <activity
             android:name=".uis.activity_settings.SettingsActivity"
             android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".uis.activity_language.LanguageActivity"
             android:exported="false" />
         <activity
             android:name=".uis.activity_sign_up.SignUpActivity"
             android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".uis.activity_verification_code.VerificationCodeActivity"
             android:exported="false" />
         <activity
             android:name=".uis.activity_login.LoginActivity"
             android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".uis.activity_contact_us.ContactUsActivity"
             android:exported="true" />
@@ -56,11 +66,7 @@
         <activity
             android:name=".uis.activity_splash.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <uses-library

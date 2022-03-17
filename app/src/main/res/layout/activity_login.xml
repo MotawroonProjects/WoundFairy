@@ -30,7 +30,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@color/gray9"
                 android:fillViewport="true"
                 android:scrollbars="none"
 
@@ -49,7 +49,7 @@
                         android:id="@+id/logo"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:layout_marginTop="150dp"
+                        android:layout_marginTop="100dp"
                         android:src="@drawable/login_back"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/logo"
-                        app:layout_constraintVertical_bias=".1"
+                        app:layout_constraintVertical_bias=".05"
 
                         />
 
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="60dp"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/rounded_strock_white"
                         android:gravity="center_vertical"
@@ -113,8 +113,8 @@
                             android:background="@color/transparent"
                             android:hint="@string/phone"
                             android:inputType="number"
-                            android:paddingStart="22dp"
-                            android:paddingEnd="22dp"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
                             android:singleLine="true"
                             android:text="@={model.phone}"
                             android:textColor="@color/black"
@@ -179,7 +179,7 @@
             android:clickable="true"
             android:focusable="true"
             android:longClickable="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -245,21 +245,20 @@
                         style="@style/PinWidget.PinView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
                         android:cursorVisible="true"
                         android:inputType="number"
                         android:itemBackground="@drawable/pin_view_item"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/green1"
                         android:textSize="15sp"
-                        app:cursorColor="@color/colorPrimaryDark"
+                        app:cursorColor="@color/green1"
                         app:cursorWidth="2dp"
+                        android:gravity="center"
                         app:hideLineWhenFilled="true"
                         app:itemCount="6"
                         app:itemHeight="40dp"
                         app:itemRadius="5dp"
-                        app:itemSpacing="15dp"
+                        app:itemSpacing="10dp"
                         app:itemWidth="40dp"
                         app:lineColor="@color/transparent"
                         app:lineWidth="0dp"
