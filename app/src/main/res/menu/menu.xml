@@ -5,15 +5,15 @@
     <item android:id="@+id/home"
         android:title="@string/home"
         android:icon="@drawable/ic_nav_home"/>
-    <item android:id="@+id/nearby"
-        android:title="@string/nearby"
-        android:icon="@drawable/ic_nav_nearby"/>
-    <item android:id="@+id/reservation"
-        android:title="@string/reservation"
-        android:icon="@drawable/ic_nav_reservation"/>
-    <item android:id="@+id/profile"
-        android:title="@string/profile"
-        android:icon="@drawable/ic_nav_user"/>
+    <item android:id="@+id/about"
+        android:title="@string/about_us"
+        android:icon="@drawable/ic_info"/>
+    <item android:id="@+id/blogs"
+        android:title="@string/blogs"
+        android:icon="@drawable/ic_blogs"/>
+    <item android:id="@+id/market"
+        android:title="@string/market"
+        android:icon="@drawable/ic_market"/>
 
 
 </menu>

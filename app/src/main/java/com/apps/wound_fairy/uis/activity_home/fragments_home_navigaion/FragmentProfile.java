@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.SavedStateHandle;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 
@@ -28,7 +27,6 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.databinding.FragmentProfileBinding;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
-import com.apps.wound_fairy.uis.activity_language.LanguageActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 
 import java.util.List;
@@ -59,7 +57,7 @@ public class FragmentProfile extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_market, container, false);
         return binding.getRoot();
     }
 

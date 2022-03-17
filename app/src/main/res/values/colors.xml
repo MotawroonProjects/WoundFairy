@@ -3,7 +3,13 @@
     <color name="colorPrimary">#00A6C6</color>
     <color name="colorPrimaryDark">#00A6C6</color>
     <color name="colorAccent">#00A6C6</color>
-
+    <color name="color1">#43FFB9</color>
+    <color name="color2">#008151</color>
+    <color name="color3">#4FE3FF</color>
+    <color name="color4">#006679</color>
+    <color name="color5">#F79FFF</color>
+    <color name="color6">#2C7CA6</color>
+    <color name="color7">#D6FFF0</color>
     <color name="white">#fff</color>
     <color name="black">#000000</color>
     <color name="black1">#222020</color>
@@ -13,6 +19,8 @@
     <color name="transparent">#00000000</color>
     <color name="gray0">#999999</color>
     <color name="gray1">#A7A7A7</color>
-
+    <color name="gray2">#364545</color>
+    <color name="gray3">#747474</color>
+    <color name="gray4">#F8F8F9</color>
 
 </resources>

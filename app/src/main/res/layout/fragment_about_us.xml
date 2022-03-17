@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/gradient_market"
+                app:riv_corner_radius_bottom_left="20dp"
+                app:riv_corner_radius_bottom_right="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/about_us"
+                android:textColor="@color/gray2"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5dp"
+                android:padding="16dp"
+                android:text="Doctors will only visit patients who live in remote areas. They will also visit patients who are elderly or disabled and can't get out of the house easily....
+Doctors are now visiting patients at their homes. This is a way for patients to save time and money, because they don't have to visit the doctor’s office or hospital.
+
+Doctors will only visit patients who live in remote areas. They will also visit patients who are elderly or disabled and can't get out of the house easily."
+                android:textColor="@color/gray3"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -36,12 +36,11 @@
     <string name="confirmation_code">Confirmation code</string>
     <string name="field_required">field required</string>
     <string name="inv_email">invaled email</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search...</string>
     <string name="rate_app">Rate App</string>
     <string name="settings">Settings</string>
     <string name="change_language">Change language</string>
-    <string name="no_reservation_to_show">No reservation to show</string>
+    <string name="no_blogs_to_show">No Blogs to show</string>
     <string name="sorry">Sorry !</string>
     <string name="no_notifications_to_show">No notifications to show</string>
     <string name="map_key" />
@@ -71,5 +70,11 @@
     <string name="choose_language">Change language</string>
     <string name="welcome_back">Welcome Back !</string>
     <string name="country_code">Country Code</string>
+    <string name="blogs">Blogs</string>
+    <string name="market">Market</string>
+    <string name="online_consultation">Online \n Consultation</string>
+    <string name="determine_a_home_visit">Determine a \n home visit</string>
+    <string name="descover_our">Descover Our</string>
+    <string name="market1">MARKET</string>
 
 </resources>

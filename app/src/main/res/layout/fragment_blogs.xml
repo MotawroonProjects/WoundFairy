@@ -57,7 +57,7 @@
                        android:layout_height="wrap_content"
                        android:textColor="@color/black"
                        android:textSize="16sp"
-                       android:text="@string/no_reservation_to_show"
+                       android:text="@string/no_blogs_to_show"
                        android:layout_gravity="center"
                        android:layout_marginTop="12dp"
                        />
