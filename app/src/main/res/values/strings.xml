@@ -70,5 +70,6 @@
     <string name="cnt_book">You cannot book now</string>
     <string name="choose_language">Change language</string>
     <string name="welcome_back">Welcome Back !</string>
+    <string name="country_code">Country Code</string>
 
 </resources>

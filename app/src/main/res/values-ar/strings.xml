@@ -70,5 +70,6 @@
     <string name="cnt_book">عفوا لايمكن الحجز الان</string>
     <string name="choose_language">تغيير اللغة</string>
     <string name="welcome_back">Welcome Back !</string>
+    <string name="country_code">Country Code</string>
 
 </resources>

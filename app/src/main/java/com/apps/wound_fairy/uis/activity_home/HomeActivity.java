@@ -47,45 +47,45 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
     private void initView() {
 
-        homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
-        setSupportActionBar(binding.toolBar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(binding.bottomNav, navController);
-        NavigationUI.setupWithNavController(binding.toolBar, navController);
-        NavigationUI.setupActionBarWithNavController(this, navController);
-
-
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (binding.toolBar.getNavigationIcon() != null) {
-                binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.black), PorterDuff.Mode.SRC_ATOP);
-
-            }
-        });
-        binding.imgNotification.setOnClickListener(v -> {
-
-
-        });
-        homeActivityMvvm.firebase.observe(this, token -> {
-            if (getUserModel() != null) {
-                UserModel userModel = getUserModel();
-                userModel.getData().setFirebase_token(token);
-                setUserModel(userModel);
-            }
-        });
-
-        binding.imgNotification.setOnClickListener(v -> {
-            if (getUserModel() != null) {
-                Intent intent = new Intent(this, NotificationActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        if (getUserModel() != null) {
-            homeActivityMvvm.updateFirebase(this, getUserModel());
-        }
+//        homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
+//        setSupportActionBar(binding.toolBar);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        navController = Navigation.findNavController(this, R.id.navHostFragment);
+//        NavigationUI.setupWithNavController(binding.bottomNav, navController);
+//        NavigationUI.setupWithNavController(binding.toolBar, navController);
+//        NavigationUI.setupActionBarWithNavController(this, navController);
+//
+//
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            if (binding.toolBar.getNavigationIcon() != null) {
+//                binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.black), PorterDuff.Mode.SRC_ATOP);
+//
+//            }
+//        });
+//        binding.imgNotification.setOnClickListener(v -> {
+//
+//
+//        });
+//        homeActivityMvvm.firebase.observe(this, token -> {
+//            if (getUserModel() != null) {
+//                UserModel userModel = getUserModel();
+//                userModel.getData().setFirebase_token(token);
+//                setUserModel(userModel);
+//            }
+//        });
+//
+//        binding.imgNotification.setOnClickListener(v -> {
+//            if (getUserModel() != null) {
+//                Intent intent = new Intent(this, NotificationActivity.class);
+//                startActivity(intent);
+//            } else {
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        if (getUserModel() != null) {
+//            homeActivityMvvm.updateFirebase(this, getUserModel());
+//        }
     }
 
 
