@@ -78,9 +78,12 @@
     <string name="share_app">Share App</string>
     <string name="blogs">Blogs</string>
     <string name="market">Market</string>
-    <string name="online_consultation">Online \n Consultation</string>
+    <string name="online_consultation">Online  \n Consultation</string>
     <string name="determine_a_home_visit">Determine a \n home visit</string>
     <string name="descover_our">Descover Our</string>
     <string name="market1">MARKET</string>
+    <string name="services">Services</string>
+    <string name="latest_blogs">Latest Blogs</string>
+    <string name="see_all">See All</string>
 
 </resources>

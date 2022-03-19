@@ -1,6 +1,7 @@
 package com.apps.wound_fairy.services;
 
 
+import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
 import com.apps.wound_fairy.model.StatusResponse;
@@ -103,5 +104,6 @@ public interface Service {
                                                              @Query(value = "api_key") String api_key,
                                                              @Query(value = "user_id") String user_id
     );
-
+    @GET("api/home/about-us")
+    Single<Response<AboutAusModel>> getAboutUs(@Header("lang") String lang);
 }

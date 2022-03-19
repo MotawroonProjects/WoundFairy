@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import android.view.ViewGroup;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.FragmentAboutUsBinding;
+import com.apps.wound_fairy.model.AboutAusModel;
+import com.apps.wound_fairy.mvvm.FragmentAboutUsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.adapter.MyPagerAdapter;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
@@ -33,7 +37,7 @@ public class FragmentAboutUs extends BaseFragment {
     private FragmentAboutUsBinding binding;
 
     private HomeActivity activity;
-
+    private FragmentAboutUsMvvm fragmentAboutUsMvvm;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,7 +61,26 @@ public class FragmentAboutUs extends BaseFragment {
     }
 
     private void initView() {
-
+        fragmentAboutUsMvvm = ViewModelProviders.of(this).get(FragmentAboutUsMvvm.class);
+        fragmentAboutUsMvvm.getIsLoading().observe(activity, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    binding.progBar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.progBar.setVisibility(View.GONE);
+                }
+            }
+        });
+        fragmentAboutUsMvvm.getMutableLiveData().observe(activity, new Observer<AboutAusModel>() {
+            @Override
+            public void onChanged(AboutAusModel aboutAusModel) {
+                if (aboutAusModel != null) {
+                    binding.setModel(aboutAusModel.getData());
+                }
+            }
+        });
+        fragmentAboutUsMvvm.getAboutUs(getLang());
 
     }
 }

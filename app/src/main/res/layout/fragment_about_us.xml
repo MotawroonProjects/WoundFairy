@@ -5,8 +5,13 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.apps.wound_fairy.model.AboutAusModel.About" />
     </data>
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,10 +26,11 @@
             >
 
             <com.makeramen.roundedimageview.RoundedImageView
+                image="@{model.image}"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/gradient_market"
+
                 app:riv_corner_radius_bottom_left="20dp"
                 app:riv_corner_radius_bottom_right="20dp" />
 
@@ -34,7 +40,7 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="16dp"
                 android:paddingRight="16dp"
-                android:text="@string/about_us"
+                android:text="@{model.title}"
                 android:textColor="@color/gray2"
                 android:textSize="16sp" />
 
@@ -43,12 +49,15 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="5dp"
                 android:padding="16dp"
-                android:text="Doctors will only visit patients who live in remote areas. They will also visit patients who are elderly or disabled and can't get out of the house easily....
-Doctors are now visiting patients at their homes. This is a way for patients to save time and money, because they don't have to visit the doctor’s office or hospital.
-
-Doctors will only visit patients who live in remote areas. They will also visit patients who are elderly or disabled and can't get out of the house easily."
+                android:text="@{model.details}"
                 android:textColor="@color/gray3"
                 android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</FrameLayout>
 </layout>

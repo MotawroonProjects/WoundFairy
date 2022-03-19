@@ -77,11 +77,14 @@
     <string name="last_name">الاسم الاخير</string>
     <string name="language">اللغة</string>
     <string name="share_app">شارك التطبيق</string>
-    <string name="blogs">Blogs</string>
-    <string name="market">Market</string>
-    <string name="online_consultation">Online Consultation</string>
-    <string name="determine_a_home_visit">Determine a home visit</string>
-    <string name="descover_our">Descover Our</string>
-    <string name="market1">MARKET</string>
+    <string name="blogs">اخبار</string>
+    <string name="market">متجر</string>
+    <string name="online_consultation">الاستشارة \n عبر الإنترنت</string>
+    <string name="determine_a_home_visit">تحديد \n زيارة منزلية</string>
+    <string name="descover_our">اكتشف</string>
+    <string name="market1">متجرنا</string>
+    <string name="services">خدمات</string>
+    <string name="latest_blogs">Latest Blogs</string>
+    <string name="see_all">See All</string>
 
 </resources>
