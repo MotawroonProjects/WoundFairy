@@ -193,9 +193,9 @@ public class ActivityLoginMvvm extends AndroidViewModel {
             @Override
             public void onSuccess(@NonNull Response<UserModel> userModelResponse) {
                 dialog.dismiss();
-                Log.e("status", userModelResponse.code() + "");
 
                 if (userModelResponse.isSuccessful()) {
+                    Log.e("status", userModelResponse.body().getStatus() + "");
                     if (userModelResponse.body().getStatus() == 200) {
 
                         userModelMutableLiveData.postValue(userModelResponse.body());

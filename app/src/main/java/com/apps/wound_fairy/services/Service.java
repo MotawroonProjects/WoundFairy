@@ -4,6 +4,7 @@ package com.apps.wound_fairy.services;
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
+import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
 
@@ -50,13 +51,13 @@ public interface Service {
 
 
     @FormUrlEncoded
-    @POST("api/logout")
-    Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
-                                            @Field("api_key") String api_key,
-                                            @Field("phone_token") String phone_token
-
+    @POST("api/auth/logout")
+    Single<Response<StatusResponse>> logout(@Field("phone_token") String phone_token
 
     );
+
+    @GET("api/home/slider")
+    Single<Response<SliderDataModel>> getSlider();
 
     @FormUrlEncoded
     @POST("api/firebase-tokens")
@@ -88,5 +89,5 @@ public interface Service {
     );
 
     @GET("api/home/about-us")
-    Single<Response<AboutAusModel>> getAboutUs(@Header("lang") String lang);
+    Single<Response<AboutAusModel>> getAboutUs(@Query("lang") String lang);
 }

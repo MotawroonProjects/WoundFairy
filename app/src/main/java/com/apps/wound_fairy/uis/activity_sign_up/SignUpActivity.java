@@ -76,7 +76,7 @@ public class SignUpActivity extends BaseActivity {
 
             model.setPhone_code(phone_code);
             model.setPhone(phone);
-            model.setFirstName(userModel.getData().getUser().getName().split(" ")[0]);
+            model.setFirstName(userModel.getData().getUser().getName().split("")[0]);
             model.setLastName(userModel.getData().getUser().getName().split("")[1]);
             model.setEmail(userModel.getData().getUser().getEmail());
 
@@ -136,7 +136,9 @@ public class SignUpActivity extends BaseActivity {
 
         binding.btnConfirm.setOnClickListener(view -> {
             if (model.isDataValid(this)) {
-                if (model.isDataValid(this)) {
+                if (userModel==null){
+                    activitySignupMvvm.signUp(model,this);
+                }else {
 
                 }
             }

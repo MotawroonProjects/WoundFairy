@@ -8,79 +8,404 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.apps.wound_fairy.model.UserModel" />
+
+        <import type="android.view.View" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context=".uis.activity_home.HomeActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawerLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_height="match_parent"
+            tools:openDrawer="start">
 
-
-            >
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolBar"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@color/white"
-                app:layout_scrollFlags="scroll|enterAlways|snap">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/logo"
+                    >
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/white"
+                        app:layout_scrollFlags="scroll|enterAlways|snap">
+
+
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/logo"
+
+                            />
+
+                        <ImageView
+                            android:id="@+id/imgNotification"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="end"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_notification"
+
+                            />
+
+
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+
+
+                <fragment
+                    android:id="@+id/navHostFragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_graph"
 
                     />
 
-                <ImageView
-                    android:id="@+id/imgNotification"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_notification"
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/white"
+                    app:elevation="5dp"
+                    app:itemIconTint="@drawable/bottom_nav_item_bg"
+                    app:itemTextColor="@drawable/bottom_nav_item_bg"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/menu" />
+            </LinearLayout>
 
-                    />
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+
+                >
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/profile_bg" />
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <LinearLayout
+                                        android:id="@+id/linearLayout2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <androidx.constraintlayout.widget.ConstraintLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginTop="25dp"
+
+                                            >
 
 
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
+                                            <FrameLayout
+                                                android:id="@+id/flImage"
+                                                android:layout_width="130dp"
+                                                android:layout_height="130dp"
+                                                android:layout_gravity="center_horizontal"
+                                                android:layout_marginTop="20dp"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
 
 
-        <fragment
-            android:id="@+id/navHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph"
+                                                >
 
-            />
+                                                <de.hdodenhof.circleimageview.CircleImageView
+                                                    android:id="@+id/image"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:clickable="false"
+                                                    android:longClickable="false"
+                                                    app:civ_border_color="@color/white"
+                                                    app:civ_border_width="1dp"
+                                                    app:civ_circle_background_color="@color/white" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/white"
-            app:elevation="5dp"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu"
-            app:itemIconTint="@drawable/bottom_nav_item_bg"
-            app:itemTextColor="@drawable/bottom_nav_item_bg"
-            />
-    </LinearLayout>
+                                                <de.hdodenhof.circleimageview.CircleImageView
+                                                    android:id="@+id/icon"
+                                                    image="@{model.data.user.image}"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:background="@drawable/circle_white"
+                                                    android:clickable="false"
+                                                    android:longClickable="false"
+                                                    android:padding="5dp"
+                                                    android:src="@drawable/circle_avatar" />
+
+
+                                            </FrameLayout>
+
+                                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                        <TextView
+                                            android:id="@+id/tvName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginTop="3dp"
+                                            android:layout_marginBottom="24dp"
+                                            android:text='@{model==null?@string/login:model.data.user.name,default=@string/login}'
+                                            android:textColor="@color/black"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                        <LinearLayout
+                                            android:id="@+id/llEditAccount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/linear_shape2"
+                                            android:orientation="horizontal"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:visibility='@{model==null?View.GONE:View.VISIBLE,default=gone}'
+                                            >
+
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_edit_acc" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:paddingStart="8dp"
+                                                android:paddingEnd="8dp"
+                                                android:text="@string/edit_profile"
+                                                android:textColor="@color/black"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/llMyOrders"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/linear_shape2"
+                                            android:orientation="horizontal"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp">
+
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_orders" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:paddingStart="8dp"
+                                                android:paddingEnd="8dp"
+                                                android:text="@string/my_orders"
+                                                android:textColor="@color/black"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/llMyReservations"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/linear_shape2"
+                                            android:orientation="horizontal"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp">
+
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_reservations" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:paddingStart="8dp"
+                                                android:paddingEnd="8dp"
+                                                android:text="@string/my_reservation"
+                                                android:textColor="@color/black"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/llSettings"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/linear_shape2"
+                                            android:orientation="horizontal"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp">
+
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_settings" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:paddingStart="8dp"
+                                                android:paddingEnd="8dp"
+                                                android:text="@string/settings"
+                                                android:textColor="@color/black"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/llLogOut"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/linear_shape2"
+                                            android:orientation="horizontal"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:visibility='@{model==null?View.GONE:View.VISIBLE,default=gone}'
+                                            >
+
+                                            <ImageView
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:src="@drawable/ic_logout" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:paddingStart="8dp"
+                                                android:paddingEnd="8dp"
+                                                android:text="@string/logout"
+                                                android:textColor="@color/black"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="30dp"
+                                        android:orientation="vertical"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="@string/follow_us"
+                                            android:textColor="@color/black"
+                                            android:textSize="22sp"
+                                            android:textStyle="bold"
+                                            android:layout_marginBottom="8dp"/>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_marginStart="8dp"
+                                                android:layout_marginEnd="8dp"
+                                                android:src="@drawable/ic_facebook" />
+
+                                            <ImageView
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_marginStart="8dp"
+                                                android:layout_marginEnd="8dp"
+                                                android:src="@drawable/ic_insta" />
+
+                                            <ImageView
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_marginStart="8dp"
+                                                android:layout_marginEnd="8dp"
+                                                android:src="@drawable/ic_twitter" />
+
+                                            <ImageView
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_marginStart="8dp"
+                                                android:layout_marginEnd="8dp"
+                                                android:src="@drawable/ic_snapchat" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </ScrollView>
+                        </FrameLayout>
+                    </FrameLayout>
+                </ScrollView>
+            </com.google.android.material.navigation.NavigationView>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 

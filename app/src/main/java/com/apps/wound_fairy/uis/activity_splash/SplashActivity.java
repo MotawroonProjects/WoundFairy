@@ -70,7 +70,7 @@ public class SplashActivity extends BaseActivity {
     private void navigateToHomeActivity() {
         Intent intent;
         if (preferences.getUserSettings(this) == null) {
-            intent=new Intent(this,LoginActivity.class);
+            intent=new Intent(this,HomeActivity.class);
             startActivity(intent);
             finish();
 

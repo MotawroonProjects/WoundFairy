@@ -32,6 +32,10 @@ public class UserModel extends StatusResponse {
             return firebase_token;
         }
 
+        public static void setFirebase_token(String firebase_token) {
+            Data.firebase_token = firebase_token;
+        }
+
         public static class User implements Serializable{
             private String id;
             private String name;

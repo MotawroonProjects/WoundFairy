@@ -14,20 +14,19 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.SliderBinding;
+import com.apps.wound_fairy.model.SliderDataModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SliderAdapter  extends PagerAdapter {
-
-
-    List<Object> IMAGES;
+    private List<SliderDataModel.SliderModel> list;
+    private Context context;
     private LayoutInflater inflater;
-    Context context;
 
-    public SliderAdapter(List<Object> IMAGES,Context context) {
+    public SliderAdapter(List<SliderDataModel.SliderModel> list, Context context) {
+        this.list = list;
         this.context = context;
-        this.IMAGES=IMAGES;
         inflater = LayoutInflater.from(context);
     }
 
@@ -38,13 +37,13 @@ public class SliderAdapter  extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return IMAGES.size();
+        return list.size();
     }
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
-
+        rowBinding.setPhoto(list.get(position).getPhoto());
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }

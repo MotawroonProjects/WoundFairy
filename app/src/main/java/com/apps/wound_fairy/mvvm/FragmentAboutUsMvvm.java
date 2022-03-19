@@ -3,6 +3,7 @@ package com.apps.wound_fairy.mvvm;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -68,6 +69,8 @@ public class FragmentAboutUsMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<AboutAusModel> response) {
                         isLoading.postValue(false);
+                        Log.e("sssss",response.code()+" "+response.body().getStatus());
+                        Log.e("lang",lang);
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getStatus() == 200) {
 
