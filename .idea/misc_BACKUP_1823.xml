@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/circle_shape.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/gradient_search.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/horizontal_line.xml" value="0.24166666666666667" />
@@ -29,17 +30,49 @@
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/menu/menu.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidProjects/demo/app/src/main/res/drawable/bottom_nav_item_bg.xml" value="0.1675925925925926" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/dialog_window_bg.xml" value="0.23425925925925925" />
+=======
+        <entry key="..\:/AndroidProjects/demo/app/src/main/res/drawable/bottom_nav_item_bg.xml" value="0.1675925925925926" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/bottom_nav_item_bg.xml" value="0.10625" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/dialog_window_bg.xml" value="0.23425925925925925" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_home_visit.xml" value="0.10625" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_home_visit_ar.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_home_visit_en.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_market.xml" value="0.10625" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_market_ar.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_market_en.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_online.xml" value="0.10625" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_online_ar.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_online_en.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/gradient_search.xml" value="0.2890625" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/ic_line.xml" value="0.15885416666666666" />
+        <entry key="..\:/WoundFairy/app/src/main/res/drawable/line.xml" value="0.15885416666666666" />
+>>>>>>> c6f04a8c58e021608b57da1f8db3072404fc1dc4
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_primary.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_strock_white.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_top.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/small_rounded_primary.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/small_stroke_primary.xml" value="0.23703703703703705" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_home.xml" value="0.25" />
+>>>>>>> c6f04a8c58e021608b57da1f8db3072404fc1dc4
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_language.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_splash.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/countries_row.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/dialog_countries.xml" value="0.14270833333333333" />
+<<<<<<< HEAD
         <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_home.xml" value="0.27291666666666664" />
+=======
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_about_us.xml" value="0.22" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_app.xml" value="0.27291666666666664" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_current_reservation.xml" value="0.1" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_market.xml" value="0.15" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_my_reservations.xml" value="0.1" />
+        <entry key="..\:/WoundFairy/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/WoundFairy/app/src/main/res/menu/menu.xml" value="0.18" />
+>>>>>>> c6f04a8c58e021608b57da1f8db3072404fc1dc4
       </map>
     </option>
   </component>
