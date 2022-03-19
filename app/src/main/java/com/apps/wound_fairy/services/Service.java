@@ -36,9 +36,8 @@ public interface Service {
 
 
     @FormUrlEncoded
-    @POST("api/login")
-    Single<Response<UserModel>> login(@Field("api_key") String api_key,
-                                      @Field("phone_code") String phone_code,
+    @POST("api/auth/login")
+    Single<Response<UserModel>> login(@Field("phone_code") String phone_code,
                                       @Field("phone") String phone);
 
     @FormUrlEncoded

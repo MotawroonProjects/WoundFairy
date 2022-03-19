@@ -24,6 +24,7 @@ import com.apps.wound_fairy.model.CountryModel;
 import com.apps.wound_fairy.model.LoginModel;
 import com.apps.wound_fairy.mvvm.ActivityLoginMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+import com.apps.wound_fairy.uis.activity_sign_up.SignUpActivity;
 import com.apps.wound_fairy.uis.activity_verification_code.VerificationCodeActivity;
 
 import java.util.ArrayList;
@@ -32,8 +33,6 @@ import java.util.List;
 
 public class LoginActivity extends BaseActivity {
     private ActivityLoginBinding binding;
-    private String phone_code = "";
-    private String phone = "";
     private LoginModel model;
     private ActivityLoginMvvm activityLoginMvvm;
     private ActivityResultLauncher<Intent> launcher;
@@ -57,6 +56,50 @@ public class LoginActivity extends BaseActivity {
         activityLoginMvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
         model = new LoginModel();
         binding.setModel(model);
+        activityLoginMvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this);
+        activityLoginMvvm.smscode.observe(this, smsCode -> {
+            binding.edtCode.setText(smsCode);
+        });
+        activityLoginMvvm.canresnd.observe(this, canResend -> {
+            if (canResend) {
+                binding.tvResend.setVisibility(View.VISIBLE);
+                binding.tvResend.setEnabled(true);
+            } else {
+                binding.tvResend.setVisibility(View.GONE);
+                binding.tvResend.setEnabled(false);
+            }
+        });
+        activityLoginMvvm.timereturn.observe(this, time -> {
+            binding.tvCounter.setText(time);
+        });
+        activityLoginMvvm.userModelMutableLiveData.observe(this, userModel -> {
+            binding.flVerification.setVisibility(View.GONE);
+            setUserModel(userModel);
+            setResult(RESULT_OK);
+            finish();
+        });
+        activityLoginMvvm.found.observe(this, s -> {
+            if (s != null) {
+                binding.flVerification.setVisibility(View.GONE);
+                navigateToSignUpActivity();
+            }
+        });
+        binding.tvResend.setOnClickListener(view -> activityLoginMvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this));
+        binding.btnConfirm.setOnClickListener(view -> {
+            String smscode = binding.edtCode.getText().toString();
+            if (!smscode.isEmpty()) {
+                activityLoginMvvm.checkValidCode(smscode, this);
+            } else {
+                binding.edtCode.setError(getResources().getString(R.string.field_required));
+            }
+        });
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
         activityLoginMvvm.getCoListMutableLiveData().observe(this, new Observer<List<CountryModel>>() {
             @Override
             public void onChanged(List<CountryModel> countryModels) {
@@ -94,7 +137,8 @@ public class LoginActivity extends BaseActivity {
         });
         binding.btnLogin.setOnClickListener(v -> {
             if (model.isDataValid(this)) {
-                navigateToVerificationCodeActivity();
+                binding.flVerification.setVisibility(View.VISIBLE);
+                activityLoginMvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this);
             }
         });
         binding.arrow.setOnClickListener(new View.OnClickListener() {
@@ -103,15 +147,10 @@ public class LoginActivity extends BaseActivity {
                 dialog.show();
             }
         });
+        sortCountries();
         createCountriesDialog();
     }
 
-    private void navigateToVerificationCodeActivity() {
-        Intent intent = new Intent(this, VerificationCodeActivity.class);
-        intent.putExtra("phone_code", model.getPhone_code());
-        intent.putExtra("phone", model.getPhone());
-        launcher.launch(intent);
-    }
 
     private void createCountriesDialog() {
 
@@ -133,5 +172,18 @@ public class LoginActivity extends BaseActivity {
         Collections.sort(countryModelList, (country1, country2) -> {
             return country1.getName().trim().compareToIgnoreCase(country2.getName().trim());
         });
+    }
+
+    private void navigateToSignUpActivity() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        intent.putExtra("phone_code", model.getPhone_code());
+        intent.putExtra("phone", model.getPhone());
+        launcher.launch(intent);
+    }
+
+    public void setItemData(CountryModel countryModel) {
+        dialog.dismiss();
+        model.setPhone_code(countryModel.getDialCode());
+        binding.setModel(model);
     }
 }

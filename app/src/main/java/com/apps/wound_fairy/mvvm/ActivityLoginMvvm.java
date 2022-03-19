@@ -1,8 +1,10 @@
 package com.apps.wound_fairy.mvvm;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,6 +13,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.model.CountryModel;
 import com.apps.wound_fairy.model.UserModel;
+import com.apps.wound_fairy.remote.Api;
+import com.apps.wound_fairy.share.Common;
+import com.apps.wound_fairy.tags.Tags;
+import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 import com.apps.wound_fairy.uis.activity_verification_code.VerificationCodeActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,10 +31,12 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class ActivityLoginMvvm extends AndroidViewModel {
     private static final String TAG = "ActivityVerificationMvvm";
@@ -68,7 +76,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
         coListMutableLiveData.postValue(new ArrayList<>(Arrays.asList(countries)));
     }
 
-    public void sendSmsCode(String lang, String phone_code, String phone, VerificationCodeActivity activity) {
+    public void sendSmsCode(String lang, String phone_code, String phone, LoginActivity activity) {
 
         startTimer();
         this.phone_code = phone_code;
@@ -153,7 +161,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
     }
 
 
-    public void checkValidCode(String code, VerificationCodeActivity activity) {
+    public void checkValidCode(String code, LoginActivity activity) {
         login(activity);
        /* if (verificationId != null) {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
@@ -173,10 +181,10 @@ public class ActivityLoginMvvm extends AndroidViewModel {
     }
 
     private void login(Context context) {
-       /* ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService(Tags.base_url).login(Tags.api_key, phone_code, phone).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<UserModel>>() {
+        Api.getService(Tags.base_url).login( phone_code, phone).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<UserModel>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 disposable.add(d);
@@ -191,11 +199,10 @@ public class ActivityLoginMvvm extends AndroidViewModel {
                     if (userModelResponse.body().getStatus() == 200) {
 
                         userModelMutableLiveData.postValue(userModelResponse.body());
-                    } else if (userModelResponse.body().getStatus() == 401) {
+                    } else if (userModelResponse.body().getStatus() == 422) {
                         found.postValue("not_found");
-                    } else if (userModelResponse.body().getStatus() == 409) {
-                        Toast.makeText(context, context.getResources().getString(R.string.user_blocked), Toast.LENGTH_LONG).show();
                     }
+
                 } else {
 
                 }
@@ -205,9 +212,10 @@ public class ActivityLoginMvvm extends AndroidViewModel {
             @Override
             public void onError(@NonNull Throwable e) {
                 dialog.dismiss();
+                Log.e("ddkkdkd",e.toString());
 
             }
-        });*/
+        });
     }
 
 

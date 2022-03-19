@@ -11,86 +11,116 @@ import com.apps.wound_fairy.R;
 
 
 public class SignUpModel extends BaseObservable {
-    private String first_name;
-    private String seconed_name;
+    private String image;
+    private String firstName;
+    private String lastName;
+    private String phone_code;
+    private String phone;
+    private String email;
 
-
-
-
-    public ObservableField<String> error_first_name = new ObservableField<>();
-    public ObservableField<String> error_seconed_name = new ObservableField<>();
+    public ObservableField<String> error_firstName = new ObservableField<>();
+    public ObservableField<String> error_lastName = new ObservableField<>();
+    public ObservableField<String> error_phone = new ObservableField<>();
 
 
 
     public boolean isDataValid(Context context) {
-        if (!first_name.trim().isEmpty()
-                &&
-                !seconed_name.trim().isEmpty() //&&
-//               department_id != 0
-
-
+        if (!firstName.trim().isEmpty()&&
+                !lastName.trim().isEmpty()&&
+                !phone.trim().isEmpty()
         ) {
-            error_first_name.set(null);
-            error_seconed_name.set(null);
-
+            error_firstName.set(null);
+            error_lastName.set(null);
+            error_phone.set(null);
             return true;
         } else {
-
-            if (first_name.trim().isEmpty()) {
-                error_first_name.set(context.getString(R.string.field_required));
-
-            } else {
-                error_first_name.set(null);
-
+            if (firstName.trim().isEmpty()){
+                error_firstName.set(context.getString(R.string.field_required));
+            }else {
+                error_firstName.set(null);
             }
-            if (seconed_name.trim().isEmpty()) {
-                error_seconed_name.set(context.getString(R.string.field_required));
-
-            } else {
-                error_seconed_name.set(null);
-
+            if (lastName.trim().isEmpty()){
+                error_lastName.set(context.getString(R.string.field_required));
+            }else {
+                error_lastName.set(null);
             }
-
-
+            if (phone.trim().isEmpty()){
+                error_phone.set(context.getString(R.string.field_required));
+            }else {
+                error_phone.set(null);
+            }
 
             return false;
         }
+
+
     }
+
 
     public SignUpModel() {
-
-        setFirst_name("");
-
-        setSeconed_name("");
+        image = "";
+        firstName = "";
+        lastName="";
+        phone_code = "20";
+        phone = "";
+        email="";
 
     }
 
+    public String getImage() {
+        return image;
+    }
 
-
-
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Bindable
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-        notifyPropertyChanged(BR.first_name);
-
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        notifyPropertyChanged(BR.firstName);
     }
+
     @Bindable
-    public String getSeconed_name() {
-        return seconed_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSeconed_name(String seconed_name) {
-        this.seconed_name = seconed_name;
-        notifyPropertyChanged(BR.seconed_name);
-
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        notifyPropertyChanged(BR.lastName);
     }
 
+    @Bindable
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+        notifyPropertyChanged(BR.email);
+    }
 
+    @Bindable
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+        notifyPropertyChanged(BR.phone);
+    }
+
+    public String getPhone_code() {
+        return phone_code;
+    }
+
+    public void setPhone_code(String phone_code) {
+        this.phone_code = phone_code;
+    }
 
 }
