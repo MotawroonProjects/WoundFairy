@@ -175,7 +175,7 @@
                                 android:orientation="vertical">
 
                                 <EditText
-                                    error="@{model.error_first_name}"
+                                    error="@{model.error_firstName}"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="8dp"
@@ -186,7 +186,7 @@
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp"
                                     android:singleLine="true"
-                                    android:text="@={model.first_name}"
+                                    android:text="@={model.firstName}"
                                     android:textColor="@color/gray4"
                                     android:textSize="14sp"
                                     tools:ignore="TextFields" />
@@ -209,7 +209,7 @@
                                 android:orientation="vertical">
 
                                 <EditText
-                                    error="@{model.error_seconed_name}"
+                                    error="@{model.error_lastName}"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="8dp"
@@ -220,7 +220,7 @@
                                     android:singleLine="true"
                                     android:hint="@string/last_name"
                                     android:textColorHint="@color/gray4"
-                                    android:text="@={model.seconed_name}"
+                                    android:text="@={model.lastName}"
                                     android:textColor="@color/gray4"
                                     android:textSize="14sp"
                                     tools:ignore="TextFields" />
@@ -281,8 +281,8 @@
                                 android:paddingRight="8dp"
                                 android:singleLine="true"
                                 android:hint="mail@mail.com"
+                                android:text="@={model.email}"
                                 android:textColorHint="@color/gray4"
-                                android:text="@={model.seconed_name}"
                                 android:textColor="@color/gray4"
                                 android:textSize="14sp"
                                 tools:ignore="TextFields" />
