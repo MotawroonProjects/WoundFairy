@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class ActivitySignupMvvm extends AndroidViewModel {
     private Context context;
-    public MutableLiveData<UserModel> userModelMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<UserModel> onUserDataSuccess = new MutableLiveData<>();
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -37,10 +37,57 @@ public class ActivitySignupMvvm extends AndroidViewModel {
         super(application);
         context = application.getApplicationContext();
 
-
     }
 
+//    public MutableLiveData<UserModel> getOnUserDataSuccess() {
+//        if (onUserDataSuccess == null) {
+//            onUserDataSuccess = new MutableLiveData<>();
+//        }
+//        return onUserDataSuccess;
+//    }
 
+    public void signUp(SignUpModel signUpModel, Context context) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code());
+        RequestBody phone_part = Common.getRequestBodyText(signUpModel.getPhone());
+        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + " " + signUpModel.getFirstName());
+        RequestBody email_part = Common.getRequestBodyText(signUpModel.getEmail());
+
+        MultipartBody.Part image = null;
+        if (signUpModel.getImage() != null && !signUpModel.getImage().isEmpty()) {
+            image = Common.getMultiPartImage(context, Uri.parse(signUpModel.getImage()), "image");
+        }
+
+        Api.getService(Tags.base_url).signUp(phone_code_part, phone_part, name_part, email_part, image)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<UserModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()){
+                            if (response.body()!=null && response.body().getStatus()==200){
+                                onUserDataSuccess.postValue(response.body());
+                            }else if (response.body().getStatus()==422){
+                                Toast.makeText(context, R.string.em_exist, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+                    }
+                });
+    }
 
     @Override
     protected void onCleared() {

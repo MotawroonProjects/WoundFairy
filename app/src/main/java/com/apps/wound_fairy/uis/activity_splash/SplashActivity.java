@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.preferences.Preferences;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.databinding.ActivitySplashBinding;
@@ -25,6 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 public class SplashActivity extends BaseActivity {
     private ActivitySplashBinding binding;
     private CompositeDisposable disposable = new CompositeDisposable();
+    private Preferences preferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void initView() {
-
+        preferences = Preferences.getInstance();
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,10 +68,14 @@ public class SplashActivity extends BaseActivity {
 
 
     private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
+        Intent intent;
+        if (preferences.getUserSettings(this) == null) {
+            intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+
     }
 
     @Override

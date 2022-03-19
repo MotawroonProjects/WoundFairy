@@ -23,9 +23,11 @@ import android.widget.Toast;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivitySignUpBinding;
 import com.apps.wound_fairy.model.SignUpModel;
+import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.mvvm.ActivitySignupMvvm;
 import com.apps.wound_fairy.preferences.Preferences;
 import com.apps.wound_fairy.share.Common;
+import com.apps.wound_fairy.tags.Tags;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +37,7 @@ import java.io.File;
 public class SignUpActivity extends BaseActivity {
     private ActivitySignUpBinding binding;
     private SignUpModel model;
+    private UserModel userModel;
     private Preferences preferences;
     private ActivitySignupMvvm activitySignupMvvm;
     private String phone_code, phone;
@@ -65,7 +68,24 @@ public class SignUpActivity extends BaseActivity {
         setUpToolbar(binding.toolbar, getString(R.string.sign_up), R.color.white, R.color.black);
         preferences = Preferences.getInstance();
         activitySignupMvvm = ViewModelProviders.of(this).get(ActivitySignupMvvm.class);
-        model = new SignUpModel();
+        model = new SignUpModel(phone_code, phone);
+        userModel = getUserModel();
+        if (userModel != null) {
+            phone_code=userModel.getData().getUser().getPhone_code();
+            phone=userModel.getData().getUser().getPhone();
+
+            model.setPhone_code(phone_code);
+            model.setPhone(phone);
+            model.setFirstName(userModel.getData().getUser().getName().split(" ")[0]);
+            model.setLastName(userModel.getData().getUser().getName().split("")[1]);
+            model.setEmail(userModel.getData().getUser().getEmail());
+
+            if (userModel.getData().getUser().getImage()!=null){
+                String url = Tags.base_url + userModel.getData().getUser().getImage();
+                Picasso.get().load(Uri.parse(url)).into(binding.image);
+                model.setImage(url);
+            }
+        }
         binding.setModel(model);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -95,7 +115,7 @@ public class SignUpActivity extends BaseActivity {
             }
         });
 
-        activitySignupMvvm.userModelMutableLiveData.observe(this, userModel -> {
+        activitySignupMvvm.onUserDataSuccess.observe(this, userModel -> {
             setUserModel(userModel);
             setResult(RESULT_OK);
             finish();

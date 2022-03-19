@@ -57,7 +57,7 @@ public class SignUpModel extends BaseObservable {
     }
 
 
-    public SignUpModel() {
+    public SignUpModel(String phone_code, String phone) {
         image = "";
         firstName = "";
         lastName="";
