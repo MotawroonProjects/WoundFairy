@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "659656005652",
+    "project_id": "woundfairy-94814",
+    "storage_bucket": "woundfairy-94814.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659656005652:android:5e65aa70932660b0742f01",
+        "android_client_info": {
+          "package_name": "com.apps.wound_fairy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659656005652-bggmns7rlu1e41ae319djcchi23rcold.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apps.wound_fairy",
+            "certificate_hash": "02234e9655300f70fcb3d1f946434728fcb0fcea"
+          }
+        },
+        {
+          "client_id": "659656005652-35rl9k197cc9g39kmdiunharec7uadel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS6qjP9XLGnUbYz3jXCgSBwDhATgJBraU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659656005652-35rl9k197cc9g39kmdiunharec7uadel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
