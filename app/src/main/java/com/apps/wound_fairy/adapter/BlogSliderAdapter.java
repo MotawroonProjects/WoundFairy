@@ -1,7 +1,6 @@
 package com.apps.wound_fairy.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,29 +9,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.PagerAdapter;
-
+import androidx.viewpager.widget.ViewPager;
 
 import com.apps.wound_fairy.R;
-import com.apps.wound_fairy.databinding.SliderBinding;
-import com.apps.wound_fairy.model.SliderDataModel;
-import com.squareup.picasso.Picasso;
+import com.apps.wound_fairy.databinding.BlogRowBinding;
+import com.apps.wound_fairy.model.BlogModel;
 
 import java.util.List;
 
-public class SliderAdapter  extends PagerAdapter {
-    private List<SliderDataModel.SliderModel> list;
+public class BlogSliderAdapter extends PagerAdapter {
+    private List<BlogModel> list;
     private Context context;
     private LayoutInflater inflater;
 
-    public SliderAdapter(List<SliderDataModel.SliderModel> list, Context context) {
+    public BlogSliderAdapter(List<BlogModel> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
     }
 
     @Override
@@ -42,8 +35,8 @@ public class SliderAdapter  extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
-        SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
-        rowBinding.setPhoto(list.get(position).getPhoto());
+        BlogRowBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.blog_row, view, false);
+        rowBinding.setModel(list.get(position));
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }
@@ -67,5 +60,8 @@ public class SliderAdapter  extends PagerAdapter {
         return POSITION_NONE;
     }
 
-
+    @Override
+    public void destroyItem(View container, int position, Object object) {
+        ((ViewPager) container).removeView((View) object);
+    }
 }

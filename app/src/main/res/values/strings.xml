@@ -90,5 +90,8 @@
     <string name="follow_us">Follow US</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="chat">Chat</string>
+    <string name="request_service">Request Service</string>
+    <string name="egp">EGP</string>
 
 </resources>

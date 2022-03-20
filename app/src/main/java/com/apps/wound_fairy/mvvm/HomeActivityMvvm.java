@@ -44,7 +44,8 @@ public class HomeActivityMvvm extends AndroidViewModel {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService(Tags.base_url).logout(userModel.getData().getFirebase_token())
+        Log.e("data",userModel.getData().getAccess_token()+"_"+userModel.getData().getFirebase_token());
+        Api.getService(Tags.base_url).logout(userModel.getData().getAccess_token(),userModel.getData().getFirebase_token())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -71,11 +72,14 @@ public class HomeActivityMvvm extends AndroidViewModel {
     }
 
     public void updateFirebase(Context context, UserModel userModel) {
-       /* FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener((Activity) context, task -> {
+       FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener((Activity) context, task -> {
             if (task.isSuccessful()) {
                 String token = task.getResult().getToken();
 
-                Api.getService(Tags.base_url).updateFirebasetoken("Bearer " + userModel.getData().getToken(), Tags.api_key, token, userModel.getData().getId() + "", "android").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<StatusResponse>>() {
+                Api.getService(Tags.base_url).updateFirebasetoken( userModel.getData().getAccess_token(), token , "android")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<Response<StatusResponse>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
@@ -97,7 +101,7 @@ public class HomeActivityMvvm extends AndroidViewModel {
                     }
                 });
             }
-        });*/
+        });
 
 
     }

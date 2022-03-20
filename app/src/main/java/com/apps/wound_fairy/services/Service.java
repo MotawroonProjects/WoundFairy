@@ -2,15 +2,15 @@ package com.apps.wound_fairy.services;
 
 
 import com.apps.wound_fairy.model.AboutAusModel;
+import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.ProductModel;
+import com.apps.wound_fairy.model.ServiceModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
 import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
 
-import java.util.List;
-
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -38,21 +38,21 @@ public interface Service {
                                       @Field("phone") String phone);
 
 
-
     @Multipart
     @POST("api/auth/register")
     Single<Response<UserModel>> signUp(@Part("phone_code") RequestBody phone_code,
-                                           @Part("phone") RequestBody phone,
-                                           @Part("name") RequestBody name,
-                                           @Part("email") RequestBody email,
-                                           @Part MultipartBody.Part image
+                                       @Part("phone") RequestBody phone,
+                                       @Part("name") RequestBody name,
+                                       @Part("email") RequestBody email,
+                                       @Part MultipartBody.Part image
 
     );
 
 
     @FormUrlEncoded
     @POST("api/auth/logout")
-    Single<Response<StatusResponse>> logout(@Field("phone_token") String phone_token
+    Single<Response<StatusResponse>> logout(@Header("Authorization") String Authorization,
+                                            @Field("phone_token") String phone_token
 
     );
 
@@ -60,15 +60,19 @@ public interface Service {
     Single<Response<SliderDataModel>> getSlider();
 
     @FormUrlEncoded
-    @POST("api/firebase-tokens")
-    Single<Response<StatusResponse>> updateFirebasetoken(@Header("AUTHORIZATION") String token,
-                                                         @Field("api_key") String api_key,
+    @POST("api/auth/insert_token")
+    Single<Response<StatusResponse>> updateFirebasetoken(@Header("Authorization") String Authorization,
                                                          @Field("phone_token") String phone_token,
-                                                         @Field("user_id") String user_id,
-                                                         @Field("software_type") String software_type
-
+                                                         @Field("type") String type
 
     );
+
+    @GET("api/home/blogs")
+    Single<Response<BlogDataModel>> getBlogs(@Query("lang") String lang);
+
+    @GET("api/home/products")
+    Single<Response<ProductModel>> getProducts(@Query("product_id") String product_id,
+                                               @Query("lang") String lang);
 
     @FormUrlEncoded
     @POST("api/contact-us")
@@ -90,4 +94,9 @@ public interface Service {
 
     @GET("api/home/about-us")
     Single<Response<AboutAusModel>> getAboutUs(@Query("lang") String lang);
+
+    @GET("api/home/online-consultations")
+    Single<Response<ServiceModel>> getService(@Query("lang") String lang,
+                                              @Query("type") String type);
+
 }

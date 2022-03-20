@@ -8,9 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.remote.Api;
 import com.apps.wound_fairy.tags.Tags;
+
+import java.util.List;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,6 +27,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
     private static final String TAG = "FragmentHomeMvvm";
     private Context context;
     private MutableLiveData<SliderDataModel> sliderDataModelMutableLiveData;
+    private MutableLiveData<List<BlogModel>> blogDataModelMutableLiveData;
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<Boolean> isLoadingLiveData;
 
@@ -36,6 +41,13 @@ public class FragmentHomeMvvm extends AndroidViewModel {
             sliderDataModelMutableLiveData = new MutableLiveData<>();
         }
         return sliderDataModelMutableLiveData;
+    }
+
+    public MutableLiveData<List<BlogModel>> getBlogDataModelMutableLiveData() {
+        if (blogDataModelMutableLiveData==null){
+            blogDataModelMutableLiveData=new MutableLiveData<>();
+        }
+        return blogDataModelMutableLiveData;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {
@@ -59,11 +71,41 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<SliderDataModel> response) {
                         isLoadingLiveData.postValue(false);
-                        Log.e("status",response.code()+"_"+response.body().getStatus());
+
                         if (response.isSuccessful() && response.body()!=null){
                             if (response.body().getStatus()==200){
                                 sliderDataModelMutableLiveData.postValue(response.body());
                             }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        isLoadingLiveData.setValue(false);
+                    }
+                });
+    }
+
+    public void getBlogs(String lang) {
+        isLoadingLiveData.setValue(true);
+        Api.getService(Tags.base_url).getBlogs(lang)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<BlogDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<BlogDataModel> response) {
+                        isLoadingLiveData.postValue(false);
+
+                        if (response.isSuccessful() && response.body() !=null) {
+                            if (response.body().getStatus()==200){
+                                blogDataModelMutableLiveData.postValue(response.body().getData());
+                            }
+
                         }
                     }
 

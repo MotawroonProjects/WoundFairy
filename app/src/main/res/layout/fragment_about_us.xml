@@ -42,16 +42,18 @@
                 android:paddingRight="16dp"
                 android:text="@{model.title}"
                 android:textColor="@color/gray2"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="5dp"
                 android:padding="16dp"
                 android:text="@{model.details}"
                 android:textColor="@color/gray3"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:lines="4"
+                android:lineSpacingExtra="5dp"/>
         </LinearLayout>
     </ScrollView>
     <ProgressBar

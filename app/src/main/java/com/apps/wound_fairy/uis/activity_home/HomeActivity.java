@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -61,6 +62,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
 
     private void initView() {
+        binding.setLang(getLang());
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         if (userModel != null) {
@@ -86,12 +88,12 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
         setSupportActionBar(binding.toolBar);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         navController = Navigation.findNavController(this, R.id.navHostFragment);
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
-       // NavigationUI.setupWithNavController(binding.toolBar, navController);
+        NavigationUI.setupWithNavController(binding.toolBar, navController);
         NavigationUI.setupActionBarWithNavController(this, navController);
 
 
@@ -113,6 +115,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         homeActivityMvvm.firebase.observe(this, token -> {
             if (getUserModel() != null) {
                 UserModel userModel = getUserModel();
+                Log.e("taken",token);
                 userModel.getData().setFirebase_token(token);
                 setUserModel(userModel);
             }
@@ -158,30 +161,30 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             binding.tvName.setOnClickListener(view -> navigationToLoginActivity());
 
         }
-//        binding.imgNotification.setOnClickListener(v -> {
-//
-//
-//        });
-//        homeActivityMvvm.firebase.observe(this, token -> {
-//            if (getUserModel() != null) {
-//                UserModel userModel = getUserModel();
-//                userModel.getData().setFirebase_token(token);
-//                setUserModel(userModel);
-//            }
-//        });
-//
-//        binding.imgNotification.setOnClickListener(v -> {
-//            if (getUserModel() != null) {
-//                Intent intent = new Intent(this, NotificationActivity.class);
-//                startActivity(intent);
-//            } else {
-//                Intent intent = new Intent(this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        if (getUserModel() != null) {
-//            homeActivityMvvm.updateFirebase(this, getUserModel());
-//        }
+        binding.imgNotification.setOnClickListener(v -> {
+
+
+        });
+        homeActivityMvvm.firebase.observe(this, token -> {
+            if (getUserModel() != null) {
+                UserModel userModel = getUserModel();
+                userModel.getData().setFirebase_token(token);
+                setUserModel(userModel);
+            }
+        });
+
+        binding.imgNotification.setOnClickListener(v -> {
+            if (getUserModel() != null) {
+                Intent intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        if (getUserModel() != null) {
+            homeActivityMvvm.updateFirebase(this, getUserModel());
+        }
     }
 
     private void navigateToSettingsActivity() {
