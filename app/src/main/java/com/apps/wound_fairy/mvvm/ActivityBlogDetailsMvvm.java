@@ -1,14 +1,14 @@
 package com.apps.wound_fairy.mvvm;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-
-import com.apps.wound_fairy.model.ProductModel;
+import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.BlogModel;
+import com.apps.wound_fairy.model.SingleBlogModel;
 import com.apps.wound_fairy.remote.Api;
 import com.apps.wound_fairy.tags.Tags;
 
@@ -21,9 +21,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class FragmentMarketMvvm extends AndroidViewModel {
+public class ActivityBlogDetailsMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isDataLoading;
-    private MutableLiveData<List<ProductModel.Product>> onDataSuccess;
+    private MutableLiveData<BlogModel> onDataSuccess;
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public MutableLiveData<Boolean> getIsDataLoading() {
@@ -33,45 +33,43 @@ public class FragmentMarketMvvm extends AndroidViewModel {
         return isDataLoading;
     }
 
-    public MutableLiveData<List<ProductModel.Product>> getOnDataSuccess() {
+    public MutableLiveData<BlogModel> getOnDataSuccess() {
         if (onDataSuccess==null){
             onDataSuccess=new MutableLiveData<>();
         }
         return onDataSuccess;
     }
 
-    public FragmentMarketMvvm(@NonNull Application application) {
+    public ActivityBlogDetailsMvvm(@NonNull Application application) {
         super(application);
     }
 
-    public void getProducts(String lang,String search){
+    public void getSingleBlog(String id,String lang){
         getIsDataLoading().setValue(true);
-
-        Api.getService(Tags.base_url).getProducts("all",lang,search)
+        Api.getService(Tags.base_url).getBlogDetails(id,lang)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ProductModel>>() {
+                .subscribe(new SingleObserver<Response<SingleBlogModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<ProductModel> response) {
+                    public void onSuccess(@NonNull Response<SingleBlogModel> response) {
                         getIsDataLoading().postValue(false);
-                        Log.e("status",response.code()+"_"+response.body().getStatus());
-                        if (response.isSuccessful() && response.body()!=null){
+
+                        if (response.isSuccessful() && response.body() !=null) {
                             if (response.body().getStatus()==200){
                                 onDataSuccess.setValue(response.body().getData());
                             }
+
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         getIsDataLoading().setValue(false);
-                        Log.e("status",e.toString());
-
                     }
                 });
     }

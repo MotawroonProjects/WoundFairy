@@ -94,6 +94,8 @@
     <string name="chat">محادثة</string>
     <string name="request_service">طلب الخدمة</string>
     <string name="egp">ج.م</string>
+    <string name="share_with">شارك مع :</string>
+    <string name="blog_details">تفاصيل الخبر</string>
 
 
 </resources>

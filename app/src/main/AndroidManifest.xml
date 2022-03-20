@@ -26,26 +26,29 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_blogs_details.BlogDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_services.ServicesActivity"
             android:exported="false" />
         <activity
             android:name=".uis.activity_settings.SettingsActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".uis.activity_language.LanguageActivity"
             android:exported="false" />
         <activity
             android:name=".uis.activity_sign_up.SignUpActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".uis.activity_verification_code.VerificationCodeActivity"
             android:exported="false" />
         <activity
             android:name=".uis.activity_login.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".uis.activity_contact_us.ContactUsActivity"
             android:exported="true" />

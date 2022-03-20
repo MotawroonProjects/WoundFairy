@@ -7,6 +7,7 @@ import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
+import com.apps.wound_fairy.model.SingleBlogModel;
 import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
@@ -70,9 +71,14 @@ public interface Service {
     @GET("api/home/blogs")
     Single<Response<BlogDataModel>> getBlogs(@Query("lang") String lang);
 
+    @GET("api/home/blogs")
+    Single<Response<SingleBlogModel>> getBlogDetails(@Query("blog_id") String blog_id,
+                                                     @Query("lang") String lang);
+
     @GET("api/home/products")
     Single<Response<ProductModel>> getProducts(@Query("product_id") String product_id,
-                                               @Query("lang") String lang);
+                                               @Query("lang") String lang,
+                                               @Query("search") String search);
 
     @FormUrlEncoded
     @POST("api/contact-us")

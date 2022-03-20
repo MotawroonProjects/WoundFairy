@@ -21,6 +21,8 @@ import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,9 @@ import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
 
 
 public class FragmentMarket extends BaseFragment {
@@ -96,8 +101,35 @@ public class FragmentMarket extends BaseFragment {
         productAdapter=new ProductAdapter(productList,activity);
         binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
         binding.recView.setAdapter(productAdapter);
-        mvvm.getProducts(getLang());
-        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getProducts(getLang()));
+        mvvm.getProducts(getLang(),binding.edtSearch.getText().toString());
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getProducts(getLang(),binding.edtSearch.getText().toString()));
+
+        Observable.create(emitter -> {
+            binding.edtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    emitter.onNext(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        })
+                .debounce(2, TimeUnit.SECONDS)
+                .distinctUntilChanged()
+                .subscribe(query -> {
+                    mvvm.getProducts(getLang(),query.toString());
+
+                });
+
+
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
 
