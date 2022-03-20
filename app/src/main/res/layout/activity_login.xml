@@ -12,6 +12,7 @@
         <variable
             name="lang"
             type="String" />
+
     </data>
 
     <FrameLayout
@@ -220,7 +221,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:text="( +20 )"
+                            android:text="@{model.phone_code}"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
@@ -228,7 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="1023105648"
+                            android:text="@{model.phone}"
                             android:textColor="@color/green1"
                             android:textSize="16sp" />
                     </LinearLayout>

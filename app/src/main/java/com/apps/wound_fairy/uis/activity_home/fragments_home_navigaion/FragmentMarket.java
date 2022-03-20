@@ -14,9 +14,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +27,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.adapter.ProductAdapter;
 import com.apps.wound_fairy.databinding.FragmentMarketBinding;
+import com.apps.wound_fairy.model.ProductModel;
+import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
+import com.apps.wound_fairy.mvvm.FragmentMarketMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +44,9 @@ public class FragmentMarket extends BaseFragment {
     private static final String TAG = FragmentMarket.class.getName();
     private HomeActivity activity;
     private FragmentMarketBinding binding;
+    private FragmentMarketMvvm mvvm;
+    private ProductAdapter productAdapter;
+    private List<ProductModel.Product> productList;
     private boolean login;
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
@@ -63,9 +74,31 @@ public class FragmentMarket extends BaseFragment {
     }
 
     private void initView() {
+        productList=new ArrayList<>();
+        mvvm = ViewModelProviders.of(this).get(FragmentMarketMvvm.class);
 
+        mvvm.getIsDataLoading().observe(activity, aBoolean -> {
+            if (aBoolean){
+                binding.tvNoSearchData.setVisibility(View.GONE);
+            }
+            binding.swipeRefresh.setRefreshing(aBoolean);
+        });
+        mvvm.getOnDataSuccess().observe(activity, products -> {
+            productAdapter.updateList(new ArrayList<>());
+            if (products!=null && products.size()>0){
+           productAdapter.updateList(products);
+           binding.tvNoSearchData.setVisibility(View.GONE);
+       }else{
+           binding.tvNoSearchData.setVisibility(View.VISIBLE);
+       }
+        });
 
-
+        productAdapter=new ProductAdapter(productList,activity);
+        binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
+        binding.recView.setAdapter(productAdapter);
+        mvvm.getProducts(getLang());
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getProducts(getLang()));
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
 
     }

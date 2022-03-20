@@ -57,13 +57,13 @@ public class SignUpModel extends BaseObservable {
     }
 
 
-    public SignUpModel() {
-        image = "";
-        firstName = "";
-        lastName="";
-        phone_code = "20";
-        phone = "";
-        email="";
+    public SignUpModel(String phone_code, String phone) {
+        this.image = "";
+        this.firstName = "";
+        this.lastName="";
+        this.phone_code =phone_code;
+        this.phone = phone;
+        this.email="";
 
     }
 

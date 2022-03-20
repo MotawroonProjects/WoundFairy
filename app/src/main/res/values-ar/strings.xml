@@ -10,7 +10,7 @@
     <string name="send">ارسال</string>
     <string name="home">الرئيسية</string>
     <string name="nearby">الاقرب</string>
-    <string name="reservation">حجوزاتي</string>
+    <string name="my_reservation">حجوزاتي</string>
     <string name="profile">حسابي</string>
     <string name="logout">تسجيل خروج</string>
     <string name="create_your_account_now">قم بانشاء حسابك الأن</string>
@@ -84,7 +84,16 @@
     <string name="descover_our">اكتشف</string>
     <string name="market1">متجرنا</string>
     <string name="services">خدمات</string>
-    <string name="latest_blogs">Latest Blogs</string>
-    <string name="see_all">See All</string>
+    <string name="latest_blogs">أحدث الاخبار</string>
+    <string name="see_all">مشاهدة الكل</string>
+    <string name="em_exist">البريد الالكتروني موجود مسبقا</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="follow_us">تابعنا</string>
+    <string name="open">فتح</string>
+    <string name="close">غلق</string>
+    <string name="chat">محادثة</string>
+    <string name="request_service">طلب الخدمة</string>
+    <string name="egp">ج.م</string>
+
 
 </resources>

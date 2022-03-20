@@ -6,24 +6,34 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.adapter.BlogAdapter;
 import com.apps.wound_fairy.databinding.FragmentBlogsBinding;
+import com.apps.wound_fairy.model.BlogModel;
+import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
 import com.apps.wound_fairy.mvvm.FragmentCurrentReservisonMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FragmentBlogs extends BaseFragment {
     private FragmentBlogsBinding binding;
-    private FragmentCurrentReservisonMvvm fragmentCurrentReservisonMvvm;
+    private FragmentBlogsMvvm mvvm;
     private HomeActivity activity;
+    private BlogAdapter adapter;
+    private List<BlogModel> blogModelList;
 
     public static FragmentBlogs newInstance() {
         FragmentBlogs fragment = new FragmentBlogs();
@@ -51,21 +61,35 @@ public class FragmentBlogs extends BaseFragment {
     }
 
     private void initView() {
-        fragmentCurrentReservisonMvvm = ViewModelProviders.of(this).get(FragmentCurrentReservisonMvvm.class);
-        fragmentCurrentReservisonMvvm.getIsLoading().observe(activity, isLoading -> {
-            if (isLoading) {
+        blogModelList=new ArrayList<>();
+        adapter=new BlogAdapter(blogModelList,activity);
+        mvvm = ViewModelProviders.of(this).get(FragmentBlogsMvvm.class);
+
+        mvvm.getIsDataLoading().observe(activity, isLoading -> {
+            if (isLoading){
+
                 binding.cardNoData.setVisibility(View.GONE);
-
-
             }
-            binding.swipeRefresh.setRefreshing(isLoading);
+                binding.swipeRefresh.setRefreshing(isLoading);
+
+        });
+        mvvm.getOnDataSuccess().observe(activity, list -> {
+            adapter.updateList(new ArrayList<>());
+
+            if (list!=null && list.size()>0){
+                adapter.updateList(list);
+                binding.cardNoData.setVisibility(View.GONE);
+            }else{
+                binding.cardNoData.setVisibility(View.VISIBLE);
+            }
         });
 
-
-
-
-        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recView.setAdapter(adapter);
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getBlogs(getLang()));
+        mvvm.getBlogs(getLang());
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+
 
     }
 

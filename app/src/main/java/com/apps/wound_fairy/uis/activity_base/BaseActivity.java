@@ -79,5 +79,10 @@ public class BaseActivity extends AppCompatActivity {
         binding.llBack.setOnClickListener(v -> finish());
     }
 
+    protected void clearUserModel(Context context) {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearUserData(context);
+
+    }
 
 }

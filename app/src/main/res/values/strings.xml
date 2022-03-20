@@ -9,7 +9,7 @@
     <string name="send">Send</string>
     <string name="home">Home</string>
     <string name="nearby">Nearby</string>
-    <string name="reservation">Reservations</string>
+    <string name="my_reservation">My Reservations</string>
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
     <string name="create_your_account_now">create your account now</string>
@@ -85,5 +85,13 @@
     <string name="services">Services</string>
     <string name="latest_blogs">Latest Blogs</string>
     <string name="see_all">See All</string>
+    <string name="em_exist">email already exists</string>
+    <string name="my_orders">My Orders</string>
+    <string name="follow_us">Follow US</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="chat">Chat</string>
+    <string name="request_service">Request Service</string>
+    <string name="egp">EGP</string>
 
 </resources>

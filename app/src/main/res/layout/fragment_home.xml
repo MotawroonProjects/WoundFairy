@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<data>
-    <variable
-        name="lang"
-        type="String" />
-</data>
+    <data>
+
+        <variable
+            name="lang"
+            type="String" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray4">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,21 +34,24 @@
 
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/pager"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="200dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ProgressBar
-                        android:id="@+id/progBar"
+                        android:id="@+id/progBarSlider"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center" />
                 </FrameLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -55,16 +61,16 @@
 
                         android:rotation='@{lang.equals("ar")?180:0}'
                         android:scaleType="centerCrop"
-                        android:src="@drawable/lines" />
+                        android:src="@drawable/ic_lines" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
 
-                        android:text="@string/services"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:text="@string/services"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -75,10 +81,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
-
+                        android:id="@+id/llOnline"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -102,11 +110,11 @@
                                     android:layout_height="0dp"
 
                                     android:layout_weight="1"
+                                    android:lines="2"
                                     android:padding="7dp"
                                     android:text="@string/online_consultation"
                                     android:textColor="@color/white"
                                     android:textSize="16sp"
-                                    android:lines="2"
                                     android:textStyle="bold" />
 
                                 <ImageView
@@ -121,7 +129,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-
+                        android:id="@+id/llHomeVisit"
                         android:layout_width="0dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -168,10 +176,13 @@
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView
-
+                    android:id="@+id/cardMarket"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_margin="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="3dp">
 
@@ -205,9 +216,9 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
                                     android:text="@string/market1"
                                     android:textColor="@color/white"
-                                    android:layout_marginTop="10dp"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -227,9 +238,12 @@
 
                     </FrameLayout>
                 </androidx.cardview.widget.CardView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -239,88 +253,100 @@
 
                         android:rotation='@{lang.equals("ar")?180:0}'
                         android:scaleType="centerCrop"
-                        android:src="@drawable/lines" />
+                        android:src="@drawable/ic_lines" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
 
-                        android:text="@string/latest_blogs"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:text="@string/latest_blogs"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"
 
                         />
+
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-                    <FrameLayout
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:id="@+id/llSeeAll"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvRecentArrive"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="@string/see_all"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="17sp" />
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvRecentArrive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="@string/see_all"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="17sp" />
 
 
-                    </FrameLayout>
+                        </FrameLayout>
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:padding="3dp"
-                        android:layout_marginStart="7dp"
-                        android:layout_marginEnd="7dp"
-                        android:rotation='@{lang.equals("en")?180:0}'
-                        android:src="@drawable/ic_left_arrow"
-                        app:tint="@color/colorAccent" />
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginEnd="7dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="3dp"
+                            android:rotation='@{lang.equals("en")?180:0}'
+                            android:src="@drawable/ic_left_arrow"
+                            app:tint="@color/colorAccent" />
+                    </LinearLayout>
+
                 </LinearLayout>
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    >
+                    android:layout_height="450dp"
+                    android:background="@color/gray4">
 
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/pager_blog"
-                        android:layout_width="0dp"
-                        android:layout_height="200dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab"
-                        android:layout_width="0dp"
-                        android:layout_height="5dp"
-                        android:layout_marginBottom="30dp"
-                        android:background="@color/transparent"
-                        android:maxWidth="8dp"
-                       android:layout_gravity="bottom|center_horizontal"
-                        app:tabBackground="@drawable/tab_gallery_indicator"
-                        app:tabGravity="center"
-                        app:tabIndicatorHeight="0dp"
-                        app:tabMode="scrollable" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray4"
+                        android:padding="7dp" />
+
+
                     <ProgressBar
                         android:id="@+id/progBar_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center" />
                 </FrameLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="7dp"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="24dp"
+                    app:tabBackground="@drawable/tab_gallery_indicator"
+                    app:tabGravity="center"
+                    app:tabPadding="2dp"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMaxWidth="8dp"
+                     />
             </LinearLayout>
         </ScrollView>
 
