@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
@@ -50,6 +51,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private UserModel userModel;
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
+    private AppBarConfiguration appBarConfiguration;
 
 
     @Override
@@ -68,11 +70,17 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         if (userModel != null) {
             binding.setModel(userModel);
         }
+        if (getLang().equals("ar")) {
+            binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        } else {
+            binding.toolBar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+        }
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
-           launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
                 userModel = getUserModel();
-                if (userModel.getData().getUser().getImage()!= null) {
+                if (userModel.getData().getUser().getImage() != null) {
                     Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
                 }
                 binding.setModel(userModel);
@@ -81,41 +89,54 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 userModel = getUserModel();
                 binding.setModel(getUserModel());
                 updateFirebase();
-            }
-            else if (req == 3 && result.getResultCode() == Activity.RESULT_OK&&result.getData()!=null) {
+            } else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 String lang = result.getData().getStringExtra("lang");
                 refreshActivity(lang);
             }
         });
+        navController = Navigation.findNavController(this, R.id.navHostFragment);
+
+        appBarConfiguration =
+                new AppBarConfiguration.Builder(navController.getGraph()) //Pass the ids of fragments from nav_graph which you dont want to show back button in toolbar
+                        .setDrawerLayout(binding.drawerLayout)
+                        .build();
+
         setSupportActionBar(binding.toolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        navController = Navigation.findNavController(this, R.id.navHostFragment);
+
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
         NavigationUI.setupWithNavController(binding.toolBar, navController);
-        NavigationUI.setupActionBarWithNavController(this, navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+ toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolBar, R.string.open, R.string.close);
+        // toggle.setDrawerIndicatorEnabled(true);
 
+        toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+        toggle.syncState();
+        binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (binding.toolBar.getNavigationIcon() != null) {
-                binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.black), PorterDuff.Mode.SRC_ATOP);
+                binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+                binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
 
             }
         });
-        toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolBar, R.string.open, R.string.close);
-        toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
-        toggle.syncState();
+
 
         homeActivityMvvm.logout.observe(this, aBoolean -> {
-            if (aBoolean){
+            if (aBoolean) {
                 logout();
             }
         });
         homeActivityMvvm.firebase.observe(this, token -> {
             if (getUserModel() != null) {
                 UserModel userModel = getUserModel();
-                Log.e("taken",token);
+                Log.e("taken", token);
                 userModel.getData().setFirebase_token(token);
                 setUserModel(userModel);
             }
@@ -126,9 +147,9 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         binding.llEditAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userModel==null){
+                if (userModel == null) {
                     navigationToLoginActivity();
-                }else {
+                } else {
                     navigationToSignupActivity();
                 }
             }
@@ -140,18 +161,18 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
         });
         binding.llSettings.setOnClickListener(view -> {
-            if (userModel==null){
+            if (userModel == null) {
                 navigationToLoginActivity();
-            }else {
+            } else {
                 navigateToSettingsActivity();
             }
         });
         binding.llLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getUserModel()==null){
+                if (getUserModel() == null) {
                     logout();
-                }else {
+                } else {
                     homeActivityMvvm.logout(HomeActivity.this, getUserModel());
                 }
             }
@@ -188,26 +209,26 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     }
 
     private void navigateToSettingsActivity() {
-        req=1;
+        req = 1;
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
         launcher.launch(intent);
     }
 
     private void navigationToSignupActivity() {
-        req=1;
+        req = 1;
         Intent intent = new Intent(HomeActivity.this, SignUpActivity.class);
         launcher.launch(intent);
     }
 
     private void logout() {
         clearUserModel(this);
-        userModel=getUserModel();
+        userModel = getUserModel();
         binding.setModel(null);
         navigationToLoginActivity();
     }
 
     private void navigationToLoginActivity() {
-        req=1;
+        req = 1;
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         launcher.launch(intent);
     }

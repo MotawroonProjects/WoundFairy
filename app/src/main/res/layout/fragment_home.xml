@@ -346,6 +346,7 @@
                     app:tabPadding="2dp"
                     app:tabIndicatorHeight="0dp"
                     app:tabMaxWidth="8dp"
+                    app:tabMode="scrollable"
                      />
             </LinearLayout>
         </ScrollView>
