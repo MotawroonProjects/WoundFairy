@@ -27,6 +27,7 @@ import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.mvvm.FragmentHomeMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.databinding.FragmentHomeBinding;
+import com.apps.wound_fairy.uis.activity_blogs_details.BlogDetailsActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.uis.activity_services.ServicesActivity;
 
@@ -151,7 +152,7 @@ public class FragmentHome extends BaseFragment {
         binding.pager.setPageMargin(20);
         fragmentHomeMvvm.getSlider();
 
-        blogSliderAdapter=new BlogSliderAdapter(blogModelList,activity);
+        blogSliderAdapter=new BlogSliderAdapter(blogModelList,activity,this);
         binding.pagerBlog.setAdapter(blogSliderAdapter);
         binding.pagerBlog.setClipToPadding(false);
          binding.pagerBlog.setPadding(20, 0, 20, 20);
@@ -174,6 +175,12 @@ public class FragmentHome extends BaseFragment {
 
         binding.llSeeAll.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.blogs));
         binding.cardMarket.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.market));
+    }
+
+    public void navigateToDetails(String id) {
+        Intent intent=new Intent(activity, BlogDetailsActivity.class);
+        intent.putExtra("data",id);
+        startActivity(intent);
     }
 
 

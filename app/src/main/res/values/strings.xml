@@ -93,5 +93,7 @@
     <string name="chat">Chat</string>
     <string name="request_service">Request Service</string>
     <string name="egp">EGP</string>
+    <string name="share_with">Share with :</string>
+    <string name="blog_details">Blog Details</string>
 
 </resources>

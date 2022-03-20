@@ -1,6 +1,7 @@
 package com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
 import com.apps.wound_fairy.mvvm.FragmentCurrentReservisonMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
+import com.apps.wound_fairy.uis.activity_blogs_details.BlogDetailsActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class FragmentBlogs extends BaseFragment {
 
     private void initView() {
         blogModelList=new ArrayList<>();
-        adapter=new BlogAdapter(blogModelList,activity);
+        adapter=new BlogAdapter(blogModelList,activity,this);
         mvvm = ViewModelProviders.of(this).get(FragmentBlogsMvvm.class);
 
         mvvm.getIsDataLoading().observe(activity, isLoading -> {
@@ -94,4 +96,9 @@ public class FragmentBlogs extends BaseFragment {
     }
 
 
+    public void navigateToDetails(String id) {
+        Intent intent=new Intent(activity, BlogDetailsActivity.class);
+        intent.putExtra("data",id);
+        startActivity(intent);
+    }
 }

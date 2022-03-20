@@ -47,15 +47,13 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_date"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="3dp"
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_gravity="center_vertical"
                     android:text="@{model.date_time}"
                     android:textColor="@color/black"
