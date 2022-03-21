@@ -45,7 +45,7 @@ public class ActivityServicesMvvm extends AndroidViewModel {
     public void getService(String lang,String type){
         isLoading.setValue(true);
 
-        Api.getService(Tags.base_url).getService(lang,type)
+        Api.getService(Tags.base_url).getServiceDetails(lang,type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ServiceModel>>() {
