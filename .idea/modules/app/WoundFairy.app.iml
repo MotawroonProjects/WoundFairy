@@ -207,5 +207,6 @@
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-rtsp:2.16.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-smoothstreaming:2.16.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:exoplayer-transformer:2.16.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.tbuonomo:dotsindicator:4.2@aar" level="project" />
   </component>
 </module>

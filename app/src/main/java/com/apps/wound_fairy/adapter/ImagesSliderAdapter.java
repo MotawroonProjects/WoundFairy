@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.SliderBinding;
 import com.apps.wound_fairy.model.ProductModel;
+import com.apps.wound_fairy.model.SliderDataModel;
 
 import java.util.List;
 
@@ -63,4 +64,6 @@ public class ImagesSliderAdapter extends PagerAdapter {
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
+
+
 }

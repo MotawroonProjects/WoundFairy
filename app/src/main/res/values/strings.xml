@@ -115,5 +115,8 @@
     <string name="test_images">Test Images:</string>
     <string name="the_service">The Service:</string>
     <string name="visit_time">Visit Time:</string>
+    <string name="note">Note</string>
+    <string name="total_price">Total Price :</string>
+    <string name="confirm_order">Confirm Order</string>
 
 </resources>

@@ -157,7 +157,7 @@ public class FragmentHome extends BaseFragment {
         binding.pagerBlog.setClipToPadding(false);
          binding.pagerBlog.setPadding(20, 0, 20, 20);
         binding.pagerBlog.setPageMargin(10);
-        binding.tab.setupWithViewPager(binding.pagerBlog);
+        binding.tab.setViewPager(binding.pagerBlog);
         fragmentHomeMvvm.getBlogs(getLang());
 
         binding.llOnline.setOnClickListener(view -> {

@@ -51,7 +51,6 @@ public class GeneralMethod {
                         Glide.with(view.getContext()).asBitmap()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(imageUrl)
-                                .centerCrop()
                                 .apply(options)
                                 .into(imageView);
                     }
@@ -64,7 +63,6 @@ public class GeneralMethod {
                         Glide.with(view.getContext()).asBitmap()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(imageUrl)
-                                .centerCrop()
                                 .apply(options)
                                 .into(imageView);
 
@@ -78,7 +76,6 @@ public class GeneralMethod {
                         Glide.with(view.getContext()).asBitmap()
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(imageUrl)
-                                .centerCrop()
                                 .apply(options)
                                 .into(imageView);
                     }

@@ -113,15 +113,27 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         NavigationUI.setupWithNavController(binding.toolBar, navController);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
- toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolBar, R.string.open, R.string.close);
+        toggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolBar, R.string.open, R.string.close);
         // toggle.setDrawerIndicatorEnabled(true);
+        if (getLang().equals("ar")) {
 
-        toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+            toggle.setHomeAsUpIndicator(R.drawable.ic_menu2);
+        } else {
+            toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
         toggle.syncState();
-        binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+        if (getLang().equals("ar")) {
+            binding.toolBar.setNavigationIcon(R.drawable.ic_menu2);
+        } else {
+            binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+        }
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (binding.toolBar.getNavigationIcon() != null) {
-                binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+                if (getLang().equals("ar")) {
+                    binding.toolBar.setNavigationIcon(R.drawable.ic_menu2);
+                } else {
+                    binding.toolBar.setNavigationIcon(R.drawable.ic_menu);
+                }
                 binding.toolBar.getNavigationIcon().setColorFilter(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
 
             }

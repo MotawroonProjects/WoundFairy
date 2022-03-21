@@ -1,6 +1,9 @@
 package com.apps.wound_fairy.adapter;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,14 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        Spannable word = new SpannableString(list.get(position).getPrice());
+
+        word.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary)), 0, word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        myHolder.binding.tvPrice.setText(word);
+        Spannable wordTwo = new SpannableString(context.getResources().getString(R.string.egp));
+
+        wordTwo.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.black)), 0, wordTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        myHolder.binding.tvPrice.append(wordTwo);
         myHolder.itemView.setOnClickListener(view -> {
             if (fragment instanceof FragmentMarket){
                 FragmentMarket fragmentMarket=(FragmentMarket) fragment;

@@ -116,5 +116,8 @@
     <string name="test_images">صور الاختبار:</string>
     <string name="the_service">الخدمة</string>
     <string name="visit_time">وقت الزيارة:</string>
+    <string name="note">ملاحظه</string>
+    <string name="total_price">الاجمالى : </string>
+    <string name="confirm_order">Confirm Order</string>
 
 </resources>

@@ -45,7 +45,7 @@ public class FragmentMarketMvvm extends AndroidViewModel {
     }
 
     public void getProducts(String lang,String search){
-        getIsDataLoading().setValue(true);
+        isDataLoading.setValue(true);
 
         Api.getService(Tags.base_url).getProducts("all",lang,search)
                 .subscribeOn(Schedulers.io())
@@ -58,8 +58,8 @@ public class FragmentMarketMvvm extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<ProductModel> response) {
-                        getIsDataLoading().postValue(false);
-                        Log.e("status",response.code()+"_"+response.body().getStatus());
+                        isDataLoading.postValue(false);
+//                        Log.e("status",response.code()+"_"+response.body().getStatus());
                         if (response.isSuccessful() && response.body()!=null){
                             if (response.body().getStatus()==200){
                                 onDataSuccess.setValue(response.body().getData());
@@ -69,7 +69,7 @@ public class FragmentMarketMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        getIsDataLoading().setValue(false);
+                        isDataLoading.setValue(false);
                         Log.e("status",e.toString());
 
                     }

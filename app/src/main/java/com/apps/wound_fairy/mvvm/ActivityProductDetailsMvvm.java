@@ -84,32 +84,5 @@ public class ActivityProductDetailsMvvm extends AndroidViewModel {
                 });
     }
 
-//    public void getSlider(){
-//        isDataLoading.setValue(true);
-//        Api.getService(Tags.base_url).getProductSlider()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SingleObserver<Response<SliderProductModel>>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//                        disposable.add(d);
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(@NonNull Response<SliderProductModel> response) {
-//                        isDataLoading.postValue(false);
-//
-//                        if (response.isSuccessful() && response.body()!=null){
-//                            if (response.body().getStatus()==200){
-//                                sliderDataModelMutableLiveData.postValue(response.body());
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        isDataLoading.setValue(false);
-//                    }
-//                });
-//    }
+
 }

@@ -80,55 +80,46 @@ public class FragmentMarket extends BaseFragment {
     }
 
     private void initView() {
-        productList=new ArrayList<>();
+        productList = new ArrayList<>();
         mvvm = ViewModelProviders.of(this).get(FragmentMarketMvvm.class);
 
         mvvm.getIsDataLoading().observe(activity, aBoolean -> {
-            if (aBoolean){
+            if (aBoolean) {
                 binding.tvNoSearchData.setVisibility(View.GONE);
             }
             binding.swipeRefresh.setRefreshing(aBoolean);
         });
         mvvm.getOnDataSuccess().observe(activity, products -> {
             productAdapter.updateList(new ArrayList<>());
-            if (products!=null && products.size()>0){
-           productAdapter.updateList(products);
-           binding.tvNoSearchData.setVisibility(View.GONE);
-       }else{
-           binding.tvNoSearchData.setVisibility(View.VISIBLE);
-       }
+            if (products != null && products.size() > 0) {
+                productAdapter.updateList(products);
+                binding.tvNoSearchData.setVisibility(View.GONE);
+            } else {
+                binding.tvNoSearchData.setVisibility(View.VISIBLE);
+            }
         });
 
-        productAdapter=new ProductAdapter(productList,activity,this);
-        binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
+        productAdapter = new ProductAdapter(productList, activity, this);
+        binding.recView.setLayoutManager(new GridLayoutManager(activity, 2));
         binding.recView.setAdapter(productAdapter);
-        mvvm.getProducts(getLang(),binding.edtSearch.getText().toString());
-        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getProducts(getLang(),binding.edtSearch.getText().toString()));
+        mvvm.getProducts(getLang(), null);
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getProducts(getLang(), binding.edtSearch.getText().toString()));
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        Observable.create(emitter -> {
-            binding.edtSearch.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-                }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    emitter.onNext(s.toString());
-                }
+            @Override
+            public void afterTextChanged(Editable s) {
+                mvvm.getProducts(getLang(),s.toString());
 
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-        })
-                .debounce(2, TimeUnit.SECONDS)
-                .distinctUntilChanged()
-                .subscribe(query -> {
-                    mvvm.getProducts(getLang(),query.toString());
-
-                });
+            }
+        });
 
 
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -142,7 +133,6 @@ public class FragmentMarket extends BaseFragment {
         launcher.launch(intent);
 
     }
-
 
 
     private void rateApp() {
@@ -184,14 +174,14 @@ public class FragmentMarket extends BaseFragment {
     private void navigateToFragmentApp(View v, String type) {
         Bundle bundle = new Bundle();
         bundle.putString("data", type);
-      //  Navigation.findNavController(v).navigate(R.id.appFragment, bundle);
+        //  Navigation.findNavController(v).navigate(R.id.appFragment, bundle);
 
     }
 
 
     public void navigateToDetails(String id) {
-        Intent intent=new Intent(activity, ProductDetailsActivity.class);
-        intent.putExtra("id",id);
+        Intent intent = new Intent(activity, ProductDetailsActivity.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

@@ -333,21 +333,20 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center" />
                 </FrameLayout>
-
-                <com.google.android.material.tabs.TabLayout
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/tab"
                     android:layout_width="wrap_content"
-                    android:layout_height="7dp"
-                    android:layout_gravity="bottom|center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="24dp"
-                    app:tabBackground="@drawable/tab_gallery_indicator"
-                    app:tabGravity="center"
-                    app:tabPadding="2dp"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabMaxWidth="8dp"
-                    app:tabMode="scrollable"
-                     />
+                    android:layout_height="10dp"
+                    app:dotsColor="@android:color/darker_gray"
+                    app:dotsCornerRadius="8dp"
+                    android:layout_gravity="center"
+                    app:dotsSize="10dp"
+                    app:dotsSpacing="2dp"
+                    app:dotsWidthFactor="2.5"
+                    app:selectedDotColor="@color/colorAccent"
+                    app:progressMode="false"
+                    android:layout_marginBottom="7dp"
+                    />
             </LinearLayout>
         </ScrollView>
 

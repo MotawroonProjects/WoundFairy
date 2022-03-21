@@ -3,6 +3,7 @@ package com.apps.wound_fairy.services;
 
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.PlaceMapDetailsData;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.ServiceModel;
@@ -35,6 +36,13 @@ public interface Service {
     Single<Response<PlaceGeocodeData>> getGeoData(@Query(value = "latlng") String latlng,
                                                   @Query(value = "language") String language,
                                                   @Query(value = "key") String key);
+
+    @GET("place/findplacefromtext/json")
+    Single<Response<PlaceMapDetailsData>> searchOnMap(@Query(value = "inputtype") String inputtype,
+                                                      @Query(value = "input") String input,
+                                                      @Query(value = "fields") String fields,
+                                                      @Query(value = "language") String language,
+                                                      @Query(value = "key") String key);
 
 
     @FormUrlEncoded
