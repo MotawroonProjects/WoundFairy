@@ -31,7 +31,7 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
 
     public boolean isDataValid(Context context) {
         if (service_id != 0 &&
-                complaint.isEmpty() &&
+                !complaint.isEmpty() &&
                 !date.isEmpty() &&
                 !time.isEmpty())
         {

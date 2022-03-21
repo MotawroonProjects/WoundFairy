@@ -10,6 +10,7 @@
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/gradient_search.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/horizontal_line.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_add.xml" value="0.2361111111111111" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_cancel.xml" value="0.23981481481481481" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_edit_account.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_language.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_left_arrow.xml" value="0.24166666666666667" />
@@ -45,6 +46,7 @@
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_verification_code.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/add_images_row.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/blog_row.xml" value="0.1935185185185185" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/countries_row.xml" value="0.25416666666666665" />

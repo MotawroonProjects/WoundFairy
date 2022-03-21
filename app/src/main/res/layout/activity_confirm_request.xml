@@ -27,6 +27,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"

@@ -115,9 +115,21 @@ public interface Service {
 
     @GET("api/home/online-consultations")
     Single<Response<ServiceModel>> getServiceDetails(@Query("lang") String lang,
-                                              @Query("type") String type);
+                                                     @Query("type") String type);
 
     @GET("api/home/services")
     Single<Response<ServiceDepartmentModel>> getServiceDepartment(@Query("lang") String lang);
+
+
+//    @Multipart
+//    @POST("api/reservation/store-reservation")
+//    Single<Response<StatusResponse>> confirmRequest(@Header("AUTHORIZATION") String token,
+//                                                    @Part("complaint") RequestBody complaint,
+//                                                    @Part("name") RequestBody name,
+//                                                    @Part("email") RequestBody email,
+//                                                    @Part("subject") RequestBody phone,
+//                                                    @Part("message") RequestBody message
+//
+//    );
 
 }
