@@ -26,6 +26,12 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_request_service.RequestServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_product_details.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_blogs_details.BlogDetailsActivity"
             android:exported="false" />
         <activity

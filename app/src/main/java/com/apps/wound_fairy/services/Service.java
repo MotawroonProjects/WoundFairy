@@ -118,6 +118,6 @@ public interface Service {
                                               @Query("type") String type);
 
     @GET("api/home/services")
-    Single<Response<ServiceDepartmentModel>> getService(@Query("lang") String lang);
+    Single<Response<ServiceDepartmentModel>> getServiceDepartment(@Query("lang") String lang);
 
 }
