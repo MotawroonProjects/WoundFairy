@@ -37,6 +37,7 @@ import com.apps.wound_fairy.mvvm.FragmentMarketMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
+import com.apps.wound_fairy.uis.activity_product_details.ProductDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +99,7 @@ public class FragmentMarket extends BaseFragment {
        }
         });
 
-        productAdapter=new ProductAdapter(productList,activity);
+        productAdapter=new ProductAdapter(productList,activity,this);
         binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
         binding.recView.setAdapter(productAdapter);
         mvvm.getProducts(getLang(),binding.edtSearch.getText().toString());
@@ -188,4 +189,9 @@ public class FragmentMarket extends BaseFragment {
     }
 
 
+    public void navigateToDetails(String id) {
+        Intent intent=new Intent(activity, ProductDetailsActivity.class);
+        intent.putExtra("id",id);
+        startActivity(intent);
+    }
 }

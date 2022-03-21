@@ -13,14 +13,15 @@ public class ProductModel extends StatusResponse implements Serializable {
     }
 
     public class Product implements Serializable{
-        private int id;
+        private String id;
         private String title;
         private String details;
         private String image;
-        private int price;
+        private String price;
         private List<Images> images;
 
-        public int getId() {
+
+        public String getId() {
             return id;
         }
 
@@ -36,13 +37,14 @@ public class ProductModel extends StatusResponse implements Serializable {
             return image;
         }
 
-        public int getPrice() {
+        public String getPrice() {
             return price;
         }
 
         public List<Images> getImages() {
             return images;
         }
+
         public class Images implements Serializable{
             private String image;
 

@@ -47,6 +47,7 @@
     <string name="filter">Filter</string>
     <string name="rating">Rating</string>
     <string name="price">Price</string>
+    <string name="price2">Price: </string>
     <string name="show_results">Show results</string>
     <string name="more">More</string>
     <string name="details">Details</string>
@@ -95,5 +96,18 @@
     <string name="egp">EGP</string>
     <string name="share_with">Share with :</string>
     <string name="blog_details">Blog Details</string>
+    <string name="specifications">Specifications</string>
+    <string name="buy">Buy</string>
+    <string name="write_your_complaint">Write your complaint</string>
+    <string name="write_here">write here ...</string>
+    <string name="upload_test_images">Upload test images</string>
+    <string name="select_the_service">select the service</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
+    <string name="current_location">Current location</string>
+    <string name="choose_service">Choose service</string>
+    <string name="field_req">Field required</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
 
 </resources>

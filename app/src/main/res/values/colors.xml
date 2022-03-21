@@ -33,8 +33,10 @@
     <color name="gray11">#C4C4C4</color>
     <color name="gray12">#FDFDFD</color>
     <color name="gray13">#FEFEFE</color>
+    <color name="gray14">#656565</color>
 
     <color name="green1">#68BE9E</color>
+    <color name="green2">#E7FAF3</color>
     <color name="red">#BE3033</color>
 
 

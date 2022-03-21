@@ -48,6 +48,7 @@
     <string name="filter">تصفية</string>
     <string name="rating">التقييم</string>
     <string name="price">السعر</string>
+    <string name="price2">السعر: </string>
     <string name="show_results">عرض النتائج</string>
     <string name="more">المزيد</string>
     <string name="details">التفاصيل</string>
@@ -96,6 +97,18 @@
     <string name="egp">ج.م</string>
     <string name="share_with">شارك مع :</string>
     <string name="blog_details">تفاصيل الخبر</string>
-
+    <string name="specifications">المواصفات</string>
+    <string name="buy">شراء</string>
+    <string name="write_your_complaint">أكتب شكواك</string>
+    <string name="write_here">أكتب هنا ...</string>
+    <string name="upload_test_images">تحميل صور للاختبار</string>
+    <string name="select_the_service">اختر الخدمة</string>
+    <string name="time">الوقت</string>
+    <string name="date">التاريخ</string>
+    <string name="location">الموقع</string>
+    <string name="current_location">الموقع الحالي</string>
+    <string name="choose_service">اختر الخدمة</string>
+    <string name="field_req">الحقل مطلوب</string>
+    <string name="dd_mm_yyyy">يوم/شهر/سنة</string>
 
 </resources>
