@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_confirm_request.ConfirmRequestActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_request_service.RequestServiceActivity"
             android:exported="false" />
         <activity

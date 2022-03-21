@@ -106,9 +106,15 @@
     <string name="time">الوقت</string>
     <string name="date">التاريخ</string>
     <string name="location">الموقع</string>
+    <string name="location2">Location:</string>
     <string name="current_location">الموقع الحالي</string>
     <string name="choose_service">اختر الخدمة</string>
     <string name="field_req">الحقل مطلوب</string>
     <string name="dd_mm_yyyy">يوم/شهر/سنة</string>
+    <string name="confirm_request">تأكيد الخدمة</string>
+    <string name="your_complaint">الشكوى الخاصة بك:</string>
+    <string name="test_images">صور الاختبار:</string>
+    <string name="the_service">الخدمة</string>
+    <string name="visit_time">وقت الزيارة:</string>
 
 </resources>

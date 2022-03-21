@@ -13,6 +13,7 @@ import com.apps.wound_fairy.databinding.ActivityServicesBinding;
 import com.apps.wound_fairy.model.ServiceModel;
 import com.apps.wound_fairy.mvvm.ActivityServicesMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+import com.apps.wound_fairy.uis.activity_request_service.RequestServiceActivity;
 
 public class ServicesActivity extends BaseActivity {
     private ActivityServicesBinding binding;
@@ -53,5 +54,10 @@ public class ServicesActivity extends BaseActivity {
         });
         mvvm.getService(getLang(),type);
         binding.llBack.setOnClickListener(view -> finish());
+
+        binding.llReqService.setOnClickListener(view -> {
+            Intent intent=new Intent(ServicesActivity.this, RequestServiceActivity.class);
+            startActivity(intent);
+        });
     }
 }

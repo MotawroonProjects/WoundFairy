@@ -105,9 +105,15 @@
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="location">Location</string>
+    <string name="location2">Location:</string>
     <string name="current_location">Current location</string>
     <string name="choose_service">Choose service</string>
     <string name="field_req">Field required</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="confirm_request">Confirm Request</string>
+    <string name="your_complaint">Your Complaint:</string>
+    <string name="test_images">Test Images:</string>
+    <string name="the_service">The Service:</string>
+    <string name="visit_time">Visit Time:</string>
 
 </resources>
