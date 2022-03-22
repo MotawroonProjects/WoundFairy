@@ -3,7 +3,9 @@ package com.apps.wound_fairy.services;
 
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.CurrentReservationModel;
 import com.apps.wound_fairy.model.PlaceMapDetailsData;
+import com.apps.wound_fairy.model.PreviousReservationModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.ServiceModel;
@@ -16,6 +18,8 @@ import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.model.SliderProductModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
+
+import java.util.List;
 
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
@@ -101,21 +105,18 @@ public interface Service {
                                                           @Query("lang") String lang);
 
     @FormUrlEncoded
-    @POST("api/contact-us")
-    Single<Response<StatusResponse>> contactUs(@Field("api_key") String api_key,
-                                               @Field("name") String name,
+    @POST("api/home/contact-us")
+    Single<Response<StatusResponse>> contactUs(@Field("name") String name,
                                                @Field("email") String email,
-                                               @Field("subject") String phone,
+                                               @Field("subject") String subject,
                                                @Field("message") String message
 
 
     );
 
 
-    @GET("api/notifications")
-    Single<Response<NotificationDataModel>> getNotifications(@Header("AUTHORIZATION") String token,
-                                                             @Query(value = "api_key") String api_key,
-                                                             @Query(value = "user_id") String user_id
+    @GET("api/home/notifications")
+    Single<Response<NotificationDataModel>> getNotifications(@Header("Authorization") String Authorization
     );
 
     @GET("api/home/about-us")
@@ -129,15 +130,28 @@ public interface Service {
     Single<Response<ServiceDepartmentModel>> getServiceDepartment(@Query("lang") String lang);
 
 
-//    @Multipart
-//    @POST("api/reservation/store-reservation")
-//    Single<Response<StatusResponse>> confirmRequest(@Header("AUTHORIZATION") String token,
-//                                                    @Part("complaint") RequestBody complaint,
-//                                                    @Part("name") RequestBody name,
-//                                                    @Part("email") RequestBody email,
-//                                                    @Part("subject") RequestBody phone,
-//                                                    @Part("message") RequestBody message
-//
-//    );
+    @Multipart
+    @POST("api/reservation/store-reservation")
+    Single<Response<StatusResponse>> confirmRequest(@Header("Authorization") String Authorization,
+                                                    @Part("complaint") RequestBody complaint,
+                                                    @Part List<MultipartBody.Part> images,
+                                                    @Part("service_id") RequestBody service_id,
+                                                    @Part("date_time") RequestBody date_time,
+                                                    @Part("total_price") RequestBody total_price,
+                                                    @Part("latitude") RequestBody latitude,
+                                                    @Part("longitude") RequestBody longitude,
+                                                    @Part("address") RequestBody address,
+                                                    @Part("lang") RequestBody lang
+
+    );
+
+    @GET("api/reservation/getReservations")
+    Single<Response<CurrentReservationModel>> getCurrentReservations(@Header("Authorization") String Authorization,
+                                                                     @Query("lang") String lang);
+
+    @GET("api/reservation/getReservations")
+    Single<Response<PreviousReservationModel>> getPreviousReservations(@Header("Authorization") String Authorization,
+                                                                       @Query("lang") String lang);
+
 
 }

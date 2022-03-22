@@ -26,7 +26,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".uis.activity_home.fragments_home_navigaion.FragmentBlogs">
+                android:background="@color/gray12"
+                >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recView"

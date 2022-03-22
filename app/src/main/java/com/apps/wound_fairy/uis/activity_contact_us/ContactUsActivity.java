@@ -10,14 +10,14 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityContactUsBinding;
 import com.apps.wound_fairy.model.ContactUsModel;
 import com.apps.wound_fairy.model.UserModel;
-import com.apps.wound_fairy.mvvm.ContactusActivityMvvm;
+import com.apps.wound_fairy.mvvm.ActivityContactUsMvvm;
 import com.apps.wound_fairy.preferences.Preferences;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 
 public class ContactUsActivity extends BaseActivity {
     private ActivityContactUsBinding binding;
     private ContactUsModel contactUsModel;
-    private ContactusActivityMvvm contactusActivityMvvm;
+    private ActivityContactUsMvvm contactusActivityMvvm;
     private UserModel userModel;
     private Preferences preferences;
 
@@ -32,19 +32,20 @@ public class ContactUsActivity extends BaseActivity {
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-        contactusActivityMvvm = ViewModelProviders.of(this).get(ContactusActivityMvvm.class);
+        contactusActivityMvvm = ViewModelProviders.of(this).get(ActivityContactUsMvvm.class);
         setUpToolbar(binding.toolbar, getString(R.string.contact_us), R.color.white, R.color.black);
 
         contactUsModel = new ContactUsModel();
         if (userModel != null) {
             contactUsModel.setName(userModel.getData().getUser().getName());
+            contactUsModel.setEmail(userModel.getData().getUser().getEmail());
 
         }
 
         binding.setContactModel(contactUsModel);
         binding.btnSend.setOnClickListener(view -> {
             if (contactUsModel.isDataValid(this)) {
-                contactusActivityMvvm.contactus(this, contactUsModel);
+                contactusActivityMvvm.contactUs(this, contactUsModel);
             }
         });
         contactusActivityMvvm.send.observe(this, aBoolean -> {
@@ -53,6 +54,7 @@ public class ContactUsActivity extends BaseActivity {
                 finish();
             }
         });
+        binding.toolbar.llBack.setOnClickListener(view -> finish());
     }
 
 

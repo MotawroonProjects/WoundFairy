@@ -3,6 +3,7 @@ package com.apps.wound_fairy.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.AddImagesRowBinding;
+import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
 import com.apps.wound_fairy.uis.activity_request_service.RequestServiceActivity;
 import com.squareup.picasso.Picasso;
 
@@ -20,13 +22,11 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private List<String> list;
     private Context context;
     private LayoutInflater inflater;
-    private RequestServiceActivity activity;
 
     public ImageAddServiceAdapter(List<String> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        activity = (RequestServiceActivity) context;
 
 
     }
@@ -42,8 +42,15 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         MyHolder myHolder = (MyHolder) holder;
         Picasso.get().load(Uri.parse(list.get(position))).fit().into(myHolder.binding.image);
         myHolder.binding.cardViewDelete.setOnClickListener(view -> {
-            activity.deleteImage(myHolder.getAdapterPosition());
+            if (context instanceof RequestServiceActivity){
+                RequestServiceActivity activity=(RequestServiceActivity) context;
+                activity.deleteImage(myHolder.getAdapterPosition());
+            }
+
         });
+        if (context instanceof ConfirmRequestActivity) {
+            myHolder.binding.cardViewDelete.setVisibility(View.GONE);
+        }
     }
 
     @Override

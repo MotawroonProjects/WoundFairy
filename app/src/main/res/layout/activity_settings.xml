@@ -32,10 +32,12 @@
                     android:layout_margin="16dp"
                     >
                     <LinearLayout
+                        android:id="@+id/llLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="16dp"
+                        android:paddingBottom="16dp"
+                        android:layout_gravity="center_vertical"
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -56,6 +58,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/tvLang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -72,11 +75,13 @@
                         android:layerType="software"
                         android:padding="8dp" />
                     <LinearLayout
+                        android:id="@+id/llTerms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -101,11 +106,13 @@
                         android:layerType="software"
                         android:padding="8dp" />
                     <LinearLayout
+                        android:id="@+id/llPrivacy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -130,11 +137,13 @@
                         android:layerType="software"
                         android:padding="8dp" />
                     <LinearLayout
+                        android:id="@+id/llContactUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -158,11 +167,12 @@
                         android:layerType="software"
                         android:padding="8dp" />
                     <LinearLayout
+                        android:id="@+id/llRate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -187,11 +197,12 @@
                         android:layerType="software"
                         android:padding="8dp" />
                     <LinearLayout
+                        android:id="@+id/llShare"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
                         >
                         <ImageView
                             android:layout_width="24dp"

@@ -35,6 +35,7 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityHomeBinding;
 import com.apps.wound_fairy.language.Language;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
+import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
 import com.apps.wound_fairy.uis.activity_notification.NotificationActivity;
 import com.apps.wound_fairy.uis.activity_settings.SettingsActivity;
 import com.apps.wound_fairy.uis.activity_sign_up.SignUpActivity;
@@ -78,18 +79,19 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         }
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
-                userModel = getUserModel();
-                if (userModel.getData().getUser().getImage() != null) {
-                    Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
-                }
-                binding.setModel(userModel);
-                updateFirebase();
-            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
-                userModel = getUserModel();
-                binding.setModel(getUserModel());
-                updateFirebase();
-            } else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+//            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
+//                userModel = getUserModel();
+//                if (userModel.getData().getUser().getImage() != null) {
+//                    Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
+//                }
+//                binding.setModel(userModel);
+//                updateFirebase();
+//            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
+//                userModel = getUserModel();
+//                binding.setModel(getUserModel());
+//                updateFirebase();
+//            } else
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 String lang = result.getData().getStringExtra("lang");
                 refreshActivity(lang);
             }
@@ -106,6 +108,21 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        binding.llMyReservations.setOnClickListener(view -> {
+            Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
+            startActivity(intent);
+        });
+        binding.imgNotification.setOnClickListener(v -> {
+            if (getUserModel() != null) {
+                binding.setCount("0");
+                Intent intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
         NavigationUI.setupWithNavController(binding.navView, navController);

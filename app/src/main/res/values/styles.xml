@@ -8,6 +8,7 @@
         <item name="android:typeface">monospace</item>
         <item name="fontFamily">@font/ar_font</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
     </style>
 
@@ -20,4 +21,11 @@
         <item name="android:windowExitAnimation">@anim/dialog_congratulation_exit</item>
     </style>
 
+    <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_top</item>
+    </style>
 </resources>
