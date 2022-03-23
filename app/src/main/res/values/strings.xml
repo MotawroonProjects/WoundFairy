@@ -108,6 +108,7 @@
     <string name="location2">Location:</string>
     <string name="current_location">Current location</string>
     <string name="choose_service">Choose service</string>
+    <string name="choose_product">Choose product</string>
     <string name="field_req">Field required</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
     <string name="confirm_request">Confirm Request</string>

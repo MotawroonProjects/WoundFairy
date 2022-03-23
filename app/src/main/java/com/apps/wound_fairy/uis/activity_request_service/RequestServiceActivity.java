@@ -151,13 +151,10 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
 
             }
         });
-        mvvm.getServiceMutableLiveData().observe(this, new Observer<List<ServiceDepartmentModel.Department>>() {
-            @Override
-            public void onChanged(List<ServiceDepartmentModel.Department> departments) {
-                if (spinnerDepartmentAdapter != null) {
-                    departments.add(0, new ServiceDepartmentModel.Department(getResources().getString(R.string.choose_service)));
-                    spinnerDepartmentAdapter.updateList(departments);
-                }
+        mvvm.getServiceMutableLiveData().observe(this, departments -> {
+            if (spinnerDepartmentAdapter != null) {
+                departments.add(0, new ServiceDepartmentModel.Department(getResources().getString(R.string.choose_service)));
+                spinnerDepartmentAdapter.updateList(departments);
             }
         });
         mvvm.getServiceDepartment(getLang());

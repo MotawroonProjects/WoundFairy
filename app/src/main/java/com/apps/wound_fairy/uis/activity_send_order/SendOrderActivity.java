@@ -27,9 +27,12 @@ import com.apps.wound_fairy.databinding.ActivitySendOrderBinding;
 import com.apps.wound_fairy.model.LocationModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
+import com.apps.wound_fairy.model.SendOrderModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
+import com.apps.wound_fairy.mvvm.ActivityConfirmRequestMvvm;
 import com.apps.wound_fairy.mvvm.ActivityMapMvvm;
 import com.apps.wound_fairy.mvvm.ActivityRequestServiceMvvm;
+import com.apps.wound_fairy.mvvm.ActivitySendOrderMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
@@ -52,9 +55,11 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private float zoom = 15.0f;
     private ActivityMapMvvm activitymapMvvm;
+    private ActivitySendOrderMvvm sendOrderMvvm;
     private ActivityResultLauncher<String> permissionLauncher;
     private ProductModel.Product product;
     private int amount;
+    private SendOrderModel sendOrderModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +79,28 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
 
         binding.setLang(getLang());
         binding.setModel(product);
+        sendOrderModel=new SendOrderModel();
+        binding.setSendModel(sendOrderModel);
         binding.tvCount.setText(amount + "");
         setprice();
         setUpToolbar(binding.toolbar, getString(R.string.request_service), R.color.white, R.color.black);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
+        sendOrderMvvm = ViewModelProviders.of(this).get(ActivitySendOrderMvvm.class);
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
 
+        sendOrderMvvm.getSend().observe(this, aBoolean -> {
+            if (aBoolean) {
+                Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendOrderMvvm.storeOrder(SendOrderActivity.this,sendOrderModel,getUserModel(),product,amount+"",getLang());
+//                navigateTo
+            }
+        });
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
             addMarker(locationModel.getLat(), locationModel.getLng());
@@ -100,22 +121,16 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
 
             }
         });
-        binding.imIncrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                amount += 1;
+        binding.imIncrease.setOnClickListener(view -> {
+            amount += 1;
+            binding.tvCount.setText(amount + "");
+            setprice();
+        });
+        binding.imDecreese.setOnClickListener(view -> {
+            if (amount > 1) {
+                amount -= 1;
                 binding.tvCount.setText(amount + "");
                 setprice();
-            }
-        });
-        binding.imDecreese.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (amount > 1) {
-                    amount -= 1;
-                    binding.tvCount.setText(amount + "");
-                    setprice();
-                }
             }
         });
 
@@ -125,7 +140,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     }
 
     private void setprice() {
-        Spannable word = new SpannableString(String.format(Locale.ENGLISH,"%.2f", Double.parseDouble(product.getPrice()) * amount));
+        Spannable word = new SpannableString(String.format(Locale.ENGLISH, "%.2f", Double.parseDouble(product.getPrice()) * amount));
 
         word.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         binding.tvPrice.setText(word);
