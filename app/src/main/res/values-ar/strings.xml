@@ -106,7 +106,7 @@
     <string name="time">الوقت</string>
     <string name="date">التاريخ</string>
     <string name="location">الموقع</string>
-    <string name="location2">Location:</string>
+    <string name="location2">الموقع:</string>
     <string name="current_location">الموقع الحالي</string>
     <string name="choose_service">اختر الخدمة</string>
     <string name="field_req">الحقل مطلوب</string>
@@ -118,6 +118,11 @@
     <string name="visit_time">وقت الزيارة:</string>
     <string name="note">ملاحظه</string>
     <string name="total_price">الاجمالى : </string>
-    <string name="confirm_order">Confirm Order</string>
+    <string name="confirm_order">تأكيد الطلب</string>
+    <string name="succ">تم</string>
+    <string name="under_review">قيد المراجعة</string>
+    <string name="approved">تمت الموافقة</string>
+    <string name="canceled">تم الإلغاء</string>
+    <string name="done">تم الانتهاء</string>
 
 </resources>

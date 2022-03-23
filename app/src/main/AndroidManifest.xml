@@ -26,6 +26,15 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_reservation_details.ReservationDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_app.AppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.activity_my_reservations.MyReservationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_confirm_request.ConfirmRequestActivity"
             android:exported="false" />
         <activity
@@ -60,11 +69,11 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_login.LoginActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="true" />
         <activity
             android:name=".uis.activity_contact_us.ContactUsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_notification.NotificationActivity"
             android:exported="true" />

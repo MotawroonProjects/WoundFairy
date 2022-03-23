@@ -10,7 +10,7 @@ public class SettingsModel extends StatusResponse implements Serializable {
     public Settings getData() {
         return data;
     }
-    public class Settings implements Serializable{
+    public static class Settings implements Serializable{
         private String terms;
         private String privacy;
         private String facebook;

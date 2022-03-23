@@ -57,6 +57,7 @@ public class HomeActivityMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
+                        Log.e("srrr",response.code()+""+response.body().getStatus()+"");
                         if (response.isSuccessful()){
                             if (response.body().getStatus()==200){
                                 logout.postValue(true);
@@ -76,6 +77,7 @@ public class HomeActivityMvvm extends AndroidViewModel {
             if (task.isSuccessful()) {
                 String token = task.getResult().getToken();
 
+                Log.e("token",token+"_");
                 Api.getService(Tags.base_url).updateFirebasetoken( userModel.getData().getAccess_token(), token , "android")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

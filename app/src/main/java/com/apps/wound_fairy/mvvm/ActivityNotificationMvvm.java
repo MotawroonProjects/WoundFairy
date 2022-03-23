@@ -55,11 +55,12 @@ public class ActivityNotificationMvvm extends AndroidViewModel {
 
     //_________________________hitting api_________________________________
 
-    public void getNotifications(UserModel userModel) {
+    public void getNotifications(UserModel userModel,String lang) {
         isLoadingLivData.setValue(true);
 
-       /* Api.getService(Tags.base_url)
-                .getNotifications("Bearer " + userModel.getData().getToken(), Tags.api_key, userModel.getData().getId() + "")
+        Log.e("token",userModel.getData().getAccess_token());
+        Api.getService(Tags.base_url)
+                .getNotifications(userModel.getData().getAccess_token())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<NotificationDataModel>>() {
@@ -71,6 +72,7 @@ public class ActivityNotificationMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<NotificationDataModel> response) {
                         isLoadingLivData.setValue(false);
+                        Log.e("status",response.code()+"");
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
                                 if (response.body().getStatus() == 200) {
@@ -84,7 +86,7 @@ public class ActivityNotificationMvvm extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: ", e);
                     }
-                });*/
+                });
 
     }
 

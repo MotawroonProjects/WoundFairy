@@ -3,6 +3,7 @@ package com.apps.wound_fairy.uis.activity_request_service;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,15 +35,18 @@ import com.apps.wound_fairy.databinding.ActivityRequestServiceBinding;
 import com.apps.wound_fairy.model.LocationModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
+import com.apps.wound_fairy.model.SettingsModel;
 import com.apps.wound_fairy.mvvm.ActivityMapMvvm;
 import com.apps.wound_fairy.mvvm.ActivityRequestServiceMvvm;
 import com.apps.wound_fairy.mvvm.ActivityServicesMvvm;
 import com.apps.wound_fairy.share.Common;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -79,8 +84,8 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
     private int selectedReq = 0;
     private Uri uri = null;
     private TimePickerDialog timePickerDialog;
-
     private String selected_date;
+    private SettingsModel.Settings settingModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,13 +100,33 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         imagesUriList=new ArrayList<>();
         requestServiceModel = new RequestServiceModel();
         binding.setRequestService(requestServiceModel);
+        settingModel=new SettingsModel.Settings();
         imageAddServiceAdapter = new ImageAddServiceAdapter(imagesUriList, this);
         binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewImages.setAdapter(imageAddServiceAdapter);
         setUpToolbar(binding.toolbar, getString(R.string.request_service), R.color.white, R.color.black);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
+        activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
         mvvm = ViewModelProviders.of(this).get(ActivityRequestServiceMvvm.class);
 
+        activitymapMvvm.getLocationData().observe(this, locationModel -> {
+
+            addMarker(locationModel.getLat(), locationModel.getLng());
+//            addServiceModel.setLat(locationModel.getLat());
+//            addServiceModel.setLng(locationModel.getLng());
+//            addServiceModel.setAddress(locationModel.getAddress());
+//            binding.setModel(addServiceModel);
+
+        });
+        permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                activitymapMvvm.initGoogleApi();
+
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         spinnerDepartmentAdapter = new SpinnerDepartmentAdapter(this);
         binding.spinnerDepartment.setAdapter(spinnerDepartmentAdapter);
@@ -111,11 +136,14 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     requestServiceModel.setService_id(0);
+                    requestServiceModel.setSelected_department("");
+
                 }else {
                     requestServiceModel.setService_id(Integer.parseInt(mvvm.getServiceMutableLiveData().getValue().get(i).getId()));
                     Log.e("id",Integer.parseInt(mvvm.getServiceMutableLiveData().getValue().get(i).getId())+"_");
-
+                    requestServiceModel.setSelected_department(mvvm.getServiceMutableLiveData().getValue().get(i).getTitle());
                 }
+                binding.setRequestService(requestServiceModel);
             }
 
             @Override
@@ -134,17 +162,18 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         });
         mvvm.getServiceDepartment(getLang());
 
-
-        binding.flDate.setOnClickListener(view -> openCalender());
-        permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-            if (isGranted) {
-//                activitymapMvvm.initGoogleApi();
-
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+        mvvm.getSettingMutableLiveData().observe(this, settings -> {
+            if (settings!=null){
+                settingModel=settings.getData();
+                requestServiceModel.setTotal_price(settingModel.getHome_visit_price());
+                binding.setRequestService(requestServiceModel);
 
             }
         });
+        mvvm.getSettings();
+
+        binding.flDate.setOnClickListener(view -> openCalender());
+
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                 if (selectedReq == READ_REQ) {
@@ -153,6 +182,8 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
                     File file = new File(Common.getImagePath(this, uri));
                     imagesUriList.add(uri.toString());
                     imageAddServiceAdapter.notifyItemInserted(imagesUriList.size() - 1);
+                    binding.iconUpload.setVisibility(View.GONE);
+                    binding.llImages.setVisibility(View.VISIBLE);
 //                        if (imagesUriList.size() < 5) {
 //
 //                        } else {
@@ -167,6 +198,8 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
                         if (path != null) {
                             imagesUriList.add(uri.toString());
                             imageAddServiceAdapter.notifyItemInserted(imagesUriList.size() - 1);
+                            binding.iconUpload.setVisibility(View.GONE);
+                            binding.llImages.setVisibility(View.VISIBLE);
 //                                if (imagesUriList.size() < 5) {
 //
 //                                } else {
@@ -176,6 +209,7 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
                         } else {
                             imagesUriList.add(uri.toString());
                             imageAddServiceAdapter.notifyItemInserted(imagesUriList.size() - 1);
+//
 //                                if (imagesUriList.size() < 5) {
 //
 //                                } else {
@@ -189,9 +223,11 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
             }
         });
 
-        binding.addImage.setOnClickListener(view -> {
+        binding.cardAddImage.setOnClickListener(view -> {
             openSheet();
         });
+        binding.iconUpload.setOnClickListener(view -> openSheet());
+
         binding.flGallery.setOnClickListener(view -> {
             closeSheet();
             checkReadPermission();
@@ -205,6 +241,7 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
             if (requestServiceModel.isDataValid(RequestServiceActivity.this)) {
                 Intent intent=new Intent(RequestServiceActivity.this, ConfirmRequestActivity.class);
                 intent.putExtra("data",requestServiceModel);
+                requestServiceModel.setImages(imagesUriList);
                 startActivity(intent);
             }
         });
@@ -213,6 +250,9 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         binding.closeCalender.setOnClickListener(view -> binding.flCalender.setVisibility(View.GONE));
         binding.btnCancel.setOnClickListener(view -> closeSheet());
         createDateDialog();
+
+        updateUI();
+        checkPermission();
     }
 
 
@@ -350,6 +390,35 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), zoom));
 
+    }
+
+    private void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this, BaseActivity.fineLocPerm) != PackageManager.PERMISSION_GRANTED) {
+            permissionLauncher.launch(BaseActivity.fineLocPerm);
+        } else {
+
+            activitymapMvvm.initGoogleApi();
+        }
+    }
+    private void updateUI() {
+        SupportMapFragment supportMapFragment = SupportMapFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.map, supportMapFragment).commit();
+        supportMapFragment.getMapAsync(this);
+
+        FragmentMapTouchListener fragmentMapTouchListener = (FragmentMapTouchListener) getSupportFragmentManager().findFragmentById(R.id.map);
+//        fragmentMapTouchListener.setListener(() -> binding.scrollView.requestDisallowInterceptTouchEvent(true));
+
+
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+
+            activitymapMvvm.startLocationUpdate();
+
+        }
     }
 
     private void openCalender() {

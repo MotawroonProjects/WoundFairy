@@ -11,8 +11,11 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.adapter.NotificationAdapter;
 import com.apps.wound_fairy.databinding.ActivityHomeBinding;
 import com.apps.wound_fairy.databinding.ActivityNotificationBinding;
+import com.apps.wound_fairy.model.NotModel;
 import com.apps.wound_fairy.mvvm.ActivityNotificationMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 public class NotificationActivity extends BaseActivity {
 
@@ -50,8 +53,26 @@ public class NotificationActivity extends BaseActivity {
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NotificationAdapter(this);
         binding.recView.setAdapter(adapter);
-        activityNotificationMvvm.getNotifications(getUserModel());
+        activityNotificationMvvm.getNotifications(getUserModel(),getLang());
+
+        binding.swipeRefresh.setOnRefreshListener(() -> activityNotificationMvvm.getNotifications(getUserModel(),getLang()));
+
+
+//        EventBus.getDefault().register(this);
 
     }
 
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onNewNotificationListener(NotModel model) {
+//        activityNotificationMvvm.getNotifications(getUserModel());
+//    }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if (EventBus.getDefault().isRegistered(this)) {
+//            EventBus.getDefault().unregister(this);
+//        }
+//    }
 }

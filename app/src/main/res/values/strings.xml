@@ -118,5 +118,11 @@
     <string name="note">Note</string>
     <string name="total_price">Total Price :</string>
     <string name="confirm_order">Confirm Order</string>
+    <string name="succ">Success</string>
+    <string name="under_review">Under Review</string>
+    <string name="approved">Approved</string>
+    <string name="canceled">Canceled</string>
+    <string name="done">Done</string>
+
 
 </resources>

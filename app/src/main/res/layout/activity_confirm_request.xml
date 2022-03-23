@@ -6,6 +6,9 @@
     <data>
 
         <variable
+            name="model"
+            type="com.apps.wound_fairy.model.RequestServiceModel" />
+        <variable
             name="lang"
             type="String" />
     </data>
@@ -55,16 +58,18 @@
 
                         <TextView
                             android:id="@+id/tvComplaint"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="3dp"
+                            android:padding="5dp"
+                            android:text="@{model.complaint}"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="16dp"
                             android:text="@string/test_images"
                             android:textColor="@color/gray3"
                             android:textSize="16sp" />
@@ -89,6 +94,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
+                            android:layout_marginTop="3dp"
+                            android:text="@{model.selected_department}"
                             android:textSize="16sp" />
 
                         <TextView
@@ -97,11 +104,13 @@
                             android:text="@string/visit_time"
                             android:textColor="@color/gray3"
                             android:textSize="16sp"
+                            android:layout_marginTop="16dp"
                             android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -123,6 +132,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:text="@{model.date}"
                                     android:textColor="@color/black" />
                             </LinearLayout>
 
@@ -145,6 +155,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
+                                    android:text="@{model.time}"
                                     android:textColor="@color/black" />
                             </LinearLayout>
                         </LinearLayout>
@@ -161,6 +172,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -185,7 +197,7 @@
                 android:id="@+id/btnConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="@drawable/small_rounded_primary"
+                android:background="@drawable/rounded_top_primary"
                 android:text="@string/confirm_request"
                 android:textColor="@color/white"
                 android:textSize="16sp"

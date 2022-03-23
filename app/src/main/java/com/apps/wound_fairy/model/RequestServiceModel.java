@@ -24,6 +24,7 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
     private String latitude;
     private String longitude;
     private String address;
+    private String selected_department;
 
     public ObservableField<String> error_complaint = new ObservableField<>();
     public ObservableField<String> error_date = new ObservableField<>();
@@ -66,14 +67,25 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
 
     public RequestServiceModel() {
         this.service_id = 0;
+
         this.complaint = "";
+        notifyPropertyChanged(BR.complaint);
         this.date = "";
+        notifyPropertyChanged(BR.date);
         this.time = "";
+        notifyPropertyChanged(BR.time);
         this.total_price = "";
+        notifyPropertyChanged(BR.total_price);
         this.latitude = "";
+        notifyPropertyChanged(BR.latitude);
         this.longitude = "";
+        notifyPropertyChanged(BR.longitude);
         this.address = "";
+        notifyPropertyChanged(BR.address);
         this.images = new ArrayList<>();
+        notifyPropertyChanged(BR.images);
+        this.selected_department="";
+        notifyPropertyChanged(BR.selected_department);
     }
 
     public int getService_id() {
@@ -161,6 +173,16 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
 
     public void setAddress(String address) {
         this.address = address;
+        notifyPropertyChanged(BR.address);
+    }
+
+    @Bindable
+    public String getSelected_department() {
+        return selected_department;
+    }
+
+    public void setSelected_department(String selected_department) {
+        this.selected_department = selected_department;
         notifyPropertyChanged(BR.address);
     }
 }
