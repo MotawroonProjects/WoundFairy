@@ -131,6 +131,7 @@
     <string name="ordered">Ordered: </string>
     <string name="reservation_time">Reservation Time: </string>
     <string name="reservation_status">Reservation Status</string>
+    <string name="edit">Edit</string>
 
 
 </resources>
