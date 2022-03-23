@@ -13,6 +13,9 @@
         <variable
             name="model"
             type="com.apps.wound_fairy.model.ProductModel.Product" />
+        <variable
+            name="sendModel"
+            type="com.apps.wound_fairy.model.SendOrderModel" />
     </data>
 
     <FrameLayout
@@ -226,6 +229,7 @@
                             android:background="@color/transparent"
                             android:hint="@string/current_location"
                             android:paddingStart="8dp"
+                            android:text="@={sendModel.address}"
                             android:paddingEnd="8dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray3"
@@ -295,6 +299,7 @@
                             android:background="@color/transparent"
                             android:gravity="top"
                             android:hint="@string/write_here"
+                            android:text="@={sendModel.note}"
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
                             android:textColor="@color/black"

@@ -109,6 +109,7 @@
     <string name="location2">الموقع:</string>
     <string name="current_location">الموقع الحالي</string>
     <string name="choose_service">اختر الخدمة</string>
+    <string name="choose_product">اختر المنتج</string>
     <string name="field_req">الحقل مطلوب</string>
     <string name="dd_mm_yyyy">يوم/شهر/سنة</string>
     <string name="confirm_request">تأكيد الخدمة</string>

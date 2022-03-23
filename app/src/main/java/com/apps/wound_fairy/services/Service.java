@@ -145,7 +145,21 @@ public interface Service {
 
     @GET("api/reservation/getReservations")
     Single<Response<ReservationDataModel>> getReservations(@Header("Authorization") String Authorization,
-                                                                  @Query("lang") String lang);
+                                                           @Query("lang") String lang);
+
+    @FormUrlEncoded
+    @POST("api/order/store-order")
+    Single<Response<StatusResponse>> storeOrder(@Header("Authorization") String Authorization,
+                                                @Field("product_id") String product_id,
+                                                @Field("amount") String amount,
+                                                @Field("latitude") String latitude,
+                                                @Field("longitude") String longitude,
+                                                @Field("address") String address,
+                                                @Field("note") String note,
+                                                @Field("total_price") String total_price,
+                                                @Field("lang") String lang
+
+    );
 
 
 }
