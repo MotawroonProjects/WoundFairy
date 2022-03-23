@@ -65,22 +65,26 @@ public class Preferences {
 
 
 
-    public void create_room_id(Context context, String room_id) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("room_id", room_id);
+    public void create_update_room(Context context, String order_id) {
+        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("order_id", order_id);
         editor.apply();
 
 
     }
 
-    public String getRoom_Id(Context context) {
+    public String getRoomId(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
-        String chat_user_id = preferences.getString("room_id","");
-        return chat_user_id;
+        return preferences.getString("order_id", "");
     }
 
+    public void clearRoomId(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
 
 

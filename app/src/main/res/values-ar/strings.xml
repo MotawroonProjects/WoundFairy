@@ -130,5 +130,7 @@
     <string name="ordered">تم طلب: </string>
     <string name="reservation_time">موعد الحجز</string>
     <string name="reservation_status">Reservation Status</string>
+    <string name="fields_are_not_required">* الحقول غير مطلوبة</string>
+    <string name="type_a_message">Type Message</string>
 
 </resources>

@@ -230,6 +230,8 @@
                             android:background="@color/transparent"
                             android:hint="@string/current_location"
                             android:paddingStart="8dp"
+                            android:lines="1"
+                            android:text="@={sendModel.address}"
                             android:paddingEnd="8dp"
                             android:text="@={sendModel.address}"
                             android:textColor="@color/black"

@@ -9,7 +9,7 @@
             type="String" />
         <variable
             name="model"
-            type="com.apps.wound_fairy.model.ServiceModel.Data" />
+            type="com.apps.wound_fairy.model.VisitOnlineModel.Data" />
     </data>
 
     <FrameLayout

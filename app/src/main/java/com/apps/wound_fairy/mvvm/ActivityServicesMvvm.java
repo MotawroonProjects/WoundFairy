@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.apps.wound_fairy.model.ServiceModel;
+import com.apps.wound_fairy.model.VisitOnlineModel;
 import com.apps.wound_fairy.remote.Api;
 import com.apps.wound_fairy.tags.Tags;
 
@@ -19,10 +19,10 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ActivityServicesMvvm extends AndroidViewModel {
-    private MutableLiveData<ServiceModel> mutableLiveData;
+    private MutableLiveData<VisitOnlineModel> mutableLiveData;
     private MutableLiveData<Boolean> isLoading;
 
-    public MutableLiveData<ServiceModel> getMutableLiveData() {
+    public MutableLiveData<VisitOnlineModel> getMutableLiveData() {
         if (mutableLiveData == null) {
             mutableLiveData = new MutableLiveData<>();
         }
@@ -46,17 +46,17 @@ public class ActivityServicesMvvm extends AndroidViewModel {
         isLoading.setValue(true);
 
 
-        Api.getService(Tags.base_url).getServiceDetails(lang,type)
+        Api.getService(Tags.base_url).getVisitOnlineDetails(lang,type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ServiceModel>>() {
+                .subscribe(new SingleObserver<Response<VisitOnlineModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<ServiceModel> response) {
+                    public void onSuccess(@NonNull Response<VisitOnlineModel> response) {
                         isLoading.postValue(false);
                         Log.e("sssss",response.code()+"_"+response.body().getData()+""+response.body().getStatus()+type+lang);
                         if (response.isSuccessful() && response.body().getData()!=null){

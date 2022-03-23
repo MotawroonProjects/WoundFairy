@@ -2,7 +2,7 @@ package com.apps.wound_fairy.model;
 
 import java.io.Serializable;
 
-public class ServiceModel extends StatusResponse implements Serializable {
+public class VisitOnlineModel extends StatusResponse implements Serializable {
     private Data data;
 
     public Data getData() {

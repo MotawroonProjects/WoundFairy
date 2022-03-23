@@ -3,12 +3,14 @@ package com.apps.wound_fairy.services;
 
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.MessagesDataModel;
 import com.apps.wound_fairy.model.OrderDataModel;
 import com.apps.wound_fairy.model.ReservationDataModel;
 import com.apps.wound_fairy.model.PlaceMapDetailsData;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
-import com.apps.wound_fairy.model.ServiceModel;
+import com.apps.wound_fairy.model.SingleMessageModel;
+import com.apps.wound_fairy.model.VisitOnlineModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
 import com.apps.wound_fairy.model.SettingsModel;
@@ -122,8 +124,8 @@ public interface Service {
     Single<Response<AboutAusModel>> getAboutUs(@Query("lang") String lang);
 
     @GET("api/home/online-consultations")
-    Single<Response<ServiceModel>> getServiceDetails(@Query("lang") String lang,
-                                                     @Query("type") String type);
+    Single<Response<VisitOnlineModel>> getVisitOnlineDetails(@Query("lang") String lang,
+                                                             @Query("type") String type);
 
     @GET("api/home/services")
     Single<Response<ServiceDepartmentModel>> getServiceDepartment(@Query("lang") String lang);
@@ -141,6 +143,16 @@ public interface Service {
                                                     @Part("longitude") RequestBody longitude,
                                                     @Part("address") RequestBody address,
                                                     @Part("lang") RequestBody lang
+
+    );
+
+    @Multipart
+    @POST("api/chat/store-chat-data")
+    Single<Response<StatusResponse>> requestChat(@Header("Authorization") String Authorization,
+                                                 @Part("complaint") RequestBody complaint,
+                                                 @Part List<MultipartBody.Part> images,
+                                                 @Part("type") RequestBody type
+
 
     );
 
@@ -166,5 +178,17 @@ public interface Service {
     Single<Response<OrderDataModel>> getOrders(@Header("Authorization") String Authorization,
                                                @Query("lang") String lang);
 
+    @FormUrlEncoded
+    @POST("api/one_chatRoom")
+    Single<Response<MessagesDataModel>> getChatMessages(@Field(value = "order_id") String order_id);
 
+    @Multipart
+    @POST("api/send_message")
+    Single<Response<SingleMessageModel>> sendMessages(@Part("order_id") RequestBody order_id,
+                                                      @Part("from_user_id") RequestBody from_user_id,
+                                                      @Part("to_user_id") RequestBody to_user_id,
+                                                      @Part("type") RequestBody type,
+                                                      @Part("message") RequestBody message,
+                                                      @Part MultipartBody.Part image
+    );
 }

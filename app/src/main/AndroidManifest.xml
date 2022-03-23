@@ -63,9 +63,13 @@
             android:name=".uis.activity_language.LanguageActivity"
             android:exported="false" />
         <activity
+            android:name=".uis.activity_request_chat.RequesChatActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".uis.activity_sign_up.SignUpActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_verification_code.VerificationCodeActivity"
             android:exported="false" />

@@ -234,8 +234,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 Intent intent = new Intent(this, NotificationActivity.class);
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                navigationToLoginActivity();
             }
         });
         if (getUserModel() != null) {
