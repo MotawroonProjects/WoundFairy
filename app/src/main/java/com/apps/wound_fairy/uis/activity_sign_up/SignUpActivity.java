@@ -76,8 +76,8 @@ public class SignUpActivity extends BaseActivity {
 
             model.setPhone_code(phone_code);
             model.setPhone(phone);
-            model.setFirstName(userModel.getData().getUser().getName().split("")[0]);
-            model.setLastName(userModel.getData().getUser().getName().split("")[1]);
+            model.setFirstName(userModel.getData().getUser().getName().split(" ")[0]);
+            model.setLastName(userModel.getData().getUser().getName().split(" ")[1]);
             model.setEmail(userModel.getData().getUser().getEmail());
 
             if (userModel.getData().getUser().getImage()!=null){

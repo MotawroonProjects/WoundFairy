@@ -79,19 +79,20 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         }
         homeActivityMvvm = ViewModelProviders.of(this).get(HomeActivityMvvm.class);
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
-//                userModel = getUserModel();
-//                if (userModel.getData().getUser().getImage() != null) {
-//                    Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
-//                }
-//                binding.setModel(userModel);
-//                updateFirebase();
-//            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
+                userModel = getUserModel();
+                if (userModel.getData().getUser().getImage() != null) {
+                    Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
+                }
+                binding.setModel(userModel);
+                updateFirebase();
+            }
+//            else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
 //                userModel = getUserModel();
 //                binding.setModel(getUserModel());
 //                updateFirebase();
 //            } else
-            if (req == 1 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 String lang = result.getData().getStringExtra("lang");
                 refreshActivity(lang);
             }
@@ -116,8 +117,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 Intent intent = new Intent(this, NotificationActivity.class);
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+               navigationToLoginActivity();
             }
         });
 
@@ -178,16 +178,20 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
         binding.llMyReservations.setOnClickListener(view -> {
-            Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
-            startActivity(intent);
+            if (getUserModel() != null) {
+                Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
+                startActivity(intent);
+            } else {
+                navigationToLoginActivity();
+
+            }
+
         });
 
         binding.llSettings.setOnClickListener(view -> {
-            if (userModel == null) {
-                navigationToLoginActivity();
-            } else {
+
                 navigateToSettingsActivity();
-            }
+
         });
         binding.llLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +235,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     }
 
     private void navigateToSettingsActivity() {
-        req = 1;
+        req = 3;
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
         launcher.launch(intent);
     }

@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.adapter.MyPagerAdapter;
@@ -43,6 +45,10 @@ public class MyReservationsActivity extends BaseActivity {
         pagerAdapter =new MyPagerAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_UNCHANGED,fragmentList,titles);
         binding.pager.setAdapter(pagerAdapter);
         binding.pager.setOffscreenPageLimit(fragmentList.size());
-
+        for (int i = 0; i < binding.tab.getChildCount(); i++) {
+            View view = ((ViewGroup) binding.tab.getChildAt(0)).getChildAt(i);
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            params.setMargins(10, 0, 10, 0);
+        }
     }
 }

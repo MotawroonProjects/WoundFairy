@@ -22,8 +22,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -112,10 +114,10 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
             addMarker(locationModel.getLat(), locationModel.getLng());
-//            addServiceModel.setLat(locationModel.getLat());
-//            addServiceModel.setLng(locationModel.getLng());
-//            addServiceModel.setAddress(locationModel.getAddress());
-//            binding.setModel(addServiceModel);
+            requestServiceModel.setLatitude(locationModel.getLat()+"");
+            requestServiceModel.setLongitude(locationModel.getLng()+"");
+            requestServiceModel.setAddress(locationModel.getAddress());
+            binding.setRequestService(requestServiceModel);
 
         });
         permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -247,7 +249,16 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         binding.closeCalender.setOnClickListener(view -> binding.flCalender.setVisibility(View.GONE));
         binding.btnCancel.setOnClickListener(view -> closeSheet());
         createDateDialog();
-
+        binding.edtSearch.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                String query = binding.edtSearch.getText().toString().trim();
+                if (!TextUtils.isEmpty(query)) {
+                    Log.e("q", query);
+                    activitymapMvvm.Search(query, getLang());
+                }
+            }
+            return false;
+        });
         updateUI();
         checkPermission();
     }

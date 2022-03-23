@@ -292,8 +292,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|top"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_strock_white2"
-                    android:backgroundTint="@color/gray9">
+                    android:background="@drawable/rounded_color9"
+                   >
 
                     <ImageView
                         android:layout_width="32dp"

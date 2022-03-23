@@ -6,9 +6,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -104,10 +106,10 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
             addMarker(locationModel.getLat(), locationModel.getLng());
-//            addServiceModel.setLat(locationModel.getLat());
-//            addServiceModel.setLng(locationModel.getLng());
-//            addServiceModel.setAddress(locationModel.getAddress());
-//            binding.setModel(addServiceModel);
+            sendOrderModel.setLatitude(locationModel.getLat()+"");
+            sendOrderModel.setLongitude(locationModel.getLng()+"");
+            sendOrderModel.setAddress(locationModel.getAddress());
+            binding.setSendModel(sendOrderModel);
 
         });
 
@@ -133,7 +135,16 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
                 setprice();
             }
         });
-
+        binding.edtSearch.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_SEARCH) {
+                String query = binding.edtSearch.getText().toString().trim();
+                if (!TextUtils.isEmpty(query)) {
+                    Log.e("q", query);
+                    activitymapMvvm.Search(query, getLang());
+                }
+            }
+            return false;
+        });
         updateUI();
         checkPermission();
 

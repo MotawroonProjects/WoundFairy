@@ -404,12 +404,14 @@
                             android:background="@drawable/linear_shape3">
 
                             <EditText
+                                android:id="@+id/edtSearch"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:background="@color/transparent"
                                 android:hint="@string/current_location"
                                 android:padding="8dp"
+                                android:imeOptions="actionSearch"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
                                 android:textSize="14sp" />
