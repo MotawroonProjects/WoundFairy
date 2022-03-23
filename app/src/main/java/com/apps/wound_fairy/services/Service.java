@@ -3,9 +3,8 @@ package com.apps.wound_fairy.services;
 
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
-import com.apps.wound_fairy.model.CurrentReservationModel;
+import com.apps.wound_fairy.model.ReservationDataModel;
 import com.apps.wound_fairy.model.PlaceMapDetailsData;
-import com.apps.wound_fairy.model.PreviousReservationModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.ServiceModel;
@@ -15,7 +14,6 @@ import com.apps.wound_fairy.model.SettingsModel;
 import com.apps.wound_fairy.model.SingleBlogModel;
 import com.apps.wound_fairy.model.SingleProductModel;
 import com.apps.wound_fairy.model.SliderDataModel;
-import com.apps.wound_fairy.model.SliderProductModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
 
@@ -146,12 +144,8 @@ public interface Service {
     );
 
     @GET("api/reservation/getReservations")
-    Single<Response<CurrentReservationModel>> getCurrentReservations(@Header("Authorization") String Authorization,
-                                                                     @Query("lang") String lang);
-
-    @GET("api/reservation/getReservations")
-    Single<Response<PreviousReservationModel>> getPreviousReservations(@Header("Authorization") String Authorization,
-                                                                       @Query("lang") String lang);
+    Single<Response<ReservationDataModel>> getReservations(@Header("Authorization") String Authorization,
+                                                                  @Query("lang") String lang);
 
 
 }

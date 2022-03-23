@@ -19,8 +19,7 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.adapter.ReservationAdapter;
 import com.apps.wound_fairy.databinding.FragmentPreviousReservationsBinding;
 import com.apps.wound_fairy.model.ReservationModel;
-import com.apps.wound_fairy.mvvm.FragmentCurrentReservisonMvvm;
-import com.apps.wound_fairy.mvvm.FragmentPreviousReservisonMvvm;
+import com.apps.wound_fairy.mvvm.FragmentReservationsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
 
@@ -31,7 +30,7 @@ import java.util.List;
 public class FragmentPreviousReservations extends BaseFragment {
     private FragmentPreviousReservationsBinding binding;
     private MyReservationsActivity activity;
-    private FragmentPreviousReservisonMvvm mvvm;
+    private FragmentReservationsMvvm mvvm;
     private ReservationAdapter reservationAdapter;
     private List<ReservationModel> reservationModelList;
 
@@ -64,27 +63,21 @@ public class FragmentPreviousReservations extends BaseFragment {
 
     private void initView() {
         reservationModelList = new ArrayList<>();
-        mvvm = ViewModelProviders.of(this).get(FragmentPreviousReservisonMvvm.class);
+        mvvm = ViewModelProviders.of(this).get(FragmentReservationsMvvm.class);
 
-        mvvm.getIsLoading().observe(activity, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    binding.tvNoSearchData.setVisibility(View.GONE);
-                }
-                binding.swipeRefresh.setRefreshing(aBoolean);
+        mvvm.getIsLoading().observe(activity, aBoolean -> {
+            if (aBoolean){
+                binding.tvNoSearchData.setVisibility(View.GONE);
             }
+            binding.swipeRefresh.setRefreshing(aBoolean);
         });
-        mvvm.getMutableLiveData().observe(activity, new Observer<List<ReservationModel>>() {
-            @Override
-            public void onChanged(List<ReservationModel> reservationModels) {
-                reservationAdapter.updateList(new ArrayList<>());
-                if (reservationModels!=null && reservationModels.size()>0){
-                    reservationAdapter.updateList(reservationModels);
-                    binding.tvNoSearchData.setVisibility(View.GONE);
-                }else {
-                    binding.tvNoSearchData.setVisibility(View.VISIBLE);
-                }
+        mvvm.getMutableLiveData().observe(activity, reservationModels -> {
+            reservationAdapter.updateList(new ArrayList<>());
+            if (reservationModels!=null && reservationModels.size()>0){
+                reservationAdapter.updateList(reservationModels);
+                binding.tvNoSearchData.setVisibility(View.GONE);
+            }else {
+                binding.tvNoSearchData.setVisibility(View.VISIBLE);
             }
         });
 

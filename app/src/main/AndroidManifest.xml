@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_reservation_details.ReservationDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_app.AppActivity"
             android:exported="false" />
         <activity
@@ -66,8 +69,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".uis.activity_login.LoginActivity"
-            android:exported="true"
-             />
+            android:exported="true" />
         <activity
             android:name=".uis.activity_contact_us.ContactUsActivity"
             android:exported="true"

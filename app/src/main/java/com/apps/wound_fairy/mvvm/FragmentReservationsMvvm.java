@@ -1,17 +1,14 @@
 package com.apps.wound_fairy.mvvm;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.apps.wound_fairy.model.CurrentReservationModel;
+import com.apps.wound_fairy.model.ReservationDataModel;
 import com.apps.wound_fairy.model.ReservationModel;
-import com.apps.wound_fairy.model.ServiceModel;
 import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.remote.Api;
 import com.apps.wound_fairy.tags.Tags;
@@ -25,19 +22,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class FragmentCurrentReservisonMvvm extends AndroidViewModel {
-    private static final String TAG = "FragmentCurrReservMvvm";
-    private Context context;
-
+public class FragmentReservationsMvvm extends AndroidViewModel {
     private MutableLiveData<List<ReservationModel>> mutableLiveData;
     private MutableLiveData<Boolean> isLoadingLivData;
-
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public FragmentCurrentReservisonMvvm(@NonNull Application application) {
-        super(application);
-        context = application.getApplicationContext();
-    }
+
 
     public MutableLiveData<Boolean> getIsLoading() {
         if (isLoadingLivData == null) {
@@ -47,34 +37,35 @@ public class FragmentCurrentReservisonMvvm extends AndroidViewModel {
     }
 
     public MutableLiveData<List<ReservationModel>> getMutableLiveData() {
-        if (mutableLiveData==null){
-            mutableLiveData=new MutableLiveData<>();
+        if (mutableLiveData == null) {
+            mutableLiveData = new MutableLiveData<>();
         }
         return mutableLiveData;
     }
-
-    //_________________________hitting api_________________________________
-
+    public FragmentReservationsMvvm(@NonNull Application application) {
+        super(application);
+    }
 
     public void getCurrentReservations(UserModel userModel,String lang){
         isLoadingLivData.setValue(true);
 
-        Api.getService(Tags.base_url).getCurrentReservations(userModel.getData().getAccess_token(),lang)
-                .observeOn(Schedulers.io())
+        Log.e("data",userModel.getData().getAccess_token()+"_"+lang);
+        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(),lang)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<CurrentReservationModel>>() {
+                .subscribe(new SingleObserver<Response<ReservationDataModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<CurrentReservationModel> response) {
+                    public void onSuccess(@NonNull Response<ReservationDataModel> response) {
                         isLoadingLivData.postValue(false);
-
+                        Log.e("status",response.code()+"");
                         if (response.isSuccessful() && response.body().getData()!=null){
                             if (response.body().getStatus()==200){
-                                mutableLiveData.setValue(response.body().getData());
+                                mutableLiveData.setValue(response.body().getData().getCurrent());
                             }
                         }
                     }
@@ -83,6 +74,38 @@ public class FragmentCurrentReservisonMvvm extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         isLoadingLivData.setValue(false);
                         Log.e("error",e.toString());
+                    }
+                });
+    }
+
+    public void getPreviousReservation(UserModel userModel, String lang) {
+        isLoadingLivData.setValue(true);
+
+        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(), lang)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<ReservationDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<ReservationDataModel> response) {
+                        isLoadingLivData.postValue(false);
+
+                        if (response.isSuccessful() && response.body().getData() != null) {
+                            if (response.body().getStatus() == 200) {
+                                mutableLiveData.setValue(response.body().getData().getPrevious());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        isLoadingLivData.setValue(false);
+                        Log.e("error", e.toString());
+
                     }
                 });
     }

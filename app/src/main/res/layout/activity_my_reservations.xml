@@ -20,39 +20,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/gradient_search">
-                <LinearLayout
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="3dp"
-                    >
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/linear_shape4_selected"
-                        android:text="@string/current"
-                        android:textAllCaps="false"
-                        android:textSize="16sp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"/>
-                        <Button
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/linear_shape4"
-                            android:text="@string/prev"
-                            android:textAllCaps="false"
-                            android:gravity="center"
-                            android:textColor="@color/color10"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"/>
-                </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabGravity="fill"
+                    app:tabMaxWidth="0dp"
+                    app:tabMode="fixed"
+                    app:tabPadding="8dp"
+                    contentPadding="8dp"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextColor="@color/color10"
+                    app:tabBackground="@drawable/tab_indicator"/>
             </FrameLayout>
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/pager"

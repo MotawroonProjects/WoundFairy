@@ -21,8 +21,8 @@ import com.apps.wound_fairy.adapter.ProductAdapter;
 import com.apps.wound_fairy.adapter.ReservationAdapter;
 import com.apps.wound_fairy.databinding.FragmentCurrentReservationsBinding;
 import com.apps.wound_fairy.model.ReservationModel;
-import com.apps.wound_fairy.mvvm.FragmentCurrentReservisonMvvm;
-import com.apps.wound_fairy.mvvm.FragmentMarketMvvm;
+
+import com.apps.wound_fairy.mvvm.FragmentReservationsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
 
@@ -33,7 +33,7 @@ import java.util.List;
 public class FragmentCurrentReservations extends BaseFragment {
     private FragmentCurrentReservationsBinding binding;
     private MyReservationsActivity activity;
-    private FragmentCurrentReservisonMvvm mvvm;
+    private FragmentReservationsMvvm mvvm;
     private ReservationAdapter reservationAdapter;
     private List<ReservationModel> reservationModelList;
 
@@ -68,7 +68,7 @@ public class FragmentCurrentReservations extends BaseFragment {
 
     private void initView() {
         reservationModelList = new ArrayList<>();
-        mvvm = ViewModelProviders.of(this).get(FragmentCurrentReservisonMvvm.class);
+        mvvm = ViewModelProviders.of(this).get(FragmentReservationsMvvm.class);
 
         mvvm.getIsLoading().observe(activity, new Observer<Boolean>() {
             @Override

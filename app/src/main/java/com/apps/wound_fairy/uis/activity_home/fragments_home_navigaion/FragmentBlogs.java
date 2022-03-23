@@ -21,7 +21,6 @@ import com.apps.wound_fairy.adapter.BlogAdapter;
 import com.apps.wound_fairy.databinding.FragmentBlogsBinding;
 import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
-import com.apps.wound_fairy.mvvm.FragmentCurrentReservisonMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_blogs_details.BlogDetailsActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;

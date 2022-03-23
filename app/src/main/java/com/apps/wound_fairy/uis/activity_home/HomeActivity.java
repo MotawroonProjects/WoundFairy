@@ -109,10 +109,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        binding.llMyReservations.setOnClickListener(view -> {
-            Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
-            startActivity(intent);
-        });
+
         binding.imgNotification.setOnClickListener(v -> {
             if (getUserModel() != null) {
                 binding.setCount("0");
@@ -173,22 +170,18 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
         }
-        binding.llEditAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (userModel == null) {
-                    navigationToLoginActivity();
-                } else {
-                    navigationToSignupActivity();
-                }
+        binding.llEditAccount.setOnClickListener(view -> {
+            if (userModel == null) {
+                navigationToLoginActivity();
+            } else {
+                navigationToSignupActivity();
             }
         });
-        binding.llMyOrders.setOnClickListener(view -> {
-
-        });
         binding.llMyReservations.setOnClickListener(view -> {
-
+            Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
+            startActivity(intent);
         });
+
         binding.llSettings.setOnClickListener(view -> {
             if (userModel == null) {
                 navigationToLoginActivity();

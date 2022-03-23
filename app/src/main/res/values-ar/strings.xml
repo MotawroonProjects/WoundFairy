@@ -120,5 +120,9 @@
     <string name="total_price">الاجمالى : </string>
     <string name="confirm_order">تأكيد الطلب</string>
     <string name="succ">تم</string>
+    <string name="under_review">قيد المراجعة</string>
+    <string name="approved">تمت الموافقة</string>
+    <string name="canceled">تم الإلغاء</string>
+    <string name="done">تم الانتهاء</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.apps.wound_fairy.general_ui;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.apps.wound_fairy.R;
 
+import com.apps.wound_fairy.model.ReservationModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -32,6 +34,22 @@ public class GeneralMethod {
             tv.setError(error);
 
 
+        }
+    }
+
+    @BindingAdapter("reservation_status")
+    public static void reservationStatus(TextView btnStatus, ReservationModel reservationModel) {
+        if (reservationModel != null) {
+            String status = reservationModel.getStatus();
+            if (status.equals("new")) {
+                btnStatus.setText(R.string.under_review);
+            } else if (status.equals("accepted")) {
+                btnStatus.setText(R.string.approved);
+            } else if (status.equals("Refused")) {
+                btnStatus.setText(R.string.canceled);
+            } else if (status.equals("ended")) {
+                btnStatus.setText(R.string.done);
+            }
         }
     }
 

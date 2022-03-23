@@ -27,6 +27,7 @@ public class ReservationAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         this.list = list;
         this.context = context;
         this.fragment = fragment;
+        inflater=LayoutInflater.from(context);
     }
 
     @NonNull

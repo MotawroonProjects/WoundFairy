@@ -8,6 +8,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import android.os.Bundle;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.adapter.MyPagerAdapter;
 import com.apps.wound_fairy.databinding.ActivityMyReservationsBinding;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_my_reservations.fragments.FragmentCurrentReservations;
@@ -19,7 +20,8 @@ import java.util.List;
 public class MyReservationsActivity extends BaseActivity {
     private ActivityMyReservationsBinding binding;
     private List<Fragment> fragmentList;
-    private PagerAdapter pagerAdapter;
+    private List<String> titles;
+    private MyPagerAdapter pagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +30,17 @@ public class MyReservationsActivity extends BaseActivity {
     }
 
     private void initView() {
+        titles = new ArrayList<>();
         fragmentList = new ArrayList<>();
         setUpToolbar(binding.toolbar, getString(R.string.my_reservation), R.color.white, R.color.black);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
 
+        titles.add(getString(R.string.current));
+        titles.add(getString(R.string.prev));
+        binding.tab.setupWithViewPager(binding.pager);
         fragmentList.add(FragmentCurrentReservations.newInstance());
         fragmentList.add(FragmentPreviousReservations.newInstance());
-        pagerAdapter =new com.apps.wound_fairy.adapter.PagerAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_UNCHANGED,fragmentList);
+        pagerAdapter =new MyPagerAdapter(getSupportFragmentManager(), PagerAdapter.POSITION_UNCHANGED,fragmentList,titles);
         binding.pager.setAdapter(pagerAdapter);
         binding.pager.setOffscreenPageLimit(fragmentList.size());
 

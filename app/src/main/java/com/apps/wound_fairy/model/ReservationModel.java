@@ -12,6 +12,7 @@ public class ReservationModel implements Serializable {
     private String total_price;
     private String latitude;
     private String longitude;
+    private String status;
     private String address;
     private ServiceDepartmentModel.Department service;
 
@@ -45,6 +46,10 @@ public class ReservationModel implements Serializable {
 
     public String getLongitude() {
         return longitude;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public String getAddress() {

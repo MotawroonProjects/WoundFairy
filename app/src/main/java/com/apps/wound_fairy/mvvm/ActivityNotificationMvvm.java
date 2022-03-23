@@ -58,7 +58,7 @@ public class ActivityNotificationMvvm extends AndroidViewModel {
     public void getNotifications(UserModel userModel,String lang) {
         isLoadingLivData.setValue(true);
 
-        Log.e("auth",userModel.getData().getAccess_token());
+        Log.e("token",userModel.getData().getAccess_token());
         Api.getService(Tags.base_url)
                 .getNotifications(userModel.getData().getAccess_token())
                 .subscribeOn(Schedulers.io())
