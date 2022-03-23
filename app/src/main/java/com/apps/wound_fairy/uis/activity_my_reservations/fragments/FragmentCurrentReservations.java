@@ -70,26 +70,20 @@ public class FragmentCurrentReservations extends BaseFragment {
         reservationModelList = new ArrayList<>();
         mvvm = ViewModelProviders.of(this).get(FragmentReservationsMvvm.class);
 
-        mvvm.getIsLoading().observe(activity, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    binding.tvNoSearchData.setVisibility(View.GONE);
-                }
-                binding.swipeRefresh.setRefreshing(aBoolean);
+        mvvm.getIsLoading().observe(activity, aBoolean -> {
+            if (aBoolean){
+                binding.tvNoSearchData.setVisibility(View.GONE);
             }
+            binding.swipeRefresh.setRefreshing(aBoolean);
         });
 
-        mvvm.getMutableLiveData().observe(activity, new Observer<List<ReservationModel>>() {
-            @Override
-            public void onChanged(List<ReservationModel> reservationModels) {
-                reservationAdapter.updateList(new ArrayList<>());
-                if (reservationModels!=null && reservationModels.size()>0){
-                    reservationAdapter.updateList(reservationModels);
-                    binding.tvNoSearchData.setVisibility(View.GONE);
-                }else {
-                    binding.tvNoSearchData.setVisibility(View.VISIBLE);
-                }
+        mvvm.getMutableLiveData().observe(activity, reservationModels -> {
+            reservationAdapter.updateList(new ArrayList<>());
+            if (reservationModels!=null && reservationModels.size()>0){
+                reservationAdapter.updateList(reservationModels);
+                binding.tvNoSearchData.setVisibility(View.GONE);
+            }else {
+                binding.tvNoSearchData.setVisibility(View.VISIBLE);
             }
         });
 

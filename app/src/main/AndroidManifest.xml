@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.activity_order_details.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.activity_my_orders.MyOrdersActivity"
             android:exported="false" />
         <activity

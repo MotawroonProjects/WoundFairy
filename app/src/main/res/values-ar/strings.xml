@@ -93,6 +93,7 @@
     <string name="open">فتح</string>
     <string name="close">غلق</string>
     <string name="chat">محادثة</string>
+    <string name="request">طلب</string>
     <string name="request_service">طلب الخدمة</string>
     <string name="egp">ج.م</string>
     <string name="share_with">شارك مع :</string>
@@ -118,6 +119,7 @@
     <string name="the_service">الخدمة</string>
     <string name="visit_time">وقت الزيارة:</string>
     <string name="note">ملاحظه</string>
+    <string name="note2">ملاحظه:</string>
     <string name="total_price">الاجمالى : </string>
     <string name="confirm_order">تأكيد الطلب</string>
     <string name="succ">تم</string>
@@ -125,5 +127,8 @@
     <string name="approved">تمت الموافقة</string>
     <string name="canceled">تم الإلغاء</string>
     <string name="done">تم الانتهاء</string>
+    <string name="ordered">تم طلب: </string>
+    <string name="reservation_time">موعد الحجز</string>
+    <string name="reservation_status">Reservation Status</string>
 
 </resources>

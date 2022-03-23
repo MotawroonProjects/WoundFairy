@@ -38,6 +38,7 @@ import com.apps.wound_fairy.mvvm.ActivitySendOrderMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
+import com.apps.wound_fairy.uis.activity_my_orders.MyOrdersActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -85,7 +86,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         binding.setSendModel(sendOrderModel);
         binding.tvCount.setText(amount + "");
         setprice();
-        setUpToolbar(binding.toolbar, getString(R.string.request_service), R.color.white, R.color.black);
+        setUpToolbar(binding.toolbar, getString(R.string.request), R.color.white, R.color.black);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         sendOrderMvvm = ViewModelProviders.of(this).get(ActivitySendOrderMvvm.class);
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
@@ -96,12 +97,9 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
             }
         });
 
-        binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendOrderMvvm.storeOrder(SendOrderActivity.this,sendOrderModel,getUserModel(),product,amount+"",getLang());
-//                navigateTo
-            }
+        binding.btnConfirm.setOnClickListener(view -> {
+            sendOrderMvvm.storeOrder(SendOrderActivity.this,sendOrderModel,getUserModel(),product,amount+"",getLang());
+                navigateToMyOrdersActivity();
         });
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
@@ -148,6 +146,11 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         updateUI();
         checkPermission();
 
+    }
+
+    private void navigateToMyOrdersActivity() {
+        Intent intent=new Intent(SendOrderActivity.this, MyOrdersActivity.class);
+        startActivity(intent);
     }
 
     private void setprice() {

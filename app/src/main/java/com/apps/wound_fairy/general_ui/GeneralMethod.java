@@ -13,6 +13,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.apps.wound_fairy.R;
 
+import com.apps.wound_fairy.model.OrderModel;
 import com.apps.wound_fairy.model.ReservationModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -41,6 +42,22 @@ public class GeneralMethod {
     public static void reservationStatus(TextView btnStatus, ReservationModel reservationModel) {
         if (reservationModel != null) {
             String status = reservationModel.getStatus();
+            if (status.equals("new")) {
+                btnStatus.setText(R.string.under_review);
+            } else if (status.equals("accepted")) {
+                btnStatus.setText(R.string.approved);
+            } else if (status.equals("Refused")) {
+                btnStatus.setText(R.string.canceled);
+            } else if (status.equals("ended")) {
+                btnStatus.setText(R.string.done);
+            }
+        }
+    }
+
+    @BindingAdapter("order_status")
+    public static void orderStatus(TextView btnStatus, OrderModel orderModel) {
+        if (orderModel != null) {
+            String status = orderModel.getStatus();
             if (status.equals("new")) {
                 btnStatus.setText(R.string.under_review);
             } else if (status.equals("accepted")) {

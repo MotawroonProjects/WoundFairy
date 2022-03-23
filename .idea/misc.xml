@@ -3,29 +3,56 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/circle_primary.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/circle_shape.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/gradient_search.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/horizontal_line.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_add.xml" value="0.2361111111111111" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_add_photo.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_cancel.xml" value="0.23981481481481481" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_edit_account.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_email.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_language.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_left_arrow.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_privacy.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_select_service.xml" value="0.23148148148148148" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_terms.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/ic_terms_cond.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/linear_shape.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/linear_shape2.xml" value="0.23148148148148148" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/linear_shape3.xml" value="0.23148148148148148" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/linear_shape4.xml" value="0.23148148148148148" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/linear_shape4_selected.xml" value="0.23148148148148148" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/pin_view_item.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/product_shape.xml" value="0.23425925925925925" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_color8.xml" value="0.2111111111111111" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_color9.xml" value="0.2462962962962963" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_gray10.xml" value="0.23425925925925925" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_green2.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_primary.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_strock_white.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_strock_white2.xml" value="0.23148148148148148" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_top.xml" value="0.24166666666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/rounded_top_primary.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/small_rounded_primary.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/small_stroke_primary.xml" value="0.24166666666666667" />
-        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_contact_us.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/tab_gallery_indicator.xml" value="0.23148148148148148" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/tab_indicator.xml" value="0.23148148148148148" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_app.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_confirm_request.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_contact_us.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_language.xml" value="0.24010416666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_login.xml" value="0.19907407407407407" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_my_orders.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_my_reservations.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_notification.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_order_details.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_product_details.xml" value="0.19166666666666668" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_request_service.xml" value="0.264" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_reservation_details.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_send_order.xml" value="0.1546875" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_services.xml" value="0.1685185185185185" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
@@ -38,8 +65,17 @@
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/exo_player_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_about_us.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_app.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_bottom_sheet_language_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_current_orders.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_current_reservations.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_market.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_previous_orders.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/fragment_previous_reservations.xml" value="0.24010416666666667" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/notification_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/order_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/product_row.xml" value="0.18333333333333332" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/reservation_row.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/menu/menu.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidProjects/demo/app/src/main/res/drawable/bottom_nav_item_bg.xml" value="0.1675925925925926" />
@@ -59,13 +95,8 @@
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/ic_menu.xml" value="0.10625" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/ic_menu2.xml" value="0.15104166666666666" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/line.xml" value="0.15885416666666666" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/linear_shape4_selected.xml" value="0.15104166666666666" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/product_shape.xml" value="0.15104166666666666" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_color2.xml" value="0.2890625" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_color8.xml" value="0.2890625" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_color9.xml" value="0.2890625" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_gray10.xml" value="0.15104166666666666" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_green1.xml" value="0.2890625" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_green2.xml" value="0.15885416666666666" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_primary.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/rounded_strock_white.xml" value="0.23703703703703705" />
@@ -74,19 +105,15 @@
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/small_rounded_primary.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/small_stroke_primary.xml" value="0.23703703703703705" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/tab_gallery_indicator.xml" value="0.10625" />
-        <entry key="..\:/WoundFairy/app/src/main/res/drawable/tab_indicator.xml" value="0.15104166666666666" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/tab_indicator_default.xml" value="0.10625" />
         <entry key="..\:/WoundFairy/app/src/main/res/drawable/tab_indicator_selected.xml" value="0.10625" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_contact_us.xml" value="0.14270833333333333" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_language.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_my_orders.xml" value="0.13489583333333333" />
-        <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_my_reservations.xml" value="0.14270833333333333" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_product_details.xml" value="0.18" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_request_service.xml" value="0.18" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_send_order.xml" value="0.22" />
-        <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_services.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_settings.xml" value="0.11203703703703703" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/activity_splash.xml" value="0.27291666666666664" />
         <entry key="..\:/WoundFairy/app/src/main/res/layout/countries_row.xml" value="0.27291666666666664" />

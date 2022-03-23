@@ -35,6 +35,7 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityHomeBinding;
 import com.apps.wound_fairy.language.Language;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
+import com.apps.wound_fairy.uis.activity_my_orders.MyOrdersActivity;
 import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
 import com.apps.wound_fairy.uis.activity_notification.NotificationActivity;
 import com.apps.wound_fairy.uis.activity_settings.SettingsActivity;
@@ -175,6 +176,14 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 navigationToLoginActivity();
             } else {
                 navigationToSignupActivity();
+            }
+        });
+        binding.llMyOrders.setOnClickListener(view -> {
+            if (getUserModel()!=null){
+                Intent intent=new Intent(HomeActivity.this, MyOrdersActivity.class);
+                startActivity(intent);
+            }else {
+                navigationToLoginActivity();
             }
         });
         binding.llMyReservations.setOnClickListener(view -> {

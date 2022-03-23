@@ -3,6 +3,7 @@ package com.apps.wound_fairy.services;
 
 import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
+import com.apps.wound_fairy.model.OrderDataModel;
 import com.apps.wound_fairy.model.ReservationDataModel;
 import com.apps.wound_fairy.model.PlaceMapDetailsData;
 import com.apps.wound_fairy.model.ProductModel;
@@ -160,6 +161,10 @@ public interface Service {
                                                 @Field("lang") String lang
 
     );
+
+    @GET("api/order/getOrders")
+    Single<Response<OrderDataModel>> getOrders(@Header("Authorization") String Authorization,
+                                               @Query("lang") String lang);
 
 
 }

@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|top"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_color9"
+                    android:background="@drawable/rounded_strock_white2"
                    >
 
                     <ImageView
@@ -301,7 +301,8 @@
                         android:layout_margin="3dp"
                         android:padding="5dp"
                         android:rotation='@{lang.equals("ar")?180:0}'
-                        android:src="@drawable/ic_left_arrow" />
+                        android:src="@drawable/ic_left_arrow"
+                         />
                 </LinearLayout>
 
             </FrameLayout>

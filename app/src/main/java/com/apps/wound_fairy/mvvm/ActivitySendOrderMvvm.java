@@ -57,8 +57,10 @@ public class ActivitySendOrderMvvm extends AndroidViewModel{
                     @Override
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
+
                         if (response.isSuccessful()){
-                            if (response.body()!=null && response.body().getStatus()==200){
+                            if (response.body().getStatus()==200){
+                                Log.e("status",response.code()+"_"+response.body().getStatus());
                                 send.postValue(true);
                             }
                         }

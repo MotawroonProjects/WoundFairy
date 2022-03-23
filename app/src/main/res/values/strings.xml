@@ -92,6 +92,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="chat">Chat</string>
+    <string name="request">Request</string>
     <string name="request_service">Request Service</string>
     <string name="egp">EGP</string>
     <string name="share_with">Share with :</string>
@@ -117,6 +118,7 @@
     <string name="the_service">The Service:</string>
     <string name="visit_time">Visit Time:</string>
     <string name="note">Note</string>
+    <string name="note2">Note:</string>
     <string name="total_price">Total Price :</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="succ">Success</string>
@@ -124,6 +126,9 @@
     <string name="approved">Approved</string>
     <string name="canceled">Canceled</string>
     <string name="done">Done</string>
+    <string name="ordered">Ordered: </string>
+    <string name="reservation_time">Reservation Time: </string>
+    <string name="reservation_status">Reservation Status</string>
 
 
 </resources>

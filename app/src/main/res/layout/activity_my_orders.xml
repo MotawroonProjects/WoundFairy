@@ -7,9 +7,38 @@
 
     </data>
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/gradient_search">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:tabIndicatorHeight="0dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabPadding="8dp"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/color10"
+                app:tabBackground="@drawable/tab_indicator"/>
+        </FrameLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray4"/>
+    </LinearLayout>
 </layout>
