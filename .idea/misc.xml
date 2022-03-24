@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/btn_cancel.xml" value="0.2074074074074074" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/btn_change_lang.xml" value="0.2074074074074074" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/btn_edit.xml" value="0.2074074074074074" />
+        <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/circle_primary.xml" value="0.23425925925925925" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/circle_shape.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/gradient_search.xml" value="0.24166666666666667" />
         <entry key="..\:/AndroidProjects/WoundFairy/app/src/main/res/drawable/horizontal_line.xml" value="0.24166666666666667" />
