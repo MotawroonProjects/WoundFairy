@@ -7,9 +7,7 @@
         <variable
             name="reservationModel"
             type="com.apps.wound_fairy.model.ReservationModel" />
-        <variable
-            name="requestModel"
-            type="com.apps.wound_fairy.model.RequestServiceModel" />
+
     </data>
 
     <LinearLayout
@@ -104,12 +102,13 @@
                             android:id="@+id/tvComplaint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
+                            android:padding="3dp"
                             android:text="@{reservationModel.complaint}"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvImages"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -152,7 +151,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -216,7 +214,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:orientation="horizontal">
 
                             <ImageView

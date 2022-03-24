@@ -45,13 +45,13 @@
                     android:layout_marginEnd="5dp"
                     android:text="@{model.Product.title}"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:layout_marginEnd="3dp"
                     android:text="@string/ordered"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,9 +70,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="3dp"
-                    android:text="@{model.amount}"
+                    android:text='@{model.amount+" "+"X"}'
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <androidx.legacy.widget.Space
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total_price"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tvPrice"
@@ -94,14 +94,14 @@
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="3dp"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
 
                 >
@@ -114,7 +114,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <androidx.legacy.widget.Space
@@ -134,8 +134,8 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"

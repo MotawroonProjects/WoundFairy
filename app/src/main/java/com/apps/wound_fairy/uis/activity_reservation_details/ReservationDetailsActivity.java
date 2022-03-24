@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.adapter.ImageAddServiceAdapter;
@@ -36,6 +37,10 @@ public class ReservationDetailsActivity extends BaseActivity {
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         binding.setReservationModel(reservationModel);
 
+        if (reservationModel.getImages().isEmpty()){
+            binding.tvImages.setVisibility(View.GONE);
+            binding.recViewImages.setVisibility(View.GONE);
+        }
         imageAddServiceAdapter = new ImageAddServiceAdapter(reservationModel.getImages(), this);
         binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         binding.recViewImages.setAdapter(imageAddServiceAdapter);

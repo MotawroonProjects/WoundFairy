@@ -189,4 +189,20 @@ public interface Service {
                                                       @Part("text") RequestBody message,
                                                       @Part MultipartBody.Part image
     );
+
+    @Multipart
+    @POST("api/reservation/store-reservation")
+    Single<Response<StatusResponse>> editRequest(@Header("Authorization") String Authorization,
+                                                 @Part("complaint") RequestBody complaint,
+                                                 @Part List<MultipartBody.Part> images,
+                                                 @Part("service_id") RequestBody service_id,
+                                                 @Part("date_time") RequestBody date_time,
+                                                 @Part("total_price") RequestBody total_price,
+                                                 @Part("latitude") RequestBody latitude,
+                                                 @Part("longitude") RequestBody longitude,
+                                                 @Part("address") RequestBody address,
+                                                 @Part("lang") RequestBody lang,
+                                                 @Part("reservation_id") RequestBody reservation_id
+
+    );
 }
