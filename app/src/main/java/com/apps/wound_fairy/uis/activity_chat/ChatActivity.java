@@ -44,7 +44,6 @@ import java.util.Locale;
 public class ChatActivity extends BaseActivity {
     private ActivityChatBinding binding;
     private ActivityChatMvvm mvvm;
-    private ChatUserModel model;
     private String imagePath = "";
     private ChatAdapter adapter;
     private ActivityResultLauncher<Intent> launcher;
@@ -55,14 +54,9 @@ public class ChatActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
-        getDataFromIntent();
         initView();
     }
 
-    private void getDataFromIntent() {
-        Intent intent = getIntent();
-        model = (ChatUserModel) intent.getSerializableExtra("data");
-    }
 
     private void initView() {
         mvvm = ViewModelProviders.of(this).get(ActivityChatMvvm.class);
@@ -72,7 +66,6 @@ public class ChatActivity extends BaseActivity {
 
 
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
-        binding.setModel(model);
         binding.setLang(getLang());
         binding.edtMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,7 +88,7 @@ public class ChatActivity extends BaseActivity {
                 }
             }
         });
-        adapter = new ChatAdapter(this, getUserModel().getData().getUser().getId(), model.getCaterer_image(), binding.recView);
+        adapter = new ChatAdapter(this, getUserModel().getData().getUser().getId(), binding.recView);
         binding.recView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recView.setAdapter(adapter);
 
@@ -125,10 +118,10 @@ public class ChatActivity extends BaseActivity {
             EventBus.getDefault().register(this);
         }
 
-        mvvm.getChatMessages(model.getOrder_id());
+        mvvm.getChatMessages(getUserModel());
 
         binding.send.setOnClickListener(v -> {
-            sendMessage("message", binding.edtMessage.getText().toString(), null);
+            sendMessage("text", binding.edtMessage.getText().toString(), null);
             binding.edtMessage.setText(null);
 
         });
@@ -141,14 +134,13 @@ public class ChatActivity extends BaseActivity {
             //binding.recView.post(() -> );
         });
 
-        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(model.getOrder_id()));
-        setRoomId(model.getOrder_id());
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(getUserModel()));
 
 
     }
 
     private void sendMessage(String type, String msg, String image_url) {
-        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(model.getOrder_id(), getUserModel().getData().getUser().getId(), model.getCaterer_id(), type, msg, image_url);
+        AddChatMessageModel addChatMessageModel = new AddChatMessageModel(type, msg, image_url,getUserModel().getData().getAccess_token());
         Intent intent = new Intent(this, ChatService.class);
         intent.putExtra("data", addChatMessageModel);
         startService(intent);
@@ -220,7 +212,6 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        clearRoomId();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
@@ -228,9 +219,9 @@ public class ChatActivity extends BaseActivity {
 
     public void displayLastMessage(MessageModel messageModel) {
         if (messageModel.getType().equals("image")) {
-           // binding.setMsg(getString(R.string.attach_sent));
+            // binding.setMsg(getString(R.string.attach_sent));
         } else {
-            binding.setMsg(messageModel.getMessage());
+            binding.setMsg(messageModel.getText());
         }
         binding.cardLastMsg.setVisibility(View.VISIBLE);
 

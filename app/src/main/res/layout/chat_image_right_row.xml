@@ -6,9 +6,11 @@
     >
 
     <data>
+
         <variable
             name="model"
-            type="com.apps.etbo5ly_client.model.MessageModel" />
+            type="com.apps.wound_fairy.model.MessageModel" />
+
         <import type="android.view.View" />
 
     </data>
@@ -27,53 +29,61 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layoutDirection="ltr"
-            android:orientation="horizontal"
-            tools:ignore="RtlCompat">
+            android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="234dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/msg_right_image_bg"
 
+                android:orientation="horizontal"
+                tools:ignore="RtlCompat">
 
-
-                >
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/image"
-                    android:layout_width="220dp"
-                    android:layout_height="250dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp"
-                    app:riv_border_color="@color/transparent"
-                    app:riv_border_width="0dp"
-                    app:riv_corner_radius="5dp"
-                    android:scaleType="fitXY"
-                    image="@{model.image}"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    createAtMsg="@{model.created_at}"
-
-                    />
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/msg_right_image_bg"
 
 
+                    >
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/image"
+                        image="@{model.image}"
+                        android:layout_width="220dp"
+                        android:layout_height="250dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:scaleType="fitXY"
+                        app:riv_border_color="@color/transparent"
+                        app:riv_border_width="0dp"
+                        app:riv_corner_radius="5dp" />
 
 
-            </FrameLayout>
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/corner_right" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="5dp"
+                android:text="@{model.time}"
+                android:textColor="@color/gray3"
+                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

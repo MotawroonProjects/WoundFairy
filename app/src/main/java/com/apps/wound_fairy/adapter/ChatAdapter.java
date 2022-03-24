@@ -35,16 +35,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<MessageModel> list;
     private Context context;
     private String current_user_id;
-    private String chat_image;
     private ChatActivity activity;
     private RecyclerView recyclerView;
     private boolean isScrolledUp = false;
 
 
-    public ChatAdapter(Context context, String current_user_id, String chat_image, RecyclerView recView) {
+    public ChatAdapter(Context context, String current_user_id, RecyclerView recView) {
         this.context = context;
         this.current_user_id = current_user_id;
-        this.chat_image = chat_image;
         inflater = LayoutInflater.from(context);
         activity = (ChatActivity) context;
         this.recyclerView = recView;
@@ -131,10 +129,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             HolderMsgLeft holderMsgLeft = (HolderMsgLeft) holder;
             holderMsgLeft.binding.setModel(model);
 
-            Glide.with(context)
-                    .load(Uri.parse(Tags.base_url + chat_image))
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderMsgLeft.binding.imageUser);
+
 
         } else if (holder instanceof HolderMsgRight) {
             HolderMsgRight holderMsgRight = (HolderMsgRight) holder;
@@ -145,20 +140,18 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             HolderImageLeft holderImageLeft = (HolderImageLeft) holder;
             holderImageLeft.binding.setModel(model);
             Glide.with(context)
-                    .load(Uri.parse(Tags.base_url + model.getImage()))
+                    .load(Uri.parse( model.getImage()))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderImageLeft.binding.imageChat);
 
 
-            Glide.with(context)
-                    .load(Uri.parse(Tags.base_url + chat_image))
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holderImageLeft.binding.imageUser);
+
 
         } else if (holder instanceof HolderImageRight) {
             HolderImageRight holderImageRight = (HolderImageRight) holder;
+            holderImageRight.binding.setModel(model);
             Glide.with(context)
-                    .load(Uri.parse(Tags.base_url + model.getImage()))
+                    .load(Uri.parse( model.getImage()))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holderImageRight.binding.image);
 
@@ -214,9 +207,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
 
         MessageModel messageModel = list.get(position);
-        if (messageModel.getType().equals("message")) {
+        if (messageModel.getType().equals("text")) {
 
-            if (messageModel.getFrom_user().getUser().getId().equals(current_user_id)) {
+            if (messageModel.getFrom_user_id().equals(current_user_id)) {
 
                 return msg_right;
             } else {
@@ -224,7 +217,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         } else {
 
-            if (messageModel.getFrom_user().getUser().getId().equals(current_user_id)) {
+            if (messageModel.getFrom_user_id().equals(current_user_id)) {
 
                 return img_right;
             } else {

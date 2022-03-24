@@ -41,6 +41,7 @@ import com.apps.wound_fairy.mvvm.ActivityRequestChatMvvm;
 import com.apps.wound_fairy.share.Common;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
+import com.apps.wound_fairy.uis.activity_chat.ChatActivity;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,7 +61,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class RequesChatActivity extends BaseActivity  {
+public class RequesChatActivity extends BaseActivity {
     private ActivityRequestChatBinding binding;
 
     private ActivityRequestChatMvvm mvvm;
@@ -85,6 +86,7 @@ public class RequesChatActivity extends BaseActivity  {
         getDataFromIntent();
         initView();
     }
+
     private void getDataFromIntent() {
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
@@ -93,10 +95,10 @@ public class RequesChatActivity extends BaseActivity  {
 
     private void initView() {
         binding.setLang(getLang());
-        imagesUriList=new ArrayList<>();
+        imagesUriList = new ArrayList<>();
         requestChatModel = new RequestChatModel();
         binding.setRequestService(requestChatModel);
-        settingModel=new SettingsModel.Settings();
+        settingModel = new SettingsModel.Settings();
         imageAddServiceAdapter = new ImageAddServiceAdapter(imagesUriList, this);
         binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewImages.setAdapter(imageAddServiceAdapter);
@@ -106,14 +108,15 @@ public class RequesChatActivity extends BaseActivity  {
         mvvm.getConfirmMutableLiveData().observe(this, aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(RequesChatActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+                binding.flData.setVisibility(View.VISIBLE);
             }
         });
 
 
         mvvm.getSettingMutableLiveData().observe(this, settings -> {
-            if (settings!=null){
-                settingModel=settings.getData();
-
+            if (settings != null) {
+                settingModel = settings.getData();
+                binding.setModel(settingModel);
 
             }
         });
@@ -185,15 +188,20 @@ public class RequesChatActivity extends BaseActivity  {
         });
         binding.llReqChat.setOnClickListener(view -> {
             if (requestChatModel.isDataValid(RequesChatActivity.this)) {
-               mvvm.confirmRequest(this,requestChatModel,getUserModel(),getLang(),type);
+                mvvm.confirmRequest(this, requestChatModel, getUserModel(), getLang(), type);
+            }
+        });
+        binding.btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.flData.setVisibility(View.GONE);
+                Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
-
-
     }
-
-
 
 
     public void openSheet() {
@@ -260,6 +268,7 @@ public class RequesChatActivity extends BaseActivity  {
 
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -290,7 +299,6 @@ public class RequesChatActivity extends BaseActivity  {
     }
 
 
-
     public void deleteImage(int adapterPosition) {
         if (imagesUriList.size() > 0) {
             imagesUriList.remove(adapterPosition);
@@ -298,7 +306,6 @@ public class RequesChatActivity extends BaseActivity  {
 
         }
     }
-
 
 
 }

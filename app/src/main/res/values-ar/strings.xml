@@ -132,5 +132,8 @@
     <string name="reservation_status">Reservation Status</string>
     <string name="fields_are_not_required">* الحقول غير مطلوبة</string>
     <string name="type_a_message">Type Message</string>
+    <string name="payment">Payment</string>
+    <string name="you_must_pay_to_start_chatting_service_cost">You must pay to start chatting Service cost</string>
+    <string name="go_to_payment">Go To Payment</string>
 
 </resources>

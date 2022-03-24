@@ -233,7 +233,6 @@
                             android:lines="1"
                             android:text="@={sendModel.address}"
                             android:paddingEnd="8dp"
-                            android:text="@={sendModel.address}"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray3"
                             android:textSize="14sp" />

@@ -42,10 +42,8 @@ public class ChatService extends Service {
 
     public void sendMessage() {
 
-        RequestBody order_id_part = Common.getRequestBodyText(model.getOrder_id());
-        RequestBody from_user_id_part = Common.getRequestBodyText(model.getFrom_user_id());
-        RequestBody to_user_id_part = Common.getRequestBodyText(model.getTo_user_id());
-        RequestBody msg_part = Common.getRequestBodyText(model.getMessage());
+
+        RequestBody msg_part = Common.getRequestBodyText(model.getText());
         RequestBody msg_type_part = Common.getRequestBodyText(model.getType());
         MultipartBody.Part imagePart = null;
 
@@ -53,9 +51,8 @@ public class ChatService extends Service {
             imagePart = Common.getMultiPartFromPath(model.getImage(), "image");
         }
 
-        Log.e("data", model.getOrder_id() + "_" + model.getFrom_user_id() + "_" + model.getTo_user_id() + "_" + model.getMessage() + "_" + model.getType() + "_" + model.getType());
 
-        Api.getService(Tags.base_url).sendMessages(order_id_part, from_user_id_part, to_user_id_part, msg_type_part, msg_part, imagePart)
+        Api.getService(Tags.base_url).sendMessages(model.getAuth(), msg_type_part, msg_part, imagePart)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<SingleMessageModel>>() {

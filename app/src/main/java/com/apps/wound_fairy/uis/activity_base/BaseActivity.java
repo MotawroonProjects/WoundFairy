@@ -41,15 +41,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     }
-    public void setRoomId(String order_id) {
-        Preferences preferences = Preferences.getInstance();
-        preferences.create_update_room(this, order_id);
-    }
 
-    public void clearRoomId() {
-        Preferences preferences = Preferences.getInstance();
-        preferences.clearRoomId(this);
-    }
 
     protected String getLang() {
         Paper.init(this);

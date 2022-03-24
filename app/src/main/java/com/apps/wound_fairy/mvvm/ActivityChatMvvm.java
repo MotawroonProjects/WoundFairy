@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.apps.wound_fairy.model.MessageModel;
 import com.apps.wound_fairy.model.MessagesDataModel;
+import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.remote.Api;
 import com.apps.wound_fairy.tags.Tags;
 
@@ -49,11 +50,11 @@ public class ActivityChatMvvm extends AndroidViewModel {
     }
 
 
-    public void getChatMessages(String order_id) {
+    public void getChatMessages(UserModel userModel) {
 
-        Log.e("id", order_id);
+       // Log.e("id", order_id);
         getIsLoading().setValue(true);
-        Api.getService(Tags.base_url).getChatMessages(order_id)
+        Api.getService(Tags.base_url).getChatMessages(userModel.getData().getAccess_token())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<MessagesDataModel>>() {

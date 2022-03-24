@@ -178,17 +178,15 @@ public interface Service {
     Single<Response<OrderDataModel>> getOrders(@Header("Authorization") String Authorization,
                                                @Query("lang") String lang);
 
-    @FormUrlEncoded
-    @POST("api/one_chatRoom")
-    Single<Response<MessagesDataModel>> getChatMessages(@Field(value = "order_id") String order_id);
+
+    @GET("api/chat/user-chat")
+    Single<Response<MessagesDataModel>> getChatMessages(@Header("Authorization") String Authorization);
 
     @Multipart
-    @POST("api/send_message")
-    Single<Response<SingleMessageModel>> sendMessages(@Part("order_id") RequestBody order_id,
-                                                      @Part("from_user_id") RequestBody from_user_id,
-                                                      @Part("to_user_id") RequestBody to_user_id,
+    @POST("api/chat/store-chat-message")
+    Single<Response<SingleMessageModel>> sendMessages(@Header("Authorization") String Authorization,
                                                       @Part("type") RequestBody type,
-                                                      @Part("message") RequestBody message,
+                                                      @Part("text") RequestBody message,
                                                       @Part MultipartBody.Part image
     );
 }
