@@ -63,6 +63,11 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return list.size();
     }
 
+    public void updateList(List<String> images) {
+        this.list=images;
+        notifyDataSetChanged();
+    }
+
     public static class MyHolder extends RecyclerView.ViewHolder {
         private AddImagesRowBinding binding;
 

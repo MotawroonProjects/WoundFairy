@@ -89,7 +89,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-
+        Log.e("data",productModel.getId()+"_"+orderModel.getId()+"_"+amount+"_"+sendOrderModel.getLatitude()+"_"+sendOrderModel.getLongitude()+"_"+sendOrderModel.getAddress()+"_"+(Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "");
         Api.getService(Tags.base_url)
                 .updateOrder(userModel.getData().getAccess_token(), productModel.getId(), orderModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
                 .subscribeOn(Schedulers.io())
@@ -103,7 +103,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<SingleOrderDataModel> response) {
                         dialog.dismiss();
-
+                        Log.e("code",response.code()+""+response.body().getStatus());
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 Log.e("status", response.code() + "_" + response.body().getStatus());

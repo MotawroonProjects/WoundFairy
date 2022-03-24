@@ -11,8 +11,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.model.OrderModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
+import com.apps.wound_fairy.model.ReservationModel;
+import com.apps.wound_fairy.model.SingleReservationModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.remote.Api;
@@ -38,6 +41,7 @@ import retrofit2.Response;
 
 public class ActivityConfirmRequestMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> confirmMutableLiveData;
+    private MutableLiveData<ReservationModel> reservationModelMutableLiveData;
     private CompositeDisposable disposable = new CompositeDisposable();
     private String lang = "ar";
 
@@ -60,6 +64,13 @@ public class ActivityConfirmRequestMvvm extends AndroidViewModel {
         return confirmMutableLiveData;
     }
 
+    public MutableLiveData<ReservationModel> getReservation() {
+        if (reservationModelMutableLiveData == null) {
+            reservationModelMutableLiveData = new MutableLiveData<>();
+        }
+        return reservationModelMutableLiveData;
+    }
+
     public void confirmRequest(Context context, RequestServiceModel model, UserModel userModel) {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
@@ -77,7 +88,7 @@ public class ActivityConfirmRequestMvvm extends AndroidViewModel {
         RequestBody complaint = Common.getRequestBodyText(model.getComplaint());
         List<MultipartBody.Part> imageList = getMultipartBodyList(model.getImages(), "images[]", context);
         RequestBody service_id = Common.getRequestBodyText(model.getService_id() + "");
-        RequestBody date_time = Common.getRequestBodyText(m_date.getTime()+"");
+        RequestBody date_time = Common.getRequestBodyText((m_date.getTime()/1000)+"");
         RequestBody total_price = Common.getRequestBodyText(model.getTotal_price());
         RequestBody latitude = Common.getRequestBodyText(model.getLatitude());
         RequestBody longitude = Common.getRequestBodyText(model.getLongitude());
@@ -125,5 +136,62 @@ public class ActivityConfirmRequestMvvm extends AndroidViewModel {
 
         }
         return partList;
+    }
+
+    public void updateRequest(Context context, RequestServiceModel model, UserModel userModel,ReservationModel reservationModel) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH);
+        Date m_date = null;
+        try {
+            m_date = dateFormat.parse(model.getDate() + " " + model.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        String m_date = sendServiceModel.getOrder_date();
+
+        RequestBody complaint = Common.getRequestBodyText(model.getComplaint());
+        List<MultipartBody.Part> imageList = getMultipartBodyList(model.getImages(), "images[]", context);
+        RequestBody service_id = Common.getRequestBodyText(model.getService_id() + "");
+        RequestBody date_time = Common.getRequestBodyText((m_date.getTime()/1000)+"");
+        RequestBody total_price = Common.getRequestBodyText(model.getTotal_price());
+        RequestBody latitude = Common.getRequestBodyText(model.getLatitude());
+        RequestBody longitude = Common.getRequestBodyText(model.getLongitude());
+        RequestBody address = Common.getRequestBodyText(model.getAddress());
+        RequestBody lang = Common.getRequestBodyText(getLang());
+        RequestBody reservation_id=Common.getRequestBodyText(reservationModel.getId());
+
+
+        Api.getService(Tags.base_url).updateRequest(userModel.getData().getAccess_token(), complaint, imageList, service_id, date_time, total_price, latitude, longitude, address, lang,reservation_id)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SingleReservationModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SingleReservationModel> response) {
+                        dialog.dismiss();
+
+                        Log.e("stt",response.code()+"");
+                        if (response.isSuccessful()) {
+                            if (response.body() != null && response.body().getStatus() == 200) {
+                                reservationModelMutableLiveData.postValue(response.body().getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("onError", e.getMessage());
+                        dialog.dismiss();
+                    }
+                });
+
     }
 }

@@ -11,6 +11,7 @@ import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.SingleMessageModel;
 import com.apps.wound_fairy.model.SingleOrderDataModel;
+import com.apps.wound_fairy.model.SingleReservationModel;
 import com.apps.wound_fairy.model.VisitOnlineModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
@@ -193,19 +194,18 @@ public interface Service {
     );
 
     @Multipart
-    @POST("api/reservation/store-reservation")
-    Single<Response<StatusResponse>> editRequest(@Header("Authorization") String Authorization,
-                                                 @Part("complaint") RequestBody complaint,
-                                                 @Part List<MultipartBody.Part> images,
-                                                 @Part("service_id") RequestBody service_id,
-                                                 @Part("date_time") RequestBody date_time,
-                                                 @Part("total_price") RequestBody total_price,
-                                                 @Part("latitude") RequestBody latitude,
-                                                 @Part("longitude") RequestBody longitude,
-                                                 @Part("address") RequestBody address,
-                                                 @Part("lang") RequestBody lang,
-                                                 @Part("reservation_id") RequestBody reservation_id
-
+    @POST("api/reservation/edit-reservation")
+    Single<Response<SingleReservationModel>> updateRequest(@Header("Authorization") String Authorization,
+                                                           @Part("complaint") RequestBody complaint,
+                                                           @Part List<MultipartBody.Part> images,
+                                                           @Part("service_id") RequestBody service_id,
+                                                           @Part("date_time") RequestBody date_time,
+                                                           @Part("total_price") RequestBody total_price,
+                                                           @Part("latitude") RequestBody latitude,
+                                                           @Part("longitude") RequestBody longitude,
+                                                           @Part("address") RequestBody address,
+                                                           @Part("lang") RequestBody lang,
+                                                           @Part("reservation_id") RequestBody reservation_id
     );
 
     @Multipart
@@ -220,7 +220,7 @@ public interface Service {
     );
 
     @FormUrlEncoded
-    @POST("api/order/store-order")
+    @POST("api/order/edit-order")
     Single<Response<SingleOrderDataModel>> updateOrder(@Header("Authorization") String Authorization,
                                                        @Field("product_id") String product_id,
                                                        @Field("order_id") String order_id,

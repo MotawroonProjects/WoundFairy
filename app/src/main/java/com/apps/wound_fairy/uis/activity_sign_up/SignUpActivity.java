@@ -84,6 +84,7 @@ public class SignUpActivity extends BaseActivity {
                 String url =  userModel.getData().getUser().getImage();
                 Picasso.get().load(Uri.parse(url)).into(binding.image);
                 model.setImage(url);
+                binding.icon.setVisibility(View.GONE);
             }
         }
         binding.setModel(model);

@@ -243,6 +243,7 @@
                 android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/red2"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
             <Button

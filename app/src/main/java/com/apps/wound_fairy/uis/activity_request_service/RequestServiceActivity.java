@@ -36,6 +36,7 @@ import com.apps.wound_fairy.adapter.SpinnerDepartmentAdapter;
 import com.apps.wound_fairy.databinding.ActivityRequestServiceBinding;
 import com.apps.wound_fairy.model.LocationModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
+import com.apps.wound_fairy.model.ReservationModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.SettingsModel;
 import com.apps.wound_fairy.mvvm.ActivityMapMvvm;
@@ -88,20 +89,29 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
     private TimePickerDialog timePickerDialog;
     private String selected_date;
     private SettingsModel.Settings settingModel;
+    private ReservationModel reservationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_request_service);
+        getDataFromIntent();
         initView();
     }
 
 
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            reservationModel = (ReservationModel) intent.getSerializableExtra("reservation");
+
+        }
+
+    }
     private void initView() {
         binding.setLang(getLang());
         imagesUriList=new ArrayList<>();
         requestServiceModel = new RequestServiceModel();
-        binding.setRequestService(requestServiceModel);
         settingModel=new SettingsModel.Settings();
         imageAddServiceAdapter = new ImageAddServiceAdapter(imagesUriList, this);
         binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -110,6 +120,23 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
         mvvm = ViewModelProviders.of(this).get(ActivityRequestServiceMvvm.class);
+
+        if (reservationModel!=null){
+
+            requestServiceModel.setComplaint(reservationModel.getComplaint());
+            requestServiceModel.setImages(reservationModel.getImages());
+            requestServiceModel.setTotal_price(reservationModel.getTotal_price());
+            requestServiceModel.setDate(reservationModel.getDate());
+            requestServiceModel.setTime(reservationModel.getTime());
+            requestServiceModel.setAddress(reservationModel.getAddress());
+            requestServiceModel.setLatitude(reservationModel.getLatitude());
+            requestServiceModel.setLongitude(reservationModel.getLongitude());
+            requestServiceModel.setService_id(Integer.parseInt(reservationModel.getService().getId()));
+
+            binding.tvDate.setText(reservationModel.getDate());
+
+        }
+        binding.setRequestService(requestServiceModel);
 
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
@@ -157,7 +184,17 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
             if (spinnerDepartmentAdapter != null) {
                 departments.add(0, new ServiceDepartmentModel.Department(getResources().getString(R.string.choose_service)));
                 spinnerDepartmentAdapter.updateList(departments);
+
+                if (reservationModel!=null){
+                    for (int i=0;i<departments.size();i++){
+                        if (reservationModel.getService().getId().equals(departments.get(i).getId())){
+                            binding.spinnerDepartment.setSelection(i);
+                            break;
+                        }
+                    }
+                }
             }
+
         });
         mvvm.getServiceDepartment(getLang());
 
@@ -189,7 +226,8 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
 //                            Toast.makeText(this, R.string.max_ad_photo, Toast.LENGTH_SHORT).show();
 //                        }
 
-                } else if (selectedReq == CAMERA_REQ) {
+                }
+                else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
                     uri = getUriFromBitmap(bitmap);
                     if (uri != null) {
@@ -218,6 +256,12 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
 
                         }
                     }
+                }else {
+                    reservationModel = (ReservationModel) result.getData().getSerializableExtra("data");
+                    Intent intent = getIntent();
+                    intent.putExtra("data", reservationModel);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
         });
@@ -237,11 +281,15 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
             checkCameraPermission();
         });
         binding.llReqService.setOnClickListener(view -> {
+            selectedReq=1000;
             if (requestServiceModel.isDataValid(RequestServiceActivity.this)) {
                 Intent intent=new Intent(RequestServiceActivity.this, ConfirmRequestActivity.class);
                 intent.putExtra("data",requestServiceModel);
+                if (reservationModel!=null){
+                    intent.putExtra("reservation",reservationModel);
+                }
                 requestServiceModel.setImages(imagesUriList);
-                startActivity(intent);
+                launcher.launch(intent);
             }
         });
 
