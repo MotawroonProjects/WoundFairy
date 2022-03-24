@@ -137,6 +137,7 @@
     <string name="edit">Edit</string>
     <string name="reservationDetails">Reservation Details</string>
     <string name="orderDetails">Order Details</string>
+    <string name="not_avail_now">Not Available Now</string>
 
 
 </resources>

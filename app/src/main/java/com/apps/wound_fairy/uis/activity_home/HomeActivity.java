@@ -3,10 +3,12 @@ package com.apps.wound_fairy.uis.activity_home;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -24,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import com.apps.wound_fairy.interfaces.Listeners;
+import com.apps.wound_fairy.model.SettingsModel;
 import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.mvvm.HomeActivityMvvm;
 import com.apps.wound_fairy.preferences.Preferences;
@@ -54,6 +57,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private ActivityResultLauncher<Intent> launcher;
     private int req = 1;
     private AppBarConfiguration appBarConfiguration;
+    private SettingsModel.Settings settingsModel;
 
 
     @Override
@@ -98,6 +102,14 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 refreshActivity(lang);
             }
         });
+        homeActivityMvvm.getSettingMutableLiveData().observe(this, new Observer<SettingsModel>() {
+            @Override
+            public void onChanged(SettingsModel settingsModel) {
+                if (settingsModel != null) {
+                    HomeActivity.this.settingsModel = settingsModel.getData();
+                }
+            }
+        });
         navController = Navigation.findNavController(this, R.id.navHostFragment);
 
         appBarConfiguration =
@@ -118,7 +130,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 Intent intent = new Intent(this, NotificationActivity.class);
                 startActivity(intent);
             } else {
-               navigationToLoginActivity();
+                navigationToLoginActivity();
             }
         });
 
@@ -179,16 +191,16 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             }
         });
         binding.llMyOrders.setOnClickListener(view -> {
-            if (getUserModel()!=null){
-                Intent intent=new Intent(HomeActivity.this, MyOrdersActivity.class);
+            if (getUserModel() != null) {
+                Intent intent = new Intent(HomeActivity.this, MyOrdersActivity.class);
                 startActivity(intent);
-            }else {
+            } else {
                 navigationToLoginActivity();
             }
         });
         binding.llMyReservations.setOnClickListener(view -> {
             if (getUserModel() != null) {
-                Intent intent=new Intent(HomeActivity.this, MyReservationsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MyReservationsActivity.class);
                 startActivity(intent);
             } else {
                 navigationToLoginActivity();
@@ -199,7 +211,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
         binding.llSettings.setOnClickListener(view -> {
 
-                navigateToSettingsActivity();
+            navigateToSettingsActivity();
 
         });
         binding.llLogOut.setOnClickListener(new View.OnClickListener() {
@@ -237,9 +249,58 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
                 navigationToLoginActivity();
             }
         });
+        binding.imFacevook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (settingsModel != null && settingsModel.getFacebook() != null && !settingsModel.getFacebook().equals("#")) {
+                    open(settingsModel.getFacebook());
+                } else {
+                    Toast.makeText(HomeActivity.this, getResources().getString(R.string.not_avail_now), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        binding.imInstegram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (settingsModel != null && settingsModel.getInsta() != null && !settingsModel.getInsta().equals("#")) {
+                    open(settingsModel.getInsta());
+                } else {
+                    Toast.makeText(HomeActivity.this, getResources().getString(R.string.not_avail_now), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        binding.imTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (settingsModel != null && settingsModel.getTwitter() != null && !settingsModel.getTwitter().equals("#")) {
+                    open(settingsModel.getTwitter());
+                } else {
+                    Toast.makeText(HomeActivity.this, getResources().getString(R.string.not_avail_now), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+//        binding.imSnapChat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (settingModel != null && settingModel.getSnapchat() != null && !settingModel.getSnapchat().equals("#")) {
+//                    open("https://snapchat.com/add/" + settingModel.getSnapchat());
+//                } else {
+//                    Toast.makeText(activity, getResources().getString(R.string.not_avail_now), Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
         if (getUserModel() != null) {
             homeActivityMvvm.updateFirebase(this, getUserModel());
         }
+        homeActivityMvvm.getSettings();
     }
 
     private void navigateToSettingsActivity() {
@@ -312,5 +373,8 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         }
     }
 
-
+    private void open(String path) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
+        startActivity(intent);
+    }
 }

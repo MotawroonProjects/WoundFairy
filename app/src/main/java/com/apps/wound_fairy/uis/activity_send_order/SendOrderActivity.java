@@ -90,7 +90,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     private void initView() {
 
         binding.setLang(getLang());
-        binding.setModel(product);
+
         sendOrderModel = new SendOrderModel();
 
         if (orderModel != null) {
@@ -103,6 +103,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
             }
             product = orderModel.getProduct();
         }
+        binding.setModel(product);
         binding.setSendModel(sendOrderModel);
 
         binding.tvCount.setText(amount + "");

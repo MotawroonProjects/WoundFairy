@@ -138,5 +138,6 @@
     <string name="edit">تعديل</string>
     <string name="reservationDetails">تفاصيل الحجز</string>
     <string name="orderDetails">تفاصيل الطلب</string>
+    <string name="not_avail_now">غير متاح الان</string>
 
 </resources>
