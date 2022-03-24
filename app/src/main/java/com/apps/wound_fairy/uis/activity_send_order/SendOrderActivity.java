@@ -76,11 +76,14 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-        product = (ProductModel.Product) intent.getSerializableExtra("data");
+
         amount = intent.getIntExtra("amount", 0);
-        if (intent.getStringExtra("order") != null) {
+        if (intent.getSerializableExtra("order") != null) {
             orderModel = (OrderModel) intent.getSerializableExtra("order");
 
+        }
+        else{
+            product = (ProductModel.Product) intent.getSerializableExtra("data");
         }
     }
 
@@ -98,6 +101,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
             if (orderModel.getNote() != null) {
                 sendOrderModel.setNote(orderModel.getNote());
             }
+            product = orderModel.getProduct();
         }
         binding.setSendModel(sendOrderModel);
 
@@ -131,12 +135,13 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         });
 
         binding.btnConfirm.setOnClickListener(view -> {
+            if(sendOrderModel.isDataValid(this)){
             if (orderModel == null) {
                 sendOrderMvvm.storeOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang());
             } else {
                 sendOrderMvvm.updateOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang(), orderModel);
 
-            }
+            }}
 
         });
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
