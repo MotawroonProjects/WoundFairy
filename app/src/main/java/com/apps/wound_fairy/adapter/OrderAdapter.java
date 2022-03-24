@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.OrderRowBinding;
 import com.apps.wound_fairy.model.OrderModel;
+import com.apps.wound_fairy.uis.activity_my_orders.fragments.FragmentCurrentOrders;
+import com.apps.wound_fairy.uis.activity_my_orders.fragments.FragmentPreviousOrders;
 
 import java.util.List;
 
@@ -44,6 +47,15 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        myHolder.itemView.setOnClickListener(view -> {
+            if (fragment instanceof FragmentCurrentOrders){
+                FragmentCurrentOrders fragmentCurrentOrders=(FragmentCurrentOrders) fragment;
+                fragmentCurrentOrders.setItemPos(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
+            }else if (fragment instanceof FragmentPreviousOrders){
+                FragmentPreviousOrders fragmentPreviousOrders=(FragmentPreviousOrders) fragment;
+                fragmentPreviousOrders.setItemPos(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
+            }
+        });
 
         Spannable word = new SpannableString(list.get(position).getTotal_price());
 

@@ -1,6 +1,7 @@
 package com.apps.wound_fairy.uis.activity_my_orders.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.apps.wound_fairy.mvvm.FragmentOrdersMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_my_orders.MyOrdersActivity;
 import com.apps.wound_fairy.uis.activity_my_reservations.fragments.FragmentCurrentReservations;
+import com.apps.wound_fairy.uis.activity_order_details.OrderDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,5 +96,11 @@ public class FragmentCurrentOrders extends BaseFragment {
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
 
+    }
+
+    public void setItemPos(OrderModel orderModel, int adapterPosition) {
+        Intent intent=new Intent(activity, OrderDetailsActivity.class);
+        intent.putExtra("data",orderModel);
+        startActivity(intent);
     }
 }

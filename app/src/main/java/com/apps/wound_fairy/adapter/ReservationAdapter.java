@@ -2,6 +2,7 @@ package com.apps.wound_fairy.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ReservationRowBinding;
 import com.apps.wound_fairy.model.ReservationModel;
+import com.apps.wound_fairy.uis.activity_my_reservations.fragments.FragmentCurrentReservations;
+import com.apps.wound_fairy.uis.activity_my_reservations.fragments.FragmentPreviousReservations;
 
 import java.util.List;
 
@@ -41,6 +44,15 @@ public class ReservationAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        myHolder.itemView.setOnClickListener(view -> {
+            if (fragment instanceof FragmentCurrentReservations){
+                FragmentCurrentReservations fragmentCurrentReservations=(FragmentCurrentReservations) fragment;
+                fragmentCurrentReservations.setItemPos(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
+            }else if (fragment instanceof FragmentPreviousReservations){
+                FragmentPreviousReservations fragmentPreviousReservations=(FragmentPreviousReservations) fragment;
+                fragmentPreviousReservations.setItemPos(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
+            }
+        });
 
     }
 

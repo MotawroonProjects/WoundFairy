@@ -14,11 +14,12 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.AddImagesRowBinding;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
 import com.apps.wound_fairy.uis.activity_request_service.RequestServiceActivity;
+import com.apps.wound_fairy.uis.activity_reservation_details.ReservationDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<String> list;
     private Context context;
     private LayoutInflater inflater;
@@ -30,10 +31,11 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AddImagesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.add_images_row,parent,false);
+        AddImagesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.add_images_row, parent, false);
         return new MyHolder(binding);
     }
 
@@ -42,13 +44,16 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         MyHolder myHolder = (MyHolder) holder;
         Picasso.get().load(Uri.parse(list.get(position))).fit().into(myHolder.binding.image);
         myHolder.binding.cardViewDelete.setOnClickListener(view -> {
-            if (context instanceof RequestServiceActivity){
-                RequestServiceActivity activity=(RequestServiceActivity) context;
+            if (context instanceof RequestServiceActivity) {
+                RequestServiceActivity activity = (RequestServiceActivity) context;
                 activity.deleteImage(myHolder.getAdapterPosition());
             }
 
         });
         if (context instanceof ConfirmRequestActivity) {
+            myHolder.binding.cardViewDelete.setVisibility(View.GONE);
+        }
+        if (context instanceof ReservationDetailsActivity) {
             myHolder.binding.cardViewDelete.setVisibility(View.GONE);
         }
     }
@@ -58,8 +63,9 @@ public class ImageAddServiceAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return list.size();
     }
 
-    public static class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder {
         private AddImagesRowBinding binding;
+
         public MyHolder(@NonNull AddImagesRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

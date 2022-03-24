@@ -1,6 +1,7 @@
 package com.apps.wound_fairy.uis.activity_my_reservations.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.apps.wound_fairy.model.ReservationModel;
 import com.apps.wound_fairy.mvvm.FragmentReservationsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
+import com.apps.wound_fairy.uis.activity_reservation_details.ReservationDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,5 +91,11 @@ public class FragmentPreviousReservations extends BaseFragment {
         binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getPreviousReservation(getUserModel(),getLang()));
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
+    }
+
+    public void setItemPos(ReservationModel reservationModel, int adapterPosition) {
+        Intent intent=new Intent(activity, ReservationDetailsActivity.class);
+        intent.putExtra("data",reservationModel);
+        startActivity(intent);
     }
 }

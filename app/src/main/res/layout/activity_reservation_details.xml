@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:text='@{reservationModel.date+"  "+reservationModel.time}'
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -67,14 +67,15 @@
                             android:text="@string/reservation_status"
                             android:textColor="@color/gray7"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"/>
 
                         <TextView
                             reservation_status="@{reservationModel}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorAccent"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
@@ -103,16 +104,15 @@
                             android:id="@+id/tvComplaint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:padding="5dp"
                             android:text="@{reservationModel.complaint}"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
                             android:text="@string/test_images"
                             android:textColor="@color/gray3"
                             android:textSize="16sp" />
@@ -121,12 +121,12 @@
                             android:id="@+id/recViewImages"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp" />
+                             />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
                             android:text="@string/the_service"
                             android:textColor="@color/gray3"
                             android:textSize="16sp"
@@ -137,9 +137,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"
-                            android:layout_marginTop="3dp"
-                            android:text="@{requestModel.selected_department}"
-                            android:textSize="16sp" />
+                            android:text="@{reservationModel.service.title}"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -147,7 +146,7 @@
                             android:text="@string/visit_time"
                             android:textColor="@color/gray3"
                             android:textSize="16sp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -176,6 +175,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:text="@{reservationModel.date}"
+                                    android:textSize="14sp"
                                     android:textColor="@color/black" />
                             </LinearLayout>
 
@@ -199,6 +199,7 @@
                                     android:layout_marginStart="8dp"
                                     android:layout_marginEnd="8dp"
                                     android:text="@{reservationModel.time}"
+                                    android:textSize="14sp"
                                     android:textColor="@color/black" />
                             </LinearLayout>
                         </LinearLayout>
@@ -206,7 +207,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
                             android:text="@string/location2"
                             android:textColor="@color/gray3"
                             android:textSize="16sp"
@@ -227,7 +228,7 @@
                                 android:id="@+id/tvLocation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"/>

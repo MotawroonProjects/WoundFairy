@@ -135,6 +135,8 @@
     <string name="you_must_pay_to_start_chatting_service_cost">You must pay to start chatting \n Service cost</string>
     <string name="go_to_payment">Go To Payment</string>
     <string name="edit">Edit</string>
+    <string name="reservationDetails">Reservation Details</string>
+    <string name="orderDetails">Order Details</string>
 
 
 </resources>
