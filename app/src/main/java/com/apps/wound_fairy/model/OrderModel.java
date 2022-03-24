@@ -11,9 +11,14 @@ public class OrderModel implements Serializable {
     private String status;
     private String total_price;
     private String address;
+    private String note;
     private String latitude;
     private String longitude;
     private ProductModel.Product product;
+
+    public String getNote() {
+        return note;
+    }
 
     public String getId() {
         return id;
