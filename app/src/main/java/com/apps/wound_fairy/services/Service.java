@@ -10,6 +10,7 @@ import com.apps.wound_fairy.model.PlaceMapDetailsData;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
 import com.apps.wound_fairy.model.SingleMessageModel;
+import com.apps.wound_fairy.model.SingleOrderDataModel;
 import com.apps.wound_fairy.model.VisitOnlineModel;
 import com.apps.wound_fairy.model.NotificationDataModel;
 import com.apps.wound_fairy.model.PlaceGeocodeData;
@@ -22,6 +23,7 @@ import com.apps.wound_fairy.model.UserModel;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -203,6 +205,32 @@ public interface Service {
                                                  @Part("address") RequestBody address,
                                                  @Part("lang") RequestBody lang,
                                                  @Part("reservation_id") RequestBody reservation_id
+
+    );
+
+    @Multipart
+    @POST("api/auth/update_profile")
+    Observable<Response<UserModel>> updateProfile(@Header("Authorization") String Authorization,
+                                                  @Part("phone_code") RequestBody phone_code,
+                                                  @Part("phone") RequestBody phone,
+                                                  @Part("name") RequestBody name,
+                                                  @Part("email") RequestBody email,
+                                                  @Part MultipartBody.Part image
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/order/store-order")
+    Single<Response<SingleOrderDataModel>> updateOrder(@Header("Authorization") String Authorization,
+                                                       @Field("product_id") String product_id,
+                                                       @Field("order_id") String order_id,
+                                                       @Field("amount") String amount,
+                                                       @Field("latitude") String latitude,
+                                                       @Field("longitude") String longitude,
+                                                       @Field("address") String address,
+                                                       @Field("note") String note,
+                                                       @Field("total_price") String total_price,
+                                                       @Field("lang") String lang
 
     );
 }

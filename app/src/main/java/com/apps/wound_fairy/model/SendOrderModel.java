@@ -1,10 +1,12 @@
 package com.apps.wound_fairy.model;
 
 import android.content.Context;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.ObservableField;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.apps.wound_fairy.R;
@@ -14,6 +16,7 @@ public class SendOrderModel extends BaseObservable {
     private String longitude;
     private String address;
     private String note;
+    public ObservableField<String> error_address = new ObservableField<>();
 
 
     public SendOrderModel() {
@@ -66,4 +69,29 @@ public class SendOrderModel extends BaseObservable {
         this.note = note;
         notifyPropertyChanged(BR.note);
     }
+    public boolean isDataValid(Context context) {
+        if (
+                !address.isEmpty()
+
+        ) {
+
+            error_address.set(null);
+
+            return true;
+        } else {
+
+
+            if (address.isEmpty()) {
+                error_address.set(context.getString(R.string.field_required));
+
+            } else {
+                error_address.set(null);
+
+            }
+
+
+            return false;
+        }
+    }
+
 }

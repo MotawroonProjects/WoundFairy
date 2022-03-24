@@ -27,6 +27,7 @@ import com.apps.wound_fairy.adapter.SpinnerDepartmentAdapter;
 import com.apps.wound_fairy.databinding.ActivityRequestServiceBinding;
 import com.apps.wound_fairy.databinding.ActivitySendOrderBinding;
 import com.apps.wound_fairy.model.LocationModel;
+import com.apps.wound_fairy.model.OrderModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
 import com.apps.wound_fairy.model.SendOrderModel;
@@ -63,6 +64,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     private ProductModel.Product product;
     private int amount;
     private SendOrderModel sendOrderModel;
+    private OrderModel orderModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +78,29 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         Intent intent = getIntent();
         product = (ProductModel.Product) intent.getSerializableExtra("data");
         amount = intent.getIntExtra("amount", 0);
+        if (intent.getStringExtra("order") != null) {
+            orderModel = (OrderModel) intent.getSerializableExtra("order");
+
+        }
     }
 
     private void initView() {
 
         binding.setLang(getLang());
         binding.setModel(product);
-        sendOrderModel=new SendOrderModel();
+        sendOrderModel = new SendOrderModel();
+
+        if (orderModel != null) {
+            amount = Integer.parseInt(orderModel.getAmount());
+            sendOrderModel.setLongitude(orderModel.getLongitude());
+            sendOrderModel.setLatitude(orderModel.getLatitude());
+            sendOrderModel.setAddress(orderModel.getAddress());
+            if (orderModel.getNote() != null) {
+                sendOrderModel.setNote(orderModel.getNote());
+            }
+        }
         binding.setSendModel(sendOrderModel);
+
         binding.tvCount.setText(amount + "");
         setprice();
         setUpToolbar(binding.toolbar, getString(R.string.request), R.color.white, R.color.black);
@@ -94,18 +111,39 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         sendOrderMvvm.getSend().observe(this, aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+
+                navigateToMyOrdersActivity();
+
+            }
+        });
+        sendOrderMvvm.getOrder().observe(this, new Observer<OrderModel>() {
+            @Override
+            public void onChanged(OrderModel orderModel) {
+                if (orderModel != null) {
+                    Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+
+                    Intent intent = getIntent();
+                    intent.putExtra("data", orderModel);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
         binding.btnConfirm.setOnClickListener(view -> {
-            sendOrderMvvm.storeOrder(SendOrderActivity.this,sendOrderModel,getUserModel(),product,amount+"",getLang());
-                navigateToMyOrdersActivity();
+            if (orderModel == null) {
+                sendOrderMvvm.storeOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang());
+            } else {
+                sendOrderMvvm.updateOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang(), orderModel);
+
+            }
+
         });
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
 
             addMarker(locationModel.getLat(), locationModel.getLng());
-            sendOrderModel.setLatitude(locationModel.getLat()+"");
-            sendOrderModel.setLongitude(locationModel.getLng()+"");
+            sendOrderModel.setLatitude(locationModel.getLat() + "");
+            sendOrderModel.setLongitude(locationModel.getLng() + "");
             sendOrderModel.setAddress(locationModel.getAddress());
             binding.setSendModel(sendOrderModel);
 
@@ -149,7 +187,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     }
 
     private void navigateToMyOrdersActivity() {
-        Intent intent=new Intent(SendOrderActivity.this, MyOrdersActivity.class);
+        Intent intent = new Intent(SendOrderActivity.this, MyOrdersActivity.class);
         startActivity(intent);
     }
 

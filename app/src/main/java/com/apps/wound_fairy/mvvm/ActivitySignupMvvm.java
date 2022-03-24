@@ -88,6 +88,63 @@ public class ActivitySignupMvvm extends AndroidViewModel {
                     }
                 });
     }
+    public void update(SignUpModel signUpModel, UserModel userModel, Context context) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code());
+        RequestBody phone_part = Common.getRequestBodyText(signUpModel.getPhone());
+        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + " " + signUpModel.getLastName());
+        RequestBody email_part = Common.getRequestBodyText(signUpModel.getEmail());
+
+        MultipartBody.Part image = null;
+        if (signUpModel.getImage() != null && !signUpModel.getImage().isEmpty()) {
+            if (!signUpModel.getImage().startsWith("http")) {
+                image = Common.getMultiPart(context, Uri.parse(signUpModel.getImage()), "image");
+
+            }
+        }
+
+
+        Api.getService(Tags.base_url).updateProfile(userModel.getData().getAccess_token(),phone_code_part,phone_part, name_part, email_part, image)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<UserModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+
+                                    onUserDataSuccess.postValue(response.body());
+                                }
+                                else if (response.body().getStatus()==422){
+                                    Toast.makeText(context, R.string.em_exist, Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        dialog.dismiss();
+                    }
+                });
+    }
 
     @Override
     protected void onCleared() {

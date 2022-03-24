@@ -231,6 +231,7 @@
                             android:hint="@string/current_location"
                             android:paddingStart="8dp"
                             android:lines="1"
+                            error="@{sendModel.error_address}"
                             android:text="@={sendModel.address}"
                             android:paddingEnd="8dp"
                             android:textColor="@color/black"

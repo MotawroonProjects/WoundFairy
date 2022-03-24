@@ -123,27 +123,25 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
-                            android:background="@drawable/linear_shape3"
-                            >
+                            android:background="@drawable/linear_shape3">
+
                             <LinearLayout
                                 android:id="@+id/llImages"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal"
-                                android:visibility="gone"
-                                >
+                                android:visibility="gone">
 
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/cardAddImage"
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginStart="5dp"
                                     android:layout_marginEnd="5dp"
                                     android:padding="5dp"
                                     app:cardCornerRadius="5dp"
-                                    app:cardElevation="3dp"
-                                    android:layout_gravity="center_vertical"
-                                    >
+                                    app:cardElevation="3dp">
 
                                     <ImageView
                                         android:id="@+id/icon3"
@@ -175,8 +173,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_upload_image"/>
+                                android:src="@drawable/ic_upload_image" />
                         </FrameLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -405,14 +404,16 @@
 
                             <EditText
                                 android:id="@+id/edtSearch"
+                                error="@{requestService.error_address}"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
                                 android:background="@color/transparent"
                                 android:hint="@string/current_location"
-                                android:padding="8dp"
-                                android:lines="1"
                                 android:imeOptions="actionSearch"
+                                android:lines="1"
+                                android:padding="8dp"
+                                android:text="@={requestService.address}"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
                                 android:textSize="14sp" />

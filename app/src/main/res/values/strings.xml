@@ -127,7 +127,7 @@
     <string name="canceled">Canceled</string>
     <string name="done">Done</string>
     <string name="fields_are_not_required">* Fields are not required</string>
-    <string name="type_a_message">Type Message</string>
+    <string name="type_a_message">Type Here</string>
     <string name="ordered">Ordered: </string>
     <string name="reservation_time">Reservation Time: </string>
     <string name="reservation_status">Reservation Status</string>

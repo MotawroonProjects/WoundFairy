@@ -10,8 +10,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.model.OrderModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.SendOrderModel;
+import com.apps.wound_fairy.model.SingleOrderDataModel;
 import com.apps.wound_fairy.model.StatusResponse;
 import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.remote.Api;
@@ -25,27 +27,36 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class ActivitySendOrderMvvm extends AndroidViewModel{
+public class ActivitySendOrderMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> send;
+    private MutableLiveData<OrderModel> orderModelMutableLiveData;
     private CompositeDisposable disposable = new CompositeDisposable();
+
     public ActivitySendOrderMvvm(@NonNull Application application) {
         super(application);
     }
 
     public MutableLiveData<Boolean> getSend() {
-        if (send==null){
-            send=new MutableLiveData<>();
+        if (send == null) {
+            send = new MutableLiveData<>();
         }
         return send;
     }
 
-    public void storeOrder(Context context, SendOrderModel sendOrderModel, UserModel userModel, ProductModel.Product productModel,String amount, String lang){
+    public MutableLiveData<OrderModel> getOrder() {
+        if (orderModelMutableLiveData == null) {
+            orderModelMutableLiveData = new MutableLiveData<>();
+        }
+        return orderModelMutableLiveData;
+    }
+
+    public void storeOrder(Context context, SendOrderModel sendOrderModel, UserModel userModel, ProductModel.Product productModel, String amount, String lang) {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .storeOrder(userModel.getData().getAccess_token(),productModel.getId(),amount,sendOrderModel.getLatitude(),sendOrderModel.getLongitude(),sendOrderModel.getAddress(),sendOrderModel.getNote(),(Double.parseDouble(productModel.getPrice())*Integer.parseInt(amount))+"",lang)
+                .storeOrder(userModel.getData().getAccess_token(), productModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -58,9 +69,9 @@ public class ActivitySendOrderMvvm extends AndroidViewModel{
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
 
-                        if (response.isSuccessful()){
-                            if (response.body().getStatus()==200){
-                                Log.e("status",response.code()+"_"+response.body().getStatus());
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
+                                Log.e("status", response.code() + "_" + response.body().getStatus());
                                 send.postValue(true);
                             }
                         }
@@ -73,4 +84,40 @@ public class ActivitySendOrderMvvm extends AndroidViewModel{
                     }
                 });
     }
+
+    public void updateOrder(Context context, SendOrderModel sendOrderModel, UserModel userModel, ProductModel.Product productModel, String amount, String lang, OrderModel orderModel) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url)
+                .updateOrder(userModel.getData().getAccess_token(), productModel.getId(), orderModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SingleOrderDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SingleOrderDataModel> response) {
+                        dialog.dismiss();
+
+                        if (response.isSuccessful()) {
+                            if (response.body().getStatus() == 200) {
+                                Log.e("status", response.code() + "_" + response.body().getStatus());
+                                orderModelMutableLiveData.postValue(response.body().getData());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("onError", e.getMessage());
+                        dialog.dismiss();
+                    }
+                });
+    }
+
 }

@@ -29,38 +29,45 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
     public ObservableField<String> error_complaint = new ObservableField<>();
     public ObservableField<String> error_date = new ObservableField<>();
     public ObservableField<String> error_time = new ObservableField<>();
+    public ObservableField<String> error_address = new ObservableField<>();
 
     public boolean isDataValid(Context context) {
         if (service_id != 0 &&
                 !complaint.isEmpty() &&
                 !date.isEmpty() &&
-                !time.isEmpty())
-        {
+                !time.isEmpty()
+                && !address.isEmpty()) {
             error_complaint.set(null);
             error_date.set(null);
             error_time.set(null);
-
+            error_address.set(null);
             return true;
-        }else {
+        } else {
             if (service_id == 0) {
                 Toast.makeText(context, R.string.choose_service, Toast.LENGTH_SHORT).show();
             }
-            if (complaint.isEmpty()){
+            if (complaint.isEmpty()) {
                 error_complaint.set(context.getString(R.string.field_req));
-            }else {
+            } else {
                 error_complaint.set(null);
             }
-            if (date.isEmpty()){
+            if (date.isEmpty()) {
                 error_date.set(context.getString(R.string.field_req));
-            }else {
+            } else {
                 error_date.set(null);
             }
-            if (time.isEmpty()){
+            if (time.isEmpty()) {
                 error_time.set(context.getString(R.string.field_req));
-            }else {
+            } else {
                 error_time.set(null);
             }
+            if (address.isEmpty()) {
+                error_address.set(context.getString(R.string.field_required));
 
+            } else {
+                error_address.set(null);
+
+            }
             return false;
         }
     }
@@ -84,7 +91,7 @@ public class RequestServiceModel extends BaseObservable implements Serializable 
         notifyPropertyChanged(BR.address);
         this.images = new ArrayList<>();
         notifyPropertyChanged(BR.images);
-        this.selected_department="";
+        this.selected_department = "";
         notifyPropertyChanged(BR.selected_department);
     }
 

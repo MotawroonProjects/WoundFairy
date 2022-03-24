@@ -81,7 +81,7 @@ public class SignUpActivity extends BaseActivity {
             model.setEmail(userModel.getData().getUser().getEmail());
 
             if (userModel.getData().getUser().getImage()!=null){
-                String url = Tags.base_url + userModel.getData().getUser().getImage();
+                String url =  userModel.getData().getUser().getImage();
                 Picasso.get().load(Uri.parse(url)).into(binding.image);
                 model.setImage(url);
             }
@@ -95,6 +95,8 @@ public class SignUpActivity extends BaseActivity {
                     uri = result.getData().getData();
                     File file = new File(Common.getImagePath(this, uri));
                     Picasso.get().load(file).fit().into(binding.image);
+                    model.setImage(uri.toString());
+                    binding.setModel(model);
 
                 } else if (selectedReq == CAMERA_REQ) {
                     Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
@@ -110,6 +112,8 @@ public class SignUpActivity extends BaseActivity {
                             Picasso.get().load(uri).fit().into(binding.image);
 
                         }
+                        model.setImage(uri.toString());
+                        binding.setModel(model);
                     }
                 }
             }
@@ -139,6 +143,7 @@ public class SignUpActivity extends BaseActivity {
                 if (userModel==null){
                     activitySignupMvvm.signUp(model,this);
                 }else {
+                    activitySignupMvvm.update(model,getUserModel(),this);
 
                 }
             }
