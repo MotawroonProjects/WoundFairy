@@ -38,8 +38,9 @@ public class ContactUsActivity extends BaseActivity {
         contactUsModel = new ContactUsModel();
         if (userModel != null) {
             contactUsModel.setName(userModel.getData().getUser().getName());
-            contactUsModel.setEmail(userModel.getData().getUser().getEmail());
-
+            if(userModel.getData().getUser().getEmail()!=null) {
+                contactUsModel.setEmail(userModel.getData().getUser().getEmail());
+            }
         }
 
         binding.setContactModel(contactUsModel);

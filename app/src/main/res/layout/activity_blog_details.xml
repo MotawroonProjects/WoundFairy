@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.text.Html" />
         <variable
             name="model"
             type="com.apps.wound_fairy.model.BlogModel" />
@@ -86,9 +87,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{model.details}"
+                        android:text='@{model!=null?Html.fromHtml(model.details).toString():""}'
                         android:textSize="14sp"
-                        android:lines="4"
                         android:lineSpacingExtra="5dp"
                         android:textColor="@color/gray7"
                         android:layout_marginTop="10dp"
