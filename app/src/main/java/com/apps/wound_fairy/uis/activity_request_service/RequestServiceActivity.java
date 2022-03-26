@@ -120,7 +120,7 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
         mvvm = ViewModelProviders.of(this).get(ActivityRequestServiceMvvm.class);
-
+        activitymapMvvm.setActivity(this);
         if (reservationModel!=null){
 
             requestServiceModel.setComplaint(reservationModel.getComplaint());

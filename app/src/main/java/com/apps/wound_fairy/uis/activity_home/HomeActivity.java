@@ -72,7 +72,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
     private void initView() {
         binding.setLang(getLang());
         preferences = Preferences.getInstance();
-        userModel = preferences.getUserData(this);
+        userModel = getUserModel();
         if (userModel != null) {
             binding.setModel(userModel);
         }
@@ -87,6 +87,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
             if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
                 userModel = getUserModel();
                 if (userModel.getData().getUser().getImage() != null) {
+                    binding.icon.setVisibility(View.GONE);
                     Picasso.get().load(Tags.base_url + userModel.getData().getUser().getImage()).into(binding.image);
                 }
                 binding.setModel(userModel);
@@ -319,6 +320,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         clearUserModel(this);
         userModel = getUserModel();
         binding.setModel(null);
+        binding.icon.setVisibility(View.VISIBLE);
         navigationToLoginActivity();
     }
 

@@ -231,6 +231,8 @@
                             android:hint="@string/current_location"
                             android:paddingStart="8dp"
                             android:lines="1"
+                            android:singleLine="true"
+                            android:imeOptions="actionSearch"
                             error="@{sendModel.error_address}"
                             android:text="@={sendModel.address}"
                             android:paddingEnd="8dp"

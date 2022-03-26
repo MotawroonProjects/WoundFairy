@@ -25,12 +25,15 @@ public class ReservationAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
     private LayoutInflater inflater;
     private AppCompatActivity appCompatActivity;
     private Fragment fragment;
+    private String lang;
 
-    public ReservationAdapter(List<ReservationModel> list, Context context, Fragment fragment) {
+    public ReservationAdapter(List<ReservationModel> list, Context context, Fragment fragment,String lang) {
         this.list = list;
         this.context = context;
         this.fragment = fragment;
+        this.lang=lang;
         inflater=LayoutInflater.from(context);
+
     }
 
     @NonNull
@@ -43,6 +46,7 @@ public class ReservationAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
+        myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(view -> {
             if (fragment instanceof FragmentCurrentReservations){

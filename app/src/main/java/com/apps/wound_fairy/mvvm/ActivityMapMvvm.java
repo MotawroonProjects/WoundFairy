@@ -8,6 +8,7 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,12 +52,18 @@ public class ActivityMapMvvm extends AndroidViewModel implements GoogleApiClient
     private MutableLiveData<GoogleMap> mMap;
     private CompositeDisposable disposable = new CompositeDisposable();
     //    private Mapcontext context;
+    private Activity activity;
     private String lang = "ar";
     private MutableLiveData<Boolean> isLoadingLivData;
 
     public ActivityMapMvvm(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {
@@ -107,7 +114,6 @@ public class ActivityMapMvvm extends AndroidViewModel implements GoogleApiClient
 
                         if (placeMapDetailsDataResponse.isSuccessful() && placeMapDetailsDataResponse.body() != null) {
 
-
                             if (placeMapDetailsDataResponse.body().getCandidates().size() > 0) {
                                 String address = placeMapDetailsDataResponse.body().getCandidates().get(0).getFormatted_address();
                                 LocationModel locationModel = new LocationModel(placeMapDetailsDataResponse.body().getCandidates().get(0).getGeometry().getLocation().getLat(), placeMapDetailsDataResponse.body().getCandidates().get(0).getGeometry().getLocation().getLng(), address);
@@ -119,7 +125,7 @@ public class ActivityMapMvvm extends AndroidViewModel implements GoogleApiClient
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Log.e("error",e.toString());
                     }
                 });
     }
@@ -192,9 +198,9 @@ public class ActivityMapMvvm extends AndroidViewModel implements GoogleApiClient
 
                 case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                     try {
-                        status.startResolutionForResult((Activity) context, 100);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
+                        status.startResolutionForResult(activity, 100);
+                    } catch (Exception e) {
+                      //  e.printStackTrace();
                     }
                     break;
 

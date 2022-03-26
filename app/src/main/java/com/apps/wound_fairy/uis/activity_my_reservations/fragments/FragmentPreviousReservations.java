@@ -83,7 +83,7 @@ public class FragmentPreviousReservations extends BaseFragment {
             }
         });
 
-        reservationAdapter = new ReservationAdapter(reservationModelList, activity, this);
+        reservationAdapter = new ReservationAdapter(reservationModelList, activity, this,getLang());
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recView.setAdapter(reservationAdapter);
 

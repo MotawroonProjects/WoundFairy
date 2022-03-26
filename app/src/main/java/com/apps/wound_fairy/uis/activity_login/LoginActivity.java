@@ -186,4 +186,6 @@ public class LoginActivity extends BaseActivity {
         model.setPhone_code(countryModel.getDialCode());
         binding.setModel(model);
     }
+
+
 }

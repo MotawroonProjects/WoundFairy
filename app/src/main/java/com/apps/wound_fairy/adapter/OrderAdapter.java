@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.OrderRowBinding;
 import com.apps.wound_fairy.model.OrderModel;
+import com.apps.wound_fairy.uis.activity_base.BaseFragment;
 import com.apps.wound_fairy.uis.activity_my_orders.fragments.FragmentCurrentOrders;
 import com.apps.wound_fairy.uis.activity_my_orders.fragments.FragmentPreviousOrders;
 
@@ -28,11 +29,14 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater inflater;
     private AppCompatActivity appCompatActivity;
     private Fragment fragment;
+    private String lang;
 
-    public OrderAdapter(List<OrderModel> list, Context context, Fragment fragment) {
+
+    public OrderAdapter(List<OrderModel> list, Context context, Fragment fragment,String lang) {
         this.list = list;
         this.context = context;
         this.fragment = fragment;
+        this.lang=lang;
         inflater=LayoutInflater.from(context);
     }
 
@@ -46,6 +50,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
+        myHolder.binding.setLang(lang);
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(view -> {
             if (fragment instanceof FragmentCurrentOrders){

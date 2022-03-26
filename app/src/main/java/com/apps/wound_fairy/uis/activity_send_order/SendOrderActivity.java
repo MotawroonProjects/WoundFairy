@@ -36,9 +36,11 @@ import com.apps.wound_fairy.mvvm.ActivityConfirmRequestMvvm;
 import com.apps.wound_fairy.mvvm.ActivityMapMvvm;
 import com.apps.wound_fairy.mvvm.ActivityRequestServiceMvvm;
 import com.apps.wound_fairy.mvvm.ActivitySendOrderMvvm;
+import com.apps.wound_fairy.tags.Tags;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
+import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 import com.apps.wound_fairy.uis.activity_my_orders.MyOrdersActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,6 +49,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,6 +68,8 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     private int amount;
     private SendOrderModel sendOrderModel;
     private OrderModel orderModel;
+    private ActivityResultLauncher<Intent> launcher;
+    private int req = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +98,11 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
 
         sendOrderModel = new SendOrderModel();
 
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
+
+            }
+        });
         if (orderModel != null) {
             amount = Integer.parseInt(orderModel.getAmount());
             sendOrderModel.setLongitude(orderModel.getLongitude());
@@ -112,7 +122,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         sendOrderMvvm = ViewModelProviders.of(this).get(ActivitySendOrderMvvm.class);
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
-
+        activitymapMvvm.setActivity(this);
         sendOrderMvvm.getSend().observe(this, aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
@@ -136,13 +146,18 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         });
 
         binding.btnConfirm.setOnClickListener(view -> {
-            if(sendOrderModel.isDataValid(this)){
-            if (orderModel == null) {
-                sendOrderMvvm.storeOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang());
-            } else {
-                sendOrderMvvm.updateOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang(), orderModel);
+            if (getUserModel()!=null){
+                if(sendOrderModel.isDataValid(this)){
+                    if (orderModel == null) {
+                        sendOrderMvvm.storeOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang());
+                    } else {
+                        sendOrderMvvm.updateOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang(), orderModel);
 
-            }}
+                    }}
+            }
+        else {
+            navigateToLoginActivity();
+            }
 
         });
         activitymapMvvm.getLocationData().observe(this, locationModel -> {
@@ -189,6 +204,13 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         });
         updateUI();
         checkPermission();
+
+    }
+
+    private void navigateToLoginActivity() {
+        req = 1;
+        Intent intent = new Intent(this, LoginActivity.class);
+        launcher.launch(intent);
 
     }
 
