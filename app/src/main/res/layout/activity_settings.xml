@@ -3,223 +3,242 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@color/gray12"
-            >
+            android:orientation="vertical">
+
             <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar"/>
+                layout="@layout/toolbar" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="true"
-                >
+                android:fillViewport="true">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="16dp"
-                    >
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:id="@+id/llLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="16dp"
                         android:layout_gravity="center_vertical"
-                        >
+                        android:orientation="horizontal"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_lang"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_lang" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/language"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/language"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
+
                         <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1" />
+
                         <TextView
                             android:id="@+id/tvLang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:text="عربي"
-                            android:textSize="16sp"
                             android:textColor="@color/black"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@drawable/horizontal_line"
                         android:layerType="software"
                         android:padding="8dp" />
+
                     <LinearLayout
                         android:id="@+id/llTerms"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        >
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_terms_cond"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_terms_cond" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/terms_and_conditions"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/terms_and_conditions"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@drawable/horizontal_line"
                         android:layerType="software"
                         android:padding="8dp" />
+
                     <LinearLayout
                         android:id="@+id/llPrivacy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        >
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_privacy"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_privacy" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/privacy_policy"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/privacy_policy"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@drawable/horizontal_line"
                         android:layerType="software"
                         android:padding="8dp" />
+
                     <LinearLayout
                         android:id="@+id/llContactUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        >
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_contact_us"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_contact_us" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/contact_us"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/contact_us"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@drawable/horizontal_line"
                         android:layerType="software"
                         android:padding="8dp" />
+
                     <LinearLayout
                         android:id="@+id/llRate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        >
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_rate"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_rate" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/rate_app"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/rate_app"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:background="@drawable/horizontal_line"
                         android:layerType="software"
                         android:padding="8dp" />
+
                     <LinearLayout
                         android:id="@+id/llShare"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        >
+                        android:paddingBottom="16dp">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_share"
-                            android:layout_gravity="center_vertical"/>
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_share" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/share_app"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
+                            android:text="@string/share_app"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
