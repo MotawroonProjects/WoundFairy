@@ -73,6 +73,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         binding.setLang(getLang());
         preferences = Preferences.getInstance();
         userModel = getUserModel();
+
         if (userModel != null) {
             binding.setModel(userModel);
         }

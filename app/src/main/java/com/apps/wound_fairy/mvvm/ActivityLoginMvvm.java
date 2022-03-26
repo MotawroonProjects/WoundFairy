@@ -162,8 +162,8 @@ public class ActivityLoginMvvm extends AndroidViewModel {
 
 
     public void checkValidCode(String code, LoginActivity activity) {
-        login(activity);
-       /* if (verificationId != null) {
+//        login(activity);
+        if (verificationId != null) {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
             mAuth.signInWithCredential(credential)
                     .addOnSuccessListener(authResult -> {
@@ -176,7 +176,7 @@ public class ActivityLoginMvvm extends AndroidViewModel {
             });
         } else {
             // Toast.makeText(context, "wait sms", Toast.LENGTH_SHORT).show();
-        }*/
+        }
 
     }
 

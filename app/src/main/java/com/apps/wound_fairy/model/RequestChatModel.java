@@ -31,11 +31,11 @@ public class RequestChatModel extends BaseObservable implements Serializable {
             return true;
         }else {
 
-            if (complaint.isEmpty()){
-                error_complaint.set(context.getString(R.string.field_req));
-            }else {
-                error_complaint.set(null);
-            }
+//            if (complaint.isEmpty()){
+//                error_complaint.set(context.getString(R.string.field_req));
+//            }else {
+//                error_complaint.set(null);
+//            }
 
 
             return false;

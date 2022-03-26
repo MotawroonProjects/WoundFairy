@@ -53,7 +53,7 @@ public class ActivitySignupMvvm extends AndroidViewModel {
 
         RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code());
         RequestBody phone_part = Common.getRequestBodyText(signUpModel.getPhone());
-        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + " " + signUpModel.getLastName());
+        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + "  " + signUpModel.getLastName());
         RequestBody email_part = Common.getRequestBodyText(signUpModel.getEmail());
 
         MultipartBody.Part image = null;
@@ -95,7 +95,7 @@ public class ActivitySignupMvvm extends AndroidViewModel {
 
         RequestBody phone_code_part = Common.getRequestBodyText(signUpModel.getPhone_code());
         RequestBody phone_part = Common.getRequestBodyText(signUpModel.getPhone());
-        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + " " + signUpModel.getLastName());
+        RequestBody name_part = Common.getRequestBodyText(signUpModel.getFirstName() + "  " + signUpModel.getLastName());
         RequestBody email_part = Common.getRequestBodyText(signUpModel.getEmail());
 
         MultipartBody.Part image = null;

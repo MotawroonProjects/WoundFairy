@@ -56,7 +56,6 @@ public class LoginActivity extends BaseActivity {
         activityLoginMvvm = ViewModelProviders.of(this).get(ActivityLoginMvvm.class);
         model = new LoginModel();
         binding.setModel(model);
-        activityLoginMvvm.sendSmsCode(getLang(), model.getPhone_code(), model.getPhone(), this);
         activityLoginMvvm.smscode.observe(this, smsCode -> {
             binding.edtCode.setText(smsCode);
         });

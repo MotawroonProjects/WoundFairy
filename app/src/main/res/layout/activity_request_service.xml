@@ -283,8 +283,8 @@
 
                                     <TextView
                                         android:id="@+id/tvDate"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
                                         android:layout_marginStart="5dp"
                                         android:background="@color/transparent"
                                         android:hint="@string/dd_mm_yyyy"
@@ -346,8 +346,8 @@
                                     <TextView
                                         android:id="@+id/tvTime"
                                         error="@{requestService.error_time}"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
                                         android:layout_marginStart="5dp"
                                         android:background="@color/transparent"
                                         android:hint="00:00"

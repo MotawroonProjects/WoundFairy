@@ -76,7 +76,7 @@ public class ConfirmRequestActivity extends BaseActivity {
                     Toast.makeText(ConfirmRequestActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
 
                     Intent intent = getIntent();
-                    intent.putExtra("data", reservationModel);
+                    intent.putExtra("reservation", reservationModel);
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -85,8 +85,9 @@ public class ConfirmRequestActivity extends BaseActivity {
                 mvvm.getConfirmMutableLiveData().observe(this, aBoolean -> {
                     if (aBoolean) {
                         Toast.makeText(ConfirmRequestActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ConfirmRequestActivity.this, MyReservationsActivity.class);
-                        startActivity(intent);
+                        Intent intent = getIntent();
+                        setResult(RESULT_OK, intent);
+                        finish();
                     }
                 });
 

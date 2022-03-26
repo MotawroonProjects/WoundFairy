@@ -46,6 +46,7 @@ import com.apps.wound_fairy.share.Common;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
+import com.apps.wound_fairy.uis.activity_my_reservations.MyReservationsActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -257,11 +258,18 @@ public class RequestServiceActivity extends BaseActivity implements OnMapReadyCa
                         }
                     }
                 }else {
-                    reservationModel = (ReservationModel) result.getData().getSerializableExtra("data");
-                    Intent intent = getIntent();
-                    intent.putExtra("data", reservationModel);
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    if (result.getData().getSerializableExtra("reservation")!=null){
+                        reservationModel = (ReservationModel) result.getData().getSerializableExtra("reservation");
+                        Intent intent = getIntent();
+                        intent.putExtra("data", reservationModel);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }else {
+                        Intent intent=new Intent(RequestServiceActivity.this, MyReservationsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             }
         });

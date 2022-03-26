@@ -129,6 +129,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 intent.putExtra("data", product);
                 intent.putExtra("amount", amount);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -189,6 +189,10 @@ public class RequesChatActivity extends BaseActivity {
         binding.llReqChat.setOnClickListener(view -> {
             if (requestChatModel.isDataValid(RequesChatActivity.this)) {
                 mvvm.confirmRequest(this, requestChatModel, getUserModel(), getLang(), type);
+            }else {
+                Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         binding.btnPayment.setOnClickListener(new View.OnClickListener() {

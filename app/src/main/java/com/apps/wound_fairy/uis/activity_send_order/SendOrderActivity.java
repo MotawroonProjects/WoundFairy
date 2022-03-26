@@ -217,6 +217,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
     private void navigateToMyOrdersActivity() {
         Intent intent = new Intent(SendOrderActivity.this, MyOrdersActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void setprice() {
