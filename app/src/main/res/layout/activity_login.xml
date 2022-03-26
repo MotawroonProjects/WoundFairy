@@ -129,7 +129,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:padding="5dp"
-                            android:rotation='@{lang.equals("ar")?180:0}'
+                            android:rotation='@{lang.equals("en")?180:0}'
                             android:src="@drawable/ic_arrow_left"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
