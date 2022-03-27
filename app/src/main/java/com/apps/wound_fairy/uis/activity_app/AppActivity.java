@@ -57,6 +57,7 @@ public class AppActivity extends BaseActivity {
 
                                              @Override
                                              public void onPageFinished(WebView view, String url) {
+                                                 binding.progBar.setVisibility(View.GONE);
                                                  binding.webView.setVisibility(View.VISIBLE);
 
 
