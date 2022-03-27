@@ -23,6 +23,7 @@ import com.apps.wound_fairy.adapter.BlogAdapter;
 import com.apps.wound_fairy.adapter.BlogSliderAdapter;
 import com.apps.wound_fairy.adapter.SliderAdapter;
 import com.apps.wound_fairy.model.BlogModel;
+import com.apps.wound_fairy.model.MessageModel;
 import com.apps.wound_fairy.model.SliderDataModel;
 import com.apps.wound_fairy.mvvm.FragmentHomeMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseFragment;
@@ -116,6 +117,7 @@ public class FragmentHome extends BaseFragment {
             }
             // binding.swipeRefresh.setRefreshing(isLoading);
         });
+
         fragmentHomeMvvm.getSliderDataModelMutableLiveData().observe(activity, new androidx.lifecycle.Observer<SliderDataModel>() {
             @Override
             public void onChanged(SliderDataModel sliderDataModel) {

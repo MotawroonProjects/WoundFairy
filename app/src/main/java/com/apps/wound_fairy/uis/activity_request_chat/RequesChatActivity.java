@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -32,6 +33,7 @@ import com.apps.wound_fairy.adapter.SpinnerDepartmentAdapter;
 import com.apps.wound_fairy.databinding.ActivityRequestChatBinding;
 import com.apps.wound_fairy.databinding.ActivityRequestServiceBinding;
 import com.apps.wound_fairy.model.LocationModel;
+import com.apps.wound_fairy.model.PaymentDataModel;
 import com.apps.wound_fairy.model.RequestChatModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
@@ -43,6 +45,7 @@ import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_chat.ChatActivity;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
+import com.apps.wound_fairy.uis.activity_payment.PaypalwebviewActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -78,6 +81,7 @@ public class RequesChatActivity extends BaseActivity {
     private int selectedReq = 0;
     private Uri uri = null;
     private SettingsModel.Settings settingModel;
+    private PaymentDataModel paymentDataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +109,14 @@ public class RequesChatActivity extends BaseActivity {
         setUpToolbar(binding.toolbar, getString(R.string.chat), R.color.white, R.color.black);
         binding.toolbar.llBack.setOnClickListener(view -> finish());
         mvvm = ViewModelProviders.of(this).get(ActivityRequestChatMvvm.class);
-        mvvm.getConfirmMutableLiveData().observe(this, aBoolean -> {
-            if (aBoolean) {
-                Toast.makeText(RequesChatActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+        mvvm.getConfirmMutableLiveData().observe(this, new Observer<PaymentDataModel>() {
+            @Override
+            public void onChanged(PaymentDataModel paymentDataModel) {
+                RequesChatActivity.this.paymentDataModel = paymentDataModel;
                 binding.flData.setVisibility(View.VISIBLE);
+
             }
         });
-
 
         mvvm.getSettingMutableLiveData().observe(this, settings -> {
             if (settings != null) {
@@ -168,6 +173,11 @@ public class RequesChatActivity extends BaseActivity {
 
                         }
                     }
+                } else if (result.getResultCode() == RESULT_OK && selectedReq == 1000) {
+
+                    Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -189,19 +199,18 @@ public class RequesChatActivity extends BaseActivity {
         binding.llReqChat.setOnClickListener(view -> {
             if (requestChatModel.isDataValid(RequesChatActivity.this)) {
                 mvvm.confirmRequest(this, requestChatModel, getUserModel(), getLang(), type);
-            }else {
-                Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
         binding.btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectedReq = 1000;
                 binding.flData.setVisibility(View.GONE);
-                Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
-                startActivity(intent);
-                finish();
+                Intent intent = new Intent(RequesChatActivity.this, PaypalwebviewActivity.class);
+                intent.putExtra("url", paymentDataModel.getData().getLink());
+
+                launcher.launch(intent);
+
             }
         });
 

@@ -138,6 +138,7 @@
     <string name="reservationDetails">Reservation Details</string>
     <string name="orderDetails">Order Details</string>
     <string name="not_avail_now">Not Available Now</string>
-
+    <string name="payment_faild">Payment Faild</string>
+    <string name="payment_suc">Payment Success</string>
 
 </resources>

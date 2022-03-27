@@ -1,6 +1,7 @@
 package com.apps.wound_fairy.mvvm;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -8,12 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.model.BlogDataModel;
 import com.apps.wound_fairy.model.BlogModel;
+import com.apps.wound_fairy.model.MessageModel;
+import com.apps.wound_fairy.model.MessagesDataModel;
 import com.apps.wound_fairy.model.SliderDataModel;
+import com.apps.wound_fairy.model.UserModel;
 import com.apps.wound_fairy.remote.Api;
+import com.apps.wound_fairy.share.Common;
 import com.apps.wound_fairy.tags.Tags;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.SingleObserver;
@@ -36,6 +43,8 @@ public class FragmentHomeMvvm extends AndroidViewModel {
         context = application.getApplicationContext();
     }
 
+
+
     public MutableLiveData<SliderDataModel> getSliderDataModelMutableLiveData() {
         if (sliderDataModelMutableLiveData == null) {
             sliderDataModelMutableLiveData = new MutableLiveData<>();
@@ -44,8 +53,8 @@ public class FragmentHomeMvvm extends AndroidViewModel {
     }
 
     public MutableLiveData<List<BlogModel>> getBlogDataModelMutableLiveData() {
-        if (blogDataModelMutableLiveData==null){
-            blogDataModelMutableLiveData=new MutableLiveData<>();
+        if (blogDataModelMutableLiveData == null) {
+            blogDataModelMutableLiveData = new MutableLiveData<>();
         }
         return blogDataModelMutableLiveData;
     }
@@ -57,7 +66,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
         return isLoadingLiveData;
     }
 
-    public void getSlider(){
+    public void getSlider() {
         isLoadingLiveData.setValue(true);
         Api.getService(Tags.base_url).getSlider()
                 .subscribeOn(Schedulers.io())
@@ -72,8 +81,8 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<SliderDataModel> response) {
                         isLoadingLiveData.postValue(false);
 
-                        if (response.isSuccessful() && response.body()!=null){
-                            if (response.body().getStatus()==200){
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
                                 sliderDataModelMutableLiveData.postValue(response.body());
                             }
                         }
@@ -101,8 +110,8 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<BlogDataModel> response) {
                         isLoadingLiveData.postValue(false);
 
-                        if (response.isSuccessful() && response.body() !=null) {
-                            if (response.body().getStatus()==200){
+                        if (response.isSuccessful() && response.body() != null) {
+                            if (response.body().getStatus() == 200) {
                                 blogDataModelMutableLiveData.postValue(response.body().getData());
                             }
 

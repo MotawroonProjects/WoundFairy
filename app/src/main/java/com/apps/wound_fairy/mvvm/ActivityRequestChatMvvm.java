@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.model.PaymentDataModel;
 import com.apps.wound_fairy.model.RequestChatModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
 import com.apps.wound_fairy.model.ServiceDepartmentModel;
@@ -41,7 +42,7 @@ import retrofit2.Response;
 public class ActivityRequestChatMvvm extends AndroidViewModel {
 
     private MutableLiveData<SettingsModel> settingMutableLiveData;
-    private MutableLiveData<Boolean> confirmMutableLiveData;
+    private MutableLiveData<PaymentDataModel> confirmMutableLiveData;
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public MutableLiveData<SettingsModel> getSettingMutableLiveData() {
@@ -49,6 +50,12 @@ public class ActivityRequestChatMvvm extends AndroidViewModel {
             settingMutableLiveData = new MutableLiveData<>();
         }
         return settingMutableLiveData;
+    }
+    public MutableLiveData<PaymentDataModel> getConfirmMutableLiveData() {
+        if (confirmMutableLiveData == null) {
+            confirmMutableLiveData = new MutableLiveData<>();
+        }
+        return confirmMutableLiveData;
     }
 
     public ActivityRequestChatMvvm(@NonNull Application application) {
@@ -84,12 +91,6 @@ public class ActivityRequestChatMvvm extends AndroidViewModel {
                     }
                 });
     }
-    public MutableLiveData<Boolean> getConfirmMutableLiveData() {
-        if (confirmMutableLiveData == null) {
-            confirmMutableLiveData = new MutableLiveData<>();
-        }
-        return confirmMutableLiveData;
-    }
 
     public void confirmRequest(Context context, RequestChatModel model, UserModel userModel,String lang,String type) {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
@@ -110,7 +111,7 @@ Log.e("type",type);
         Api.getService(Tags.base_url).requestChat(userModel.getData().getAccess_token(), complaint, imageList,type_part)
                 .subscribeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                .subscribe(new SingleObserver<Response<PaymentDataModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
@@ -118,7 +119,7 @@ Log.e("type",type);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                    public void onSuccess(@NonNull Response<PaymentDataModel> response) {
                         dialog.dismiss();
 
 
@@ -126,7 +127,7 @@ Log.e("type",type);
 
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
-                                confirmMutableLiveData.postValue(true);
+                                confirmMutableLiveData.postValue(response.body());
                             }
                         }
                     }

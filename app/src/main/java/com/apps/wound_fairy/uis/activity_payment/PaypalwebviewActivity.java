@@ -1,11 +1,8 @@
-package com.apps.wound_fairy.uis.activity_app;
+package com.apps.wound_fairy.uis.activity_payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -15,40 +12,57 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.apps.wound_fairy.R;
-import com.apps.wound_fairy.databinding.ActivityAppBinding;
-import com.apps.wound_fairy.uis.activity_base.BaseActivity;
-import com.apps.wound_fairy.uis.activity_payment.PaypalwebviewActivity;
+import androidx.databinding.DataBindingUtil;
 
-public class AppActivity extends BaseActivity {
-    private ActivityAppBinding binding;
-    private String type;
-    private String url;
+import com.apps.wound_fairy.R;
+import com.apps.wound_fairy.databinding.ActivityPaypalBinding;
+import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+
+
+import java.util.Locale;
+
+import io.paperdb.Paper;
+
+public class PaypalwebviewActivity extends BaseActivity {
+    private ActivityPaypalBinding binding;
+    private String link = "";
+    private String lang;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_app);
-        getDataFromIntent();
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_paypal);
+        Paper.init(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(lang);
+        binding.llBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
         initView();
     }
-    private void getDataFromIntent(){
-        Intent intent=getIntent();
-        type = intent.getStringExtra("data");
-        url=intent.getStringExtra("url");
 
-    }
 
     private void initView() {
-        binding.setLang(getLang());
-
+        Paper.init(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        if (getIntent().getStringExtra("url") != null) {
+            link = getIntent().getStringExtra("url");
+        }
         setUpWebView();
     }
+
+
     private void setUpWebView() {
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         binding.webView.getSettings().setBuiltInZoomControls(false);
-        binding.webView.loadUrl(url);
+        binding.webView.loadUrl(link);
         binding.webView.setWebViewClient(new WebViewClient() {
                                              @Override
                                              public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -57,21 +71,29 @@ public class AppActivity extends BaseActivity {
 
                                              @Override
                                              public void onPageFinished(WebView view, String url) {
-                                                 binding.webView.setVisibility(View.VISIBLE);
 
+                                                 if (url.contains("success") || url.contains("checkout/done")) {
+                                                     setResult(RESULT_OK);
+                                                     finish();
+                                                     Toast.makeText(PaypalwebviewActivity.this, getString(R.string.payment_suc), Toast.LENGTH_SHORT).show();
 
+                                                 }
+                                                 else if(url.contains("error")){
+                                                     Toast.makeText(PaypalwebviewActivity.this, getString(R.string.payment_faild), Toast.LENGTH_SHORT).show();
+
+                                                 }
                                              }
 
                                              @Override
                                              public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                                                  super.onReceivedError(view, request, error);
-                                                   binding.webView.setVisibility(View.INVISIBLE);
+                                               //  binding.webView.setVisibility(View.INVISIBLE);
                                              }
 
                                              @Override
                                              public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
                                                  super.onReceivedHttpError(view, request, errorResponse);
-                                                 binding.webView.setVisibility(View.INVISIBLE);
+                                                 //binding.webView.setVisibility(View.INVISIBLE);
                                              }
                                          }
 
@@ -82,11 +104,6 @@ public class AppActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         binding.webView.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
-        back();
     }
 
     @Override

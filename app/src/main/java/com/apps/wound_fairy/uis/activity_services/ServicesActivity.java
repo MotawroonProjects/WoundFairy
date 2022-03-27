@@ -12,14 +12,18 @@ import android.view.View;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityServicesBinding;
+import com.apps.wound_fairy.model.MessageModel;
 import com.apps.wound_fairy.mvvm.ActivityServicesMvvm;
 import com.apps.wound_fairy.tags.Tags;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
+import com.apps.wound_fairy.uis.activity_chat.ChatActivity;
 import com.apps.wound_fairy.uis.activity_home.HomeActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 import com.apps.wound_fairy.uis.activity_request_chat.RequesChatActivity;
 import com.apps.wound_fairy.uis.activity_request_service.RequestServiceActivity;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class ServicesActivity extends BaseActivity {
     private ActivityServicesBinding binding;
@@ -52,7 +56,20 @@ public class ServicesActivity extends BaseActivity {
 //
         });
         mvvm = ViewModelProviders.of(this).get(ActivityServicesMvvm.class);
+        mvvm.onDataSuccess().observe(this, new androidx.lifecycle.Observer<List<MessageModel>>() {
+            @Override
+            public void onChanged(List<MessageModel> messageModels) {
+                if (messageModels.size() > 0) {
+                    Intent intent = new Intent(ServicesActivity.this, ChatActivity.class);
+                    startActivity(intent);
 
+                } else {
+                    Intent intent = new Intent(ServicesActivity.this, RequesChatActivity.class);
+                    intent.putExtra("type", type);
+                    startActivity(intent);
+                }
+            }
+        });
         mvvm.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean) {
                 binding.progBar.setVisibility(View.VISIBLE);
@@ -85,9 +102,7 @@ public class ServicesActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (getUserModel() != null) {
-                    Intent intent = new Intent(ServicesActivity.this, RequesChatActivity.class);
-                    intent.putExtra("type", type);
-                    startActivity(intent);
+                    mvvm.getChatData(getUserModel(), ServicesActivity.this);
                 } else {
                     navigationToLoginActivity();
                 }

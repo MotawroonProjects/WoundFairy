@@ -5,6 +5,7 @@ import com.apps.wound_fairy.model.AboutAusModel;
 import com.apps.wound_fairy.model.BlogDataModel;
 import com.apps.wound_fairy.model.MessagesDataModel;
 import com.apps.wound_fairy.model.OrderDataModel;
+import com.apps.wound_fairy.model.PaymentDataModel;
 import com.apps.wound_fairy.model.ReservationDataModel;
 import com.apps.wound_fairy.model.PlaceMapDetailsData;
 import com.apps.wound_fairy.model.ProductModel;
@@ -151,10 +152,10 @@ public interface Service {
 
     @Multipart
     @POST("api/chat/store-chat-data")
-    Single<Response<StatusResponse>> requestChat(@Header("Authorization") String Authorization,
-                                                 @Part("complaint") RequestBody complaint,
-                                                 @Part List<MultipartBody.Part> images,
-                                                 @Part("type") RequestBody type
+    Single<Response<PaymentDataModel>> requestChat(@Header("Authorization") String Authorization,
+                                                   @Part("complaint") RequestBody complaint,
+                                                   @Part List<MultipartBody.Part> images,
+                                                   @Part("type") RequestBody type
 
 
     );
@@ -233,4 +234,6 @@ public interface Service {
                                                        @Field("lang") String lang
 
     );
+    @GET("api/chat/user-chat-data")
+    Single<Response<MessagesDataModel>> getChatData(@Header("Authorization") String Authorization);
 }
