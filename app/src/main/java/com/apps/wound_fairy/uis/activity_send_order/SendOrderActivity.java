@@ -28,6 +28,7 @@ import com.apps.wound_fairy.databinding.ActivityRequestServiceBinding;
 import com.apps.wound_fairy.databinding.ActivitySendOrderBinding;
 import com.apps.wound_fairy.model.LocationModel;
 import com.apps.wound_fairy.model.OrderModel;
+import com.apps.wound_fairy.model.PaymentDataModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.RequestServiceModel;
 import com.apps.wound_fairy.model.SendOrderModel;
@@ -42,6 +43,8 @@ import com.apps.wound_fairy.uis.activity_base.FragmentMapTouchListener;
 import com.apps.wound_fairy.uis.activity_confirm_request.ConfirmRequestActivity;
 import com.apps.wound_fairy.uis.activity_login.LoginActivity;
 import com.apps.wound_fairy.uis.activity_my_orders.MyOrdersActivity;
+import com.apps.wound_fairy.uis.activity_payment.PaypalwebviewActivity;
+import com.apps.wound_fairy.uis.activity_request_chat.RequesChatActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -86,8 +89,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         if (intent.getSerializableExtra("order") != null) {
             orderModel = (OrderModel) intent.getSerializableExtra("order");
 
-        }
-        else{
+        } else {
             product = (ProductModel.Product) intent.getSerializableExtra("data");
         }
     }
@@ -99,8 +101,8 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         sendOrderModel = new SendOrderModel();
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
-
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                navigateToMyOrdersActivity();
             }
         });
         if (orderModel != null) {
@@ -123,12 +125,14 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         sendOrderMvvm = ViewModelProviders.of(this).get(ActivitySendOrderMvvm.class);
         activitymapMvvm = ViewModelProviders.of(this).get(ActivityMapMvvm.class);
         activitymapMvvm.setActivity(this);
-        sendOrderMvvm.getSend().observe(this, aBoolean -> {
-            if (aBoolean) {
+        sendOrderMvvm.getSend().observe(this, new Observer<PaymentDataModel>() {
+            @Override
+            public void onChanged(PaymentDataModel paymentDataModel) {
                 Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SendOrderActivity.this, PaypalwebviewActivity.class);
+                intent.putExtra("url", paymentDataModel.getData().getLink());
 
-                navigateToMyOrdersActivity();
-
+                launcher.launch(intent);
             }
         });
         sendOrderMvvm.getOrder().observe(this, new Observer<OrderModel>() {
@@ -146,17 +150,17 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         });
 
         binding.btnConfirm.setOnClickListener(view -> {
-            if (getUserModel()!=null){
-                if(sendOrderModel.isDataValid(this)){
+            if (getUserModel() != null) {
+                if (sendOrderModel.isDataValid(this)) {
                     if (orderModel == null) {
                         sendOrderMvvm.storeOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang());
                     } else {
                         sendOrderMvvm.updateOrder(SendOrderActivity.this, sendOrderModel, getUserModel(), product, amount + "", getLang(), orderModel);
 
-                    }}
-            }
-        else {
-            navigateToLoginActivity();
+                    }
+                }
+            } else {
+                navigateToLoginActivity();
             }
 
         });

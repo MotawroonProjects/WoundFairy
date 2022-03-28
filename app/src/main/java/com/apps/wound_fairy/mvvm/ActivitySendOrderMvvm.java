@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.model.OrderModel;
+import com.apps.wound_fairy.model.PaymentDataModel;
 import com.apps.wound_fairy.model.ProductModel;
 import com.apps.wound_fairy.model.SendOrderModel;
 import com.apps.wound_fairy.model.SingleOrderDataModel;
@@ -28,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class ActivitySendOrderMvvm extends AndroidViewModel {
-    private MutableLiveData<Boolean> send;
+    private MutableLiveData<PaymentDataModel> send;
     private MutableLiveData<OrderModel> orderModelMutableLiveData;
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -36,7 +37,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
         super(application);
     }
 
-    public MutableLiveData<Boolean> getSend() {
+    public MutableLiveData<PaymentDataModel> getSend() {
         if (send == null) {
             send = new MutableLiveData<>();
         }
@@ -59,20 +60,20 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
                 .storeOrder(userModel.getData().getAccess_token(), productModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                .subscribe(new SingleObserver<Response<PaymentDataModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                    public void onSuccess(@NonNull Response<PaymentDataModel> response) {
                         dialog.dismiss();
 
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
                                 Log.e("status", response.code() + "_" + response.body().getStatus());
-                                send.postValue(true);
+                                send.postValue(response.body());
                             }
                         }
                     }

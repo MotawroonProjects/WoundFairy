@@ -108,6 +108,7 @@ public class ActivityServicesMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<MessagesDataModel> response) {
                         dialog.dismiss();
                         if (response.isSuccessful()) {
+                            Log.e("dldldk",response.code()+" "+response.body().getStatus());
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 onDataSuccess().setValue(response.body().getData());
                             }

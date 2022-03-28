@@ -166,7 +166,7 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/order/store-order")
-    Single<Response<StatusResponse>> storeOrder(@Header("Authorization") String Authorization,
+    Single<Response<PaymentDataModel>> storeOrder(@Header("Authorization") String Authorization,
                                                 @Field("product_id") String product_id,
                                                 @Field("amount") String amount,
                                                 @Field("latitude") String latitude,
