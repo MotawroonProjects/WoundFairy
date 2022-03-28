@@ -18,6 +18,7 @@ import com.apps.wound_fairy.databinding.ActivitySettingsBinding;
 import com.apps.wound_fairy.language.Language;
 import com.apps.wound_fairy.model.SettingsModel;
 import com.apps.wound_fairy.mvvm.ActivitySettingsMvvm;
+import com.apps.wound_fairy.tags.Tags;
 import com.apps.wound_fairy.uis.activity_app.AppActivity;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.apps.wound_fairy.uis.activity_contact_us.ContactUsActivity;
@@ -66,8 +67,8 @@ public class SettingsActivity extends BaseActivity {
             Intent intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
             startActivity(intent);
         });
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms",settingModel.getTerms()));
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy",settingModel.getPrivacy()));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy",Tags.base_url+"webView?type=privacy"));
         binding.llRate.setOnClickListener(view -> rateApp());
         binding.llShare.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SEND);
