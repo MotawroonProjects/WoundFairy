@@ -101,7 +101,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         sendOrderModel = new SendOrderModel();
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == Activity.RESULT_OK) {
+            if (result.getResultCode() == Activity.RESULT_OK&&req==2) {
                 navigateToMyOrdersActivity();
             }
         });
@@ -128,6 +128,7 @@ public class SendOrderActivity extends BaseActivity implements OnMapReadyCallbac
         sendOrderMvvm.getSend().observe(this, new Observer<PaymentDataModel>() {
             @Override
             public void onChanged(PaymentDataModel paymentDataModel) {
+                req=2;
                 Toast.makeText(SendOrderActivity.this, getResources().getString(R.string.succ), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SendOrderActivity.this, PaypalwebviewActivity.class);
                 intent.putExtra("url", paymentDataModel.getData().getLink());
