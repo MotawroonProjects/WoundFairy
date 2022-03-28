@@ -173,7 +173,10 @@ public class RequesChatActivity extends BaseActivity {
 
                         }
                     }
-                } else if (result.getResultCode() == RESULT_OK && selectedReq == 1000) {
+                }
+            }
+            else if(result.getResultCode()==RESULT_OK){
+                  if (selectedReq == 1000) {
 
                     Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
                     startActivity(intent);
