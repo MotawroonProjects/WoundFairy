@@ -207,9 +207,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
 
         MessageModel messageModel = list.get(position);
+
+        String id=messageModel.getFrom_user_id()+"";
+
         if (messageModel.getType().equals("text")) {
 
-            if (messageModel.getFrom_user_id().equals(current_user_id)) {
+            if (id.equals(current_user_id)) {
 
                 return msg_right;
             } else {
@@ -217,7 +220,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         } else {
 
-            if (messageModel.getFrom_user_id().equals(current_user_id)) {
+            if (id.equals(current_user_id)) {
 
                 return img_right;
             } else {
