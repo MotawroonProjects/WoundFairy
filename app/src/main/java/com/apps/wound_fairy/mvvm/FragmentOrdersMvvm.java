@@ -50,7 +50,7 @@ public class FragmentOrdersMvvm extends AndroidViewModel {
     public void getCurrentOrders(UserModel userModel, String lang) {
         isLoadingLivData.setValue(true);
 
-        Api.getService(Tags.base_url).getOrders(userModel.getData().getAccess_token(), lang)
+        Api.getService(Tags.base_url).getOrders(userModel.getData().getAccess_token(), "ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<OrderDataModel>>() {
@@ -81,7 +81,7 @@ public class FragmentOrdersMvvm extends AndroidViewModel {
     public void getPreviousOrder(UserModel userModel,String lang) {
         isLoadingLivData.setValue(true);
 
-        Api.getService(Tags.base_url).getOrders(userModel.getData().getAccess_token(),lang)
+        Api.getService(Tags.base_url).getOrders(userModel.getData().getAccess_token(),"ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<OrderDataModel>>() {

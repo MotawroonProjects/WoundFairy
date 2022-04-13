@@ -47,7 +47,7 @@ public class FragmentMarketMvvm extends AndroidViewModel {
     public void getProducts(String lang,String search){
         isDataLoading.setValue(true);
 
-        Api.getService(Tags.base_url).getProducts("all",lang,search)
+        Api.getService(Tags.base_url).getProducts("all","ar",search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ProductModel>>() {

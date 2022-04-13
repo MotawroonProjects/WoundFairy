@@ -57,7 +57,7 @@ public class FragmentAboutUsMvvm extends AndroidViewModel {
         isLoading.setValue(true);
 
         Api.getService(Tags.base_url)
-                .getAboutUs(lang)
+                .getAboutUs("ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<AboutAusModel>>() {

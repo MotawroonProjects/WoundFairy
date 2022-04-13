@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<import type="android.text.Html"/>
         <variable
             name="model"
             type="com.apps.wound_fairy.model.AboutAusModel.About" />
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="@{model.details}"
+                android:text='@{model!=null?Html.fromHtml(model.details).toString():""}'
                 android:textColor="@color/gray3"
                 android:textSize="14sp"
                 android:lines="4"

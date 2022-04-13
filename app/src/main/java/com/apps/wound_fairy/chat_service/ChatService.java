@@ -17,6 +17,8 @@ import com.apps.wound_fairy.tags.Tags;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
+
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -63,6 +65,11 @@ public class ChatService extends Service {
 
                     @Override
                     public void onSuccess(@NonNull Response<SingleMessageModel> response) {
+                        try {
+                            Log.e("jfjj",response.code()+""+response.errorBody().string());
+                        } catch (Exception e) {
+                            //e.printStackTrace();
+                        }
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 EventBus.getDefault().post(response.body().getData());

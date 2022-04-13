@@ -63,7 +63,7 @@ public class ActivityServicesMvvm extends AndroidViewModel {
         isLoading.setValue(true);
 
 
-        Api.getService(Tags.base_url).getVisitOnlineDetails(lang,type)
+        Api.getService(Tags.base_url).getVisitOnlineDetails("ar",type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<VisitOnlineModel>>() {

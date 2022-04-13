@@ -49,7 +49,7 @@ public class FragmentReservationsMvvm extends AndroidViewModel {
         isLoadingLivData.setValue(true);
 
         Log.e("data",userModel.getData().getAccess_token()+"_"+lang);
-        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(),lang)
+        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(),"ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ReservationDataModel>>() {
@@ -80,7 +80,7 @@ public class FragmentReservationsMvvm extends AndroidViewModel {
     public void getPreviousReservation(UserModel userModel, String lang) {
         isLoadingLivData.setValue(true);
 
-        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(), lang)
+        Api.getService(Tags.base_url).getReservations(userModel.getData().getAccess_token(), "ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ReservationDataModel>>() {

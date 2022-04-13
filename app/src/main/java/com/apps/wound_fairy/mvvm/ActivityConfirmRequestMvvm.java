@@ -93,7 +93,7 @@ public class ActivityConfirmRequestMvvm extends AndroidViewModel {
         RequestBody latitude = Common.getRequestBodyText(model.getLatitude());
         RequestBody longitude = Common.getRequestBodyText(model.getLongitude());
         RequestBody address = Common.getRequestBodyText(model.getAddress());
-        RequestBody lang = Common.getRequestBodyText(getLang());
+        RequestBody lang = Common.getRequestBodyText("ar");
 
 
         Api.getService(Tags.base_url).confirmRequest(userModel.getData().getAccess_token(), complaint, imageList, service_id, date_time, total_price, latitude, longitude, address, lang)
@@ -160,7 +160,7 @@ public class ActivityConfirmRequestMvvm extends AndroidViewModel {
         RequestBody latitude = Common.getRequestBodyText(model.getLatitude());
         RequestBody longitude = Common.getRequestBodyText(model.getLongitude());
         RequestBody address = Common.getRequestBodyText(model.getAddress());
-        RequestBody lang = Common.getRequestBodyText(getLang());
+        RequestBody lang = Common.getRequestBodyText("ar");
         RequestBody reservation_id=Common.getRequestBodyText(reservationModel.getId());
 
 

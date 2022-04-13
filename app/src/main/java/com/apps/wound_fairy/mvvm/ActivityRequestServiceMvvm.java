@@ -46,7 +46,7 @@ public class ActivityRequestServiceMvvm extends AndroidViewModel {
     }
 
     public void getServiceDepartment(String lang) {
-        Api.getService(Tags.base_url).getServiceDepartment(lang)
+        Api.getService(Tags.base_url).getServiceDepartment("ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<ServiceDepartmentModel>>() {

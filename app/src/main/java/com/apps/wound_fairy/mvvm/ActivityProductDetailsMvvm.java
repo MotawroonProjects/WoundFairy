@@ -56,7 +56,7 @@ public class ActivityProductDetailsMvvm extends AndroidViewModel {
 
     public void getSingleProduct(String id,String lang){
         getIsDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getSingleProduct(id,lang)
+        Api.getService(Tags.base_url).getSingleProduct(id,"ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<SingleProductModel>>() {

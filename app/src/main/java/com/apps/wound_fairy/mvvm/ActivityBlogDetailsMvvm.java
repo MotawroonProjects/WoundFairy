@@ -46,7 +46,7 @@ public class ActivityBlogDetailsMvvm extends AndroidViewModel {
 
     public void getSingleBlog(String id,String lang){
         getIsDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getBlogDetails(id,lang)
+        Api.getService(Tags.base_url).getBlogDetails(id,"ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<SingleBlogModel>>() {

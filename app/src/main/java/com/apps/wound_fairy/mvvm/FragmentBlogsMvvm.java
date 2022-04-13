@@ -46,7 +46,7 @@ public class FragmentBlogsMvvm extends AndroidViewModel {
 
     public void getBlogs(String lang) {
         getIsDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getBlogs(lang)
+        Api.getService(Tags.base_url).getBlogs("ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<BlogDataModel>>() {

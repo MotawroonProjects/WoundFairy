@@ -44,7 +44,6 @@ public class FragmentHomeMvvm extends AndroidViewModel {
     }
 
 
-
     public MutableLiveData<SliderDataModel> getSliderDataModelMutableLiveData() {
         if (sliderDataModelMutableLiveData == null) {
             sliderDataModelMutableLiveData = new MutableLiveData<>();
@@ -97,7 +96,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
     public void getBlogs(String lang) {
         isLoadingLiveData.setValue(true);
-        Api.getService(Tags.base_url).getBlogs(lang)
+        Api.getService(Tags.base_url).getBlogs("ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<BlogDataModel>>() {

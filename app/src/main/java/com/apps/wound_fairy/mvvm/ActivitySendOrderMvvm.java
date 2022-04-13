@@ -57,7 +57,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .storeOrder(userModel.getData().getAccess_token(), productModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
+                .storeOrder(userModel.getData().getAccess_token(), productModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", "ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<PaymentDataModel>>() {
@@ -92,7 +92,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
         dialog.show();
         Log.e("data",productModel.getId()+"_"+orderModel.getId()+"_"+amount+"_"+sendOrderModel.getLatitude()+"_"+sendOrderModel.getLongitude()+"_"+sendOrderModel.getAddress()+"_"+(Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "");
         Api.getService(Tags.base_url)
-                .updateOrder(userModel.getData().getAccess_token(), productModel.getId(), orderModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", lang)
+                .updateOrder(userModel.getData().getAccess_token(), productModel.getId(), orderModel.getId(), amount, sendOrderModel.getLatitude(), sendOrderModel.getLongitude(), sendOrderModel.getAddress(), sendOrderModel.getNote(), (Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)) + "", "ar")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<SingleOrderDataModel>>() {
