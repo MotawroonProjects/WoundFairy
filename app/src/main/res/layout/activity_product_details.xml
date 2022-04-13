@@ -144,7 +144,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="16dp"
                                 android:lineSpacingExtra="3dp"
-                                android:text='@{model!=null?Html.fromHtml(model.details).toString():""}'
+                                android:text='@{model!=null&amp;&amp;model.details!=null?Html.fromHtml(model.details).toString():""}'
                                 android:textColor="@color/gray14"
                                 android:textSize="14sp" />
                             <!--                            android:text="@{Html.fromHtml(model.details).toString()}"-->
