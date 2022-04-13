@@ -8,6 +8,7 @@ public class BlogModel implements Serializable {
     private String title;
     private String details;
     private String image;
+    private String video;
 
     public String getId() {
         return id;
@@ -27,5 +28,9 @@ public class BlogModel implements Serializable {
 
     public String getImage() {
         return image;
+    }
+
+    public String getVideo() {
+        return video;
     }
 }

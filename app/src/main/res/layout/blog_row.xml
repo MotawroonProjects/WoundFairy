@@ -29,6 +29,7 @@
                 android:layout_margin="10dp"
                 >
                 <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     image="@{model.image}"
@@ -51,6 +52,7 @@
                     android:layout_gravity="center_vertical"
                     />
                 <TextView
+                    android:id="@+id/tvtime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -63,6 +65,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{model.title}"
@@ -74,6 +77,7 @@
                 android:layout_marginTop="5dp"
                 />
             <TextView
+                android:id="@+id/tvDetials"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text='@{model!=null?Html.fromHtml(model.details).toString():""}'
