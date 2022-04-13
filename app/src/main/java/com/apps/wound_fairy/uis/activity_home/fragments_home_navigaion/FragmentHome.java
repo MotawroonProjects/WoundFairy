@@ -142,7 +142,7 @@ public class FragmentHome extends BaseFragment {
                     blogModelList.addAll(list);
                     blogSliderAdapter.notifyDataSetChanged();
                     timer2=new Timer();
-                    timer2.scheduleAtFixedRate(new MyTask2(),30000,30000);
+                    timer2.scheduleAtFixedRate(new MyTask2(),3000,3000);
                 }
             }
         });
