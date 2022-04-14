@@ -3,6 +3,7 @@ package com.apps.wound_fairy.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Parcelable;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,12 @@ import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.BlogRowBinding;
 import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion.FragmentHome;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BlogSliderAdapter extends PagerAdapter {
     private List<BlogModel> list;
@@ -48,43 +53,13 @@ public class BlogSliderAdapter extends PagerAdapter {
         rowBinding.setModel(list.get(position));
         if (list.get(position).getVideo() != null) {
             rowBinding.image.setVisibility(View.GONE);
-            rowBinding.webView.loadUrl(list.get(position).getVideo());
-
+            setUpYoutube(rowBinding, list.get(position).getVideo());
 
 
         }else{
             rowBinding.flvideo.setVisibility(View.GONE);
         }
-        rowBinding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        rowBinding.webView.getSettings().setJavaScriptEnabled(true);
-        rowBinding.webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return super.shouldOverrideUrlLoading(view, request);
-            }
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                rowBinding.webView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-
-            }
-
-            @Override
-            public void onPageCommitVisible(WebView view, String url) {
-                super.onPageCommitVisible(view, url);
-                rowBinding.progBarVideo.setVisibility(View.GONE);
-
-            }
-
-
-        });
         view.addView(rowBinding.getRoot());
         rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,4 +97,36 @@ public class BlogSliderAdapter extends PagerAdapter {
     public void destroyItem(View container, int position, Object object) {
         ((ViewPager) container).removeView((View) object);
     }
+    private void setUpYoutube(BlogRowBinding binding, String url) {
+        String videoId = extractYTId(url);
+        if (videoId != null) {
+
+            binding.youtubePlayerView.setEnableAutomaticInitialization(false);
+            binding.youtubePlayerView.initialize(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(YouTubePlayer youTubePlayer) {
+                    super.onReady(youTubePlayer);
+                    youTubePlayer.loadVideo(videoId, 0);
+
+                }
+            }, true);
+
+
+        } else {
+        }
+
+
+    }
+
+    private String extractYTId(String ytUrl) {
+        String vId = null;
+        Pattern pattern = Pattern.compile("^https?://.*(?:www\\.youtube\\.com/|v/|u/\\w/|embed/|watch\\?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(ytUrl);
+        if (matcher.matches()) {
+            vId = matcher.group(1);
+        }
+        return vId;
+    }
+
 }

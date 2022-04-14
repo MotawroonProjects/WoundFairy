@@ -18,15 +18,20 @@ import android.webkit.WebViewClient;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityBlogDetailsBinding;
+import com.apps.wound_fairy.databinding.BlogRowBinding;
 import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.mvvm.ActivityBlogDetailsMvvm;
 import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -71,7 +76,7 @@ public class BlogDetailsActivity extends BaseActivity {
                 this.blogModel=blogModel;
                 if (blogModel.getVideo() != null) {
                     binding.image.setVisibility(View.GONE);
-                    binding.webView.loadUrl(blogModel.getVideo());
+                    setUpYoutube( blogModel.getVideo());
 
 
 
@@ -80,38 +85,39 @@ public class BlogDetailsActivity extends BaseActivity {
                 }
             }
         });
-        binding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        binding.webView.getSettings().setJavaScriptEnabled(true);
-        binding.webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                return super.shouldOverrideUrlLoading(view, request);
-            }
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                binding.webView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-
-            }
-
-            @Override
-            public void onPageCommitVisible(WebView view, String url) {
-                super.onPageCommitVisible(view, url);
-                binding.progBarVideo.setVisibility(View.GONE);
-
-            }
-
-
-        });
         mvvm.getSingleBlog(id,getLang());
     }
+    private void setUpYoutube( String url) {
+        String videoId = extractYTId(url);
+        if (videoId != null) {
 
+            binding.youtubePlayerView.setEnableAutomaticInitialization(false);
+            binding.youtubePlayerView.initialize(new AbstractYouTubePlayerListener() {
+                @Override
+                public void onReady(YouTubePlayer youTubePlayer) {
+                    super.onReady(youTubePlayer);
+                    youTubePlayer.loadVideo(videoId, 0);
+
+                }
+            }, true);
+
+
+        } else {
+        }
+
+
+    }
+
+    private String extractYTId(String ytUrl) {
+        String vId = null;
+        Pattern pattern = Pattern.compile("^https?://.*(?:www\\.youtube\\.com/|v/|u/\\w/|embed/|watch\\?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(ytUrl);
+        if (matcher.matches()) {
+            vId = matcher.group(1);
+        }
+        return vId;
+    }
 
 }
