@@ -7,9 +7,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.ActivityBlogDetailsBinding;
@@ -19,14 +24,7 @@ import com.apps.wound_fairy.mvvm.FragmentBlogsMvvm;
 import com.apps.wound_fairy.uis.activity_base.BaseActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
-import com.google.android.exoplayer2.source.MediaSourceFactory;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSource;
-import com.google.android.exoplayer2.util.Util;
+
 
 import java.util.ArrayList;
 
@@ -36,9 +34,6 @@ public class BlogDetailsActivity extends BaseActivity {
     private ActivityBlogDetailsBinding binding;
     private ActivityBlogDetailsMvvm mvvm;
     private String id;
-    private ExoPlayer player;
-    private DataSource.Factory dataSourceFactory;
-    private DefaultTrackSelector trackSelector;
     private boolean isInFullScreen = false;
     private BlogModel blogModel;
     @Override
@@ -76,124 +71,47 @@ public class BlogDetailsActivity extends BaseActivity {
                 this.blogModel=blogModel;
                 if (blogModel.getVideo() != null) {
                     binding.image.setVisibility(View.GONE);
-                    getVideoImage();
-                    setupPlayer();
+                    binding.webView.loadUrl(blogModel.getVideo());
+
+
 
                 }else{
-                    binding.exoPlayer.setVisibility(View.GONE);
-                    binding.flVideo.setVisibility(View.GONE);
+                    binding.flvideo.setVisibility(View.GONE);
                 }
             }
         });
-        binding.flVideo.setOnClickListener(v -> {
-            isInFullScreen = true;
+        binding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        binding.webView.getSettings().setJavaScriptEnabled(true);
+        binding.webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return super.shouldOverrideUrlLoading(view, request);
+            }
 
-            if (player != null) {
-                player.setPlayWhenReady(true);
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                binding.webView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+
+            }
+
+            @Override
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
+                binding.progBarVideo.setVisibility(View.GONE);
+
             }
 
 
         });
         mvvm.getSingleBlog(id,getLang());
     }
-    private void getVideoImage() {
 
-        int microSecond = 6000000;// 6th second as an example
-        Uri uri = Uri.parse(blogModel.getVideo());
-        RequestOptions options = new RequestOptions().frame(microSecond).override(binding.imageVideo.getWidth(), binding.imageVideo.getHeight());
-        Glide.with(this).asBitmap()
-                .load(uri)
-                .centerCrop()
-                .apply(options)
-                .into(binding.imageVideo);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void setupPlayer() {
-
-        if (blogModel.getVideo() != null) {
-            trackSelector = new DefaultTrackSelector(this);
-            dataSourceFactory = new DefaultDataSource.Factory(this);
-            MediaSourceFactory mediaSourceFactory = new DefaultMediaSourceFactory(dataSourceFactory);
-            MediaItem mediaItem = MediaItem.fromUri(Uri.parse(blogModel.getVideo()));
-
-            player = new ExoPlayer.Builder(this)
-                    .setTrackSelector(trackSelector)
-                    .setMediaSourceFactory(mediaSourceFactory)
-                    .build();
-
-            player.setMediaItem(mediaItem);
-            player.setPlayWhenReady(false);
-            player.setRepeatMode(ExoPlayer.REPEAT_MODE_ONE);
-            binding.exoPlayer.setPlayer(player);
-            player.prepare();
-
-            binding.exoPlayer.setOnTouchListener((v, event) -> {
-                if (player != null && player.isPlaying()) {
-                    player.setPlayWhenReady(false);
-                } else if (player != null && !player.isPlaying()) {
-
-                    player.setPlayWhenReady(true);
-
-                }
-                return false;
-            });
-
-
-        }
-
-
-    }
-
-    public boolean isFullScreen() {
-        return isInFullScreen;
-    }
-
-    public void setToNormalScreen() {
-
-        isInFullScreen = false;
-        if (player != null) {
-            player.setPlayWhenReady(false);
-        }
-
-
-    }
-
-    @Override
-    public void onResume() {
-        if ((Util.SDK_INT <= 23 || player == null) && blogModel != null) {
-            setupPlayer();
-        }
-        super.onResume();
-
-
-    }
-
-    @Override
-    public void onStart() {
-        if (Util.SDK_INT > 23) {
-            if (player == null && blogModel != null) {
-                setupPlayer();
-                binding.exoPlayer.onResume();
-            }
-
-
-        }
-        super.onStart();
-
-
-    }
-
-    @Override
-    public void onPause() {
-        if (Util.SDK_INT <= 23) {
-            if (player != null) {
-                player.setPlayWhenReady(false);
-            }
-        }
-        super.onPause();
-
-
-    }
 
 }

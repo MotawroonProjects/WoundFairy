@@ -1,16 +1,15 @@
 package com.apps.wound_fairy.adapter;
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.os.Parcelable;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -18,27 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.exoplayer2.ExoPlayer;
-
 import com.apps.wound_fairy.R;
 import com.apps.wound_fairy.databinding.BlogRowBinding;
 import com.apps.wound_fairy.model.BlogModel;
 import com.apps.wound_fairy.uis.activity_home.fragments_home_navigaion.FragmentHome;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.MediaSourceFactory;
-import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
-import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,18 +29,12 @@ public class BlogSliderAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater inflater;
     private Fragment fragment;
-    private ExoPlayer player;
-    private int currentWindow = 0;
-    private long currentPosition = 0;
-    private boolean playWhenReady = false;
-    private PlayerView playerView;
-    private ProgressBar progressBar;
 
-    public BlogSliderAdapter(List<BlogModel> list, Context context, Fragment fragment) {
+    public BlogSliderAdapter(List<BlogModel> list, Context context,Fragment fragment) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.fragment = fragment;
+        this.fragment=fragment;
     }
 
     @Override
@@ -67,43 +43,50 @@ public class BlogSliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
-    }
-
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = null;
-        BlogModel model = list.get(position);
-
-        if (model.getVideo() != null) {
-            view = inflater.inflate(R.layout.slider_video, container, false);
-            playerView = view.findViewById(R.id.player);
-            progressBar = view.findViewById(R.id.progBarBuffering);
-            TextView tvtime=view.findViewById(R.id.tvtime);
-            TextView tvtitle=view.findViewById(R.id.tvTitle);
-            TextView tvDetials=view.findViewById(R.id.tvDetials);
-tvtime.setText(model.getDate_time());
-tvtitle.setText(model.getTitle());
-tvDetials.setText(Html.fromHtml(model.getDetails()).toString());
-            Uri uri = Uri.parse(model.getVideo());
-
-            initPlayer(playerView, progressBar, uri);
+    public Object instantiateItem(ViewGroup view, int position) {
+        BlogRowBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.blog_row, view, false);
+        rowBinding.setModel(list.get(position));
+        if (list.get(position).getVideo() != null) {
+            rowBinding.image.setVisibility(View.GONE);
+            rowBinding.webView.loadUrl(list.get(position).getVideo());
 
 
-        } else {
-            view = inflater.inflate(R.layout.blog_row, container, false);
-            ImageView imageView = view.findViewById(R.id.image);
-            Picasso.get().load(Uri.parse(model.getImage())).into(imageView);
-            TextView tvtime=view.findViewById(R.id.tvtime);
-            TextView tvtitle=view.findViewById(R.id.tvTitle);
-            TextView tvDetials=view.findViewById(R.id.tvDetials);
-            tvtime.setText(model.getDate_time());
-            tvtitle.setText(model.getTitle());
-            tvDetials.setText(Html.fromHtml(model.getDetails()).toString());
+
+        }else{
+            rowBinding.flvideo.setVisibility(View.GONE);
         }
-       view.setOnClickListener(new View.OnClickListener() {
+        rowBinding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        rowBinding.webView.getSettings().setJavaScriptEnabled(true);
+        rowBinding.webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                rowBinding.webView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+
+            }
+
+            @Override
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
+                rowBinding.progBarVideo.setVisibility(View.GONE);
+
+            }
+
+
+        });
+        view.addView(rowBinding.getRoot());
+        rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (fragment instanceof FragmentHome){
@@ -112,76 +95,31 @@ tvDetials.setText(Html.fromHtml(model.getDetails()).toString());
                 }
             }
         });
-        container.addView(view);
-
-
-        return view;
-    }
-
-
-    private void initPlayer(PlayerView playerView, ProgressBar progBarBuffering, Uri uri) {
-
-        Log.e("vid", uri.toString());
-
-        if (player == null) {
-            DefaultTrackSelector trackSelector = new DefaultTrackSelector();
-            trackSelector.setParameters(trackSelector.buildUponParameters().setMaxVideoSizeSd());
-            DefaultDataSource.Factory dataSourceFactory = new DefaultDataSource.Factory(context);
-
-            MediaSourceFactory mediaSourceFactory = new DefaultMediaSourceFactory(dataSourceFactory);
-
-            player = new ExoPlayer.Builder(context)
-                    .setTrackSelector(trackSelector)
-                    .setMediaSourceFactory(mediaSourceFactory)
-                    .build();
-            playerView.setPlayer(player);
-            Log.e("1", "1");
-        } else {
-            currentWindow = 0;
-            currentPosition = 0;
-            Log.e("2", "2");
-
-        }
-
-        MediaItem mediaItem = MediaItem.fromUri(uri);
-
-        player.seekTo(currentWindow, currentPosition);
-        player.setPlayWhenReady(playWhenReady);
-        player.setMediaItem(mediaItem);
-
-        playerView.setOnTouchListener((v, event) -> {
-            if (player != null && player.isPlaying()) {
-                player.setPlayWhenReady(false);
-            } else if (player != null && !player.isPlaying()) {
-
-                player.setPlayWhenReady(true);
-
-            }
-            return false;
-        });
-
+        return rowBinding.getRoot();
 
     }
-
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        BlogModel model = list.get(position);
-        if (model.getVideo()!=null) {
-            progressBar.setVisibility(View.GONE);
-            releasePlayer();
-            Log.e("release", "release");
-        }
-        container.removeView((View) object);
+    public boolean isViewFromObject(View view, Object object) {
+        return view.equals(object);
     }
 
-    public void releasePlayer() {
-        if (player != null) {
-            playWhenReady = player.getPlayWhenReady();
-            currentWindow = player.getCurrentWindowIndex();
-            currentPosition = player.getCurrentPosition();
-            player.stop();
+    @Override
+    public void restoreState(Parcelable state, ClassLoader loader) {
+    }
 
-        }
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
+
+    @Override
+    public void destroyItem(View container, int position, Object object) {
+        ((ViewPager) container).removeView((View) object);
     }
 }

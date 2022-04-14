@@ -166,14 +166,14 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/order/store-order")
     Single<Response<PaymentDataModel>> storeOrder(@Header("Authorization") String Authorization,
-                                                @Field("product_id") String product_id,
-                                                @Field("amount") String amount,
-                                                @Field("latitude") String latitude,
-                                                @Field("longitude") String longitude,
-                                                @Field("address") String address,
-                                                @Field("note") String note,
-                                                @Field("total_price") String total_price,
-                                                @Field("lang") String lang
+                                                  @Field("product_id") String product_id,
+                                                  @Field("amount") String amount,
+                                                  @Field("latitude") String latitude,
+                                                  @Field("longitude") String longitude,
+                                                  @Field("address") String address,
+                                                  @Field("note") String note,
+                                                  @Field("total_price") String total_price,
+                                                  @Field("lang") String lang
 
     );
 
@@ -233,6 +233,7 @@ public interface Service {
                                                        @Field("lang") String lang
 
     );
+
     @GET("api/chat/user-chat-data")
     Single<Response<MessagesDataModel>> getChatData(@Header("Authorization") String Authorization);
 }

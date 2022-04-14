@@ -1,9 +1,14 @@
 package com.apps.wound_fairy.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +51,45 @@ public class BlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder=(MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        if (list.get(position).getVideo() != null) {
+            ((MyHolder) holder).binding.image.setVisibility(View.GONE);
+            ((MyHolder) holder).binding.webView.loadUrl(list.get(position).getVideo());
+
+
+
+        }else{
+            ((MyHolder) holder).binding.flvideo.setVisibility(View.GONE);
+        }
+        ((MyHolder) holder).binding.webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        ((MyHolder) holder).binding.webView.getSettings().setJavaScriptEnabled(true);
+        ((MyHolder) holder).binding.webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                ((MyHolder) holder).binding.webView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+
+            }
+
+            @Override
+            public void onPageCommitVisible(WebView view, String url) {
+                super.onPageCommitVisible(view, url);
+                ((MyHolder) holder).binding.progBarVideo.setVisibility(View.GONE);
+
+            }
+
+
+        });
         myHolder.itemView.setOnClickListener(view -> {
             if (fragment instanceof FragmentBlogs){
                 FragmentBlogs fragmentBlogs=(FragmentBlogs) fragment;

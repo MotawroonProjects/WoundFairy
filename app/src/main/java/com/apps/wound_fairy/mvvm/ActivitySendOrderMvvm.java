@@ -52,6 +52,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
     }
 
     public void storeOrder(Context context, SendOrderModel sendOrderModel, UserModel userModel, ProductModel.Product productModel, String amount, String lang) {
+       Log.e("dldldl",userModel.getData().getAccess_token()+"_"+sendOrderModel.getAddress()+"_"+sendOrderModel.getLatitude()+"_"+sendOrderModel.getLongitude()+"_"+sendOrderModel.getNote()+"_"+amount+"_"+lang+"_"+productModel.getId()+"_"+(Double.parseDouble(productModel.getPrice()) * Integer.parseInt(amount)));
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
@@ -69,6 +70,7 @@ public class ActivitySendOrderMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<PaymentDataModel> response) {
                         dialog.dismiss();
+                        Log.e("status", response.code() + "_" + response.body().getStatus());
 
                         if (response.isSuccessful()) {
                             if (response.body().getStatus() == 200) {
