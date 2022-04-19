@@ -112,8 +112,14 @@ public class RequesChatActivity extends BaseActivity {
         mvvm.getConfirmMutableLiveData().observe(this, new Observer<PaymentDataModel>() {
             @Override
             public void onChanged(PaymentDataModel paymentDataModel) {
+                if(Double.parseDouble(settingModel.getOnline_price())>0){
                 RequesChatActivity.this.paymentDataModel = paymentDataModel;
-                binding.flData.setVisibility(View.VISIBLE);
+                binding.flData.setVisibility(View.VISIBLE);}
+                else{
+                    Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
