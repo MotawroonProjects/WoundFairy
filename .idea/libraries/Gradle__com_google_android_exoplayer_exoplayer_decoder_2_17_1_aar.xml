@@ -2,15 +2,21 @@
   <library name="Gradle: com.google.android.exoplayer:exoplayer-decoder:2.17.1@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/91a1a7a7b8b1b9d9c08bd57c5cd0ec12/transformed/jetified-exoplayer-decoder-2.17.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/d08fca1fbc1d01f6193a9cb32c14b0b0/transformed/jetified-exoplayer-decoder-2.17.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/91a1a7a7b8b1b9d9c08bd57c5cd0ec12/transformed/jetified-exoplayer-decoder-2.17.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/91a1a7a7b8b1b9d9c08bd57c5cd0ec12/transformed/jetified-exoplayer-decoder-2.17.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/91a1a7a7b8b1b9d9c08bd57c5cd0ec12/transformed/jetified-exoplayer-decoder-2.17.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/91a1a7a7b8b1b9d9c08bd57c5cd0ec12/transformed/jetified-exoplayer-decoder-2.17.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/d08fca1fbc1d01f6193a9cb32c14b0b0/transformed/jetified-exoplayer-decoder-2.17.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/d08fca1fbc1d01f6193a9cb32c14b0b0/transformed/jetified-exoplayer-decoder-2.17.1/res" />
+      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/d08fca1fbc1d01f6193a9cb32c14b0b0/transformed/jetified-exoplayer-decoder-2.17.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-decoder/2.17.1/74597a2734326d2df92f9e36ce3feb06219dfd11/exoplayer-decoder-2.17.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-decoder/2.17.1/74597a2734326d2df92f9e36ce3feb06219dfd11/exoplayer-decoder-2.17.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -333,6 +333,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 
 
     public void refreshActivity(String lang) {
+        Log.e("lang",lang);
         Paper.book().write("lang", lang);
         Language.setNewLocale(this, lang);
         new Handler()
@@ -380,4 +381,5 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(path));
         startActivity(intent);
     }
+
 }

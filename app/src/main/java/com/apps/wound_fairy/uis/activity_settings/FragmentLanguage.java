@@ -66,7 +66,7 @@ public class FragmentLanguage extends BottomSheetDialogFragment {
 
         binding.btnConfirm.setOnClickListener(view -> {
           dismiss();
-          activity.refreshActivity(selectedLang);
+          //activity.refreshActivity(selectedLang);
         });
     }
 

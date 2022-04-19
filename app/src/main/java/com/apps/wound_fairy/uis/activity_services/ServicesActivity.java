@@ -56,18 +56,15 @@ public class ServicesActivity extends BaseActivity {
 //
         });
         mvvm = ViewModelProviders.of(this).get(ActivityServicesMvvm.class);
-        mvvm.onDataSuccess().observe(this, new androidx.lifecycle.Observer<List<MessageModel>>() {
-            @Override
-            public void onChanged(List<MessageModel> messageModels) {
-                if (messageModels.size() > 0) {
-                    Intent intent = new Intent(ServicesActivity.this, ChatActivity.class);
-                    startActivity(intent);
+        mvvm.onDataSuccess().observe(this, messageModels -> {
+            if (messageModels.size() > 0) {
+                Intent intent = new Intent(ServicesActivity.this, ChatActivity.class);
+                startActivity(intent);
 
-                } else {
-                    Intent intent = new Intent(ServicesActivity.this, RequesChatActivity.class);
-                    intent.putExtra("type", type);
-                    startActivity(intent);
-                }
+            } else {
+                Intent intent = new Intent(ServicesActivity.this, RequesChatActivity.class);
+                intent.putExtra("type", type);
+                startActivity(intent);
             }
         });
         mvvm.getIsLoading().observe(this, aBoolean -> {

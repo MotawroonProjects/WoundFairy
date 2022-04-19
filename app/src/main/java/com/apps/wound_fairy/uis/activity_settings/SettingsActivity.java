@@ -52,23 +52,23 @@ public class SettingsActivity extends BaseActivity {
         mvvm.getSettings();
 
         binding.llLanguage.setOnClickListener(view -> {
-            req=1;
-            Intent intent=new Intent(SettingsActivity.this, LanguageActivity.class);
+            req = 1;
+            Intent intent = new Intent(SettingsActivity.this, LanguageActivity.class);
             launcher.launch(intent);
 //            getSupportFragmentManager().beginTransaction()
 //         .add(android.R.id.content, new FragmentLanguage ()).commit()
         });
-        if (getLang().equals("ar")){
+        if (getLang().equals("ar")) {
             binding.tvLang.setText("عربي");
-        }else {
+        } else {
             binding.tvLang.setText("english");
         }
         binding.llContactUs.setOnClickListener(view -> {
             Intent intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
             startActivity(intent);
         });
-        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url+"webView?type=terms"));
-        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy",Tags.base_url+"webView?type=privacy"));
+        binding.llTerms.setOnClickListener(view -> navigateToAppActivity("terms", Tags.base_url + "webView?type=terms"));
+        binding.llPrivacy.setOnClickListener(view -> navigateToAppActivity("privacy", Tags.base_url + "webView?type=privacy"));
         binding.llRate.setOnClickListener(view -> rateApp());
         binding.llShare.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -94,7 +94,7 @@ public class SettingsActivity extends BaseActivity {
     private void navigateToAppActivity(String type, String url) {
         Intent intent = new Intent(SettingsActivity.this, AppActivity.class);
         intent.putExtra("data", type);
-        intent.putExtra("url",url);
+        intent.putExtra("url", url);
         startActivity(intent);
 
     }
@@ -135,17 +135,5 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
-    public void refreshActivity(String lang) {
-        Paper.book().write("lang", lang);
-        Language.setNewLocale(this, lang);
-        new Handler()
-                .postDelayed(() -> {
 
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
-                }, 500);
-
-
-    }
 }
