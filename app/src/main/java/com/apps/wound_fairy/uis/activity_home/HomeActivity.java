@@ -101,6 +101,7 @@ public class HomeActivity extends BaseActivity implements Listeners.Verification
 //            } else
             else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 String lang = result.getData().getStringExtra("lang");
+                Log.e("lang",lang);
                 refreshActivity(lang);
             }
         });

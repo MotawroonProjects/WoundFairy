@@ -12,7 +12,6 @@ import java.util.Locale;
 public class Language {
 
     public static void setNewLocale(Context c, String language) {
-        persistLanguage(c, language);
         updateResources(c, language);
     }
 
@@ -25,7 +24,7 @@ public class Language {
 
 
         config.setLocale(locale);
-        //res.updateConfiguration(config, res.getDisplayMetrics());
+        res.updateConfiguration(config, res.getDisplayMetrics());
         context = context.createConfigurationContext(config);
 
         return context;
@@ -33,10 +32,5 @@ public class Language {
 
     }
 
-    private static void persistLanguage(Context c, String language) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(c);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("lang",language);
-        editor.apply();
-    }
+
 }
