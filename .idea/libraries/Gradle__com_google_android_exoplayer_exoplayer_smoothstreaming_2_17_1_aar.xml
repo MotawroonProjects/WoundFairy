@@ -1,18 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.exoplayer:exoplayer-smoothstreaming:2.17.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a396792925158b1be6d2d8a7ad1b0f3b/transformed/jetified-exoplayer-smoothstreaming-2.17.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a396792925158b1be6d2d8a7ad1b0f3b/transformed/jetified-exoplayer-smoothstreaming-2.17.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a396792925158b1be6d2d8a7ad1b0f3b/transformed/jetified-exoplayer-smoothstreaming-2.17.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/a396792925158b1be6d2d8a7ad1b0f3b/transformed/jetified-exoplayer-smoothstreaming-2.17.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/res" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/80aa7d5f5d14bbb3a32e9c3f484426e9/transformed/jetified-exoplayer-smoothstreaming-2.17.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-smoothstreaming/2.17.1/11ded9580413942eb8e9d92f100aff42a7a788eb/exoplayer-smoothstreaming-2.17.1-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-smoothstreaming/2.17.1/11ded9580413942eb8e9d92f100aff42a7a788eb/exoplayer-smoothstreaming-2.17.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
