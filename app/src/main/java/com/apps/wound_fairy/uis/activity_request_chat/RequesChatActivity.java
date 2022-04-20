@@ -112,8 +112,14 @@ public class RequesChatActivity extends BaseActivity {
         mvvm.getConfirmMutableLiveData().observe(this, new Observer<PaymentDataModel>() {
             @Override
             public void onChanged(PaymentDataModel paymentDataModel) {
+                if(Double.parseDouble(settingModel.getOnline_price())>0){
                 RequesChatActivity.this.paymentDataModel = paymentDataModel;
-                binding.flData.setVisibility(View.VISIBLE);
+                binding.flData.setVisibility(View.VISIBLE);}
+                else{
+                    Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
@@ -209,10 +215,16 @@ public class RequesChatActivity extends BaseActivity {
             public void onClick(View view) {
                 selectedReq = 1000;
                 binding.flData.setVisibility(View.GONE);
+                if(paymentDataModel.getData().getLink()!=null){
                 Intent intent = new Intent(RequesChatActivity.this, PaypalwebviewActivity.class);
                 intent.putExtra("url", paymentDataModel.getData().getLink());
 
-                launcher.launch(intent);
+                launcher.launch(intent);}
+                else{
+                    Intent intent = new Intent(RequesChatActivity.this, ChatActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
