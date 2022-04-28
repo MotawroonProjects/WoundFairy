@@ -106,7 +106,7 @@ public class BlogSliderAdapter extends PagerAdapter {
                 @Override
                 public void onReady(YouTubePlayer youTubePlayer) {
                     super.onReady(youTubePlayer);
-                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.cueVideo(videoId, 0);
 
                 }
             }, true);

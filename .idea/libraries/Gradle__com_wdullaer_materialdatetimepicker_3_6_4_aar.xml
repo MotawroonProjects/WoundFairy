@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cf1b2f2171084e4a0ea2b7b436514ff4/transformed/jetified-materialdatetimepicker-3.6.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cf1b2f2171084e4a0ea2b7b436514ff4/transformed/jetified-materialdatetimepicker-3.6.4/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cf1b2f2171084e4a0ea2b7b436514ff4/transformed/jetified-materialdatetimepicker-3.6.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/182422d19fa61d3317fff0fc51c85921/transformed/jetified-materialdatetimepicker-3.6.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/182422d19fa61d3317fff0fc51c85921/transformed/jetified-materialdatetimepicker-3.6.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/182422d19fa61d3317fff0fc51c85921/transformed/jetified-materialdatetimepicker-3.6.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.wdullaer/materialdatetimepicker/3.6.4/3845c9be8e096c3b2c93b55b7212e90855d9a94d/materialdatetimepicker-3.6.4-javadoc.jar!/" />

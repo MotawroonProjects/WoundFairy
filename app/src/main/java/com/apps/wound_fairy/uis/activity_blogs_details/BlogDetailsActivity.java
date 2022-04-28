@@ -97,7 +97,7 @@ public class BlogDetailsActivity extends BaseActivity {
                 @Override
                 public void onReady(YouTubePlayer youTubePlayer) {
                     super.onReady(youTubePlayer);
-                    youTubePlayer.loadVideo(videoId, 0);
+                    youTubePlayer.cueVideo(videoId, 0);
 
                 }
             }, true);
