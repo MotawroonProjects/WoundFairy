@@ -207,6 +207,7 @@ public class RequesChatActivity extends BaseActivity {
         });
         binding.llReqChat.setOnClickListener(view -> {
             if (requestChatModel.isDataValid(RequesChatActivity.this)) {
+                requestChatModel.setImages(imagesUriList);
                 mvvm.confirmRequest(this, requestChatModel, getUserModel(), getLang(), type);
             }
         });
